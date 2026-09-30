@@ -4,6 +4,7 @@ const ARCHIVOS = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
+  "./music/musica-mar-y-chelas.mp3",
 
   "./images/logo-mar-y-chelas.png",
   "./images/menu-mar-y-chelas.jpg",
