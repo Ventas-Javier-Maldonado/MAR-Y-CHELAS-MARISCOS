@@ -1371,6 +1371,34 @@ footer p{
 
 <body>
 
+<!-- MÚSICA DE MAR Y CHELAS -->
+<audio id="musicaMarYChelas" loop preload="auto">
+  <source src="music/musica-mar-y-chelas.mp3" type="audio/mpeg">
+</audio>
+
+<button
+  id="botonMusica"
+  onclick="alternarMusica()"
+  aria-label="Activar o pausar música"
+  style="
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    z-index:9999;
+    width:52px;
+    height:52px;
+    border:none;
+    border-radius:50%;
+    background:#063d2b;
+    color:white;
+    font-size:22px;
+    box-shadow:0 5px 18px rgba(0,0,0,.35);
+    cursor:pointer;
+  "
+>
+  🔇
+</button>   
+
 
 <!-- =====================================================
      PORTADA
@@ -3288,6 +3316,31 @@ if("serviceWorker" in navigator){
 }
 
 </script>
+
+<script>
+const musicaMarYChelas = document.getElementById("musicaMarYChelas");
+const botonMusica = document.getElementById("botonMusica");
+
+function alternarMusica(){
+
+  if(musicaMarYChelas.paused){
+
+    musicaMarYChelas.play()
+      .then(() => {
+        botonMusica.textContent = "🔊";
+      })
+      .catch(() => {
+        botonMusica.textContent = "🔇";
+      });
+
+  }else{
+
+    musicaMarYChelas.pause();
+    botonMusica.textContent = "🔇";
+
+  }
+}
+</script>   
 
 </body>
 </html>
