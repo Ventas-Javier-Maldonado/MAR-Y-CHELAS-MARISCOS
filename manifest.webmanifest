@@ -1,0 +1,26 @@
+{
+  "name": "Mar y Chelas",
+  "short_name": "Mar y Chelas",
+  "description": "Mariscos buenos · Chelas mejores",
+  "lang": "es-MX",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f1e5ca",
+  "theme_color": "#063d2b",
+  "icons": [
+    {
+      "src": "images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

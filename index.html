@@ -1,0 +1,3293 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8"> 
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#063d2b">
+
+<meta name="description" content="Mar y Chelas — Mariscos, ceviches, aguachiles, tostadas y charolas para compartir.">
+
+<link rel="manifest" href="manifest.webmanifest">
+
+<link rel="apple-touch-icon" href="images/icon-192.png">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="apple-mobile-web-app-title" content="Mar y Chelas">
+
+<title>Mar y Chelas | Mariscos Buenos, Chelas Mejores</title>
+
+<style>
+
+/* =========================================================
+   MAR Y CHELAS
+   ESTILO ORIGINAL
+========================================================= */
+
+:root{
+  --verde:#06452f;
+  --verde2:#0b6847;
+  --verde3:#123f30;
+  --crema:#f1e5ca;
+  --crema2:#fff7e6;
+  --amarillo:#d8c52b;
+  --amarillo2:#f1df55;
+  --negro:#101714;
+  --blanco:#ffffff;
+  --sombra:0 18px 50px rgba(0,0,0,.35);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--negro);
+
+  background:
+    linear-gradient(
+      rgba(241,229,202,.91),
+      rgba(241,229,202,.96)
+    ),
+    url("images/menu-mar-y-chelas.jpg");
+
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+
+  overflow-x:hidden;
+}
+
+/* =========================================================
+   PORTADA
+========================================================= */
+
+.portada{
+
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  position:relative;
+
+  padding:30px 20px;
+
+  background:
+    linear-gradient(
+      rgba(0,48,34,.38),
+      rgba(0,35,25,.70)
+    ),
+    url("images/menu-mar-y-chelas.jpg");
+
+  background-size:cover;
+  background-position:center;
+
+}
+
+.portada::after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 20%,
+      rgba(0,0,0,.55) 100%
+    );
+
+  pointer-events:none;
+}
+
+.portada-contenido{
+
+  position:relative;
+
+  z-index:2;
+
+  width:100%;
+  max-width:620px;
+
+  text-align:center;
+
+  color:white;
+
+  padding:35px 25px;
+}
+
+.logo-portada{
+
+  width:min(380px,85%);
+
+  max-height:230px;
+
+  object-fit:contain;
+
+  margin:0 auto 25px;
+
+  filter:
+    drop-shadow(0 12px 20px rgba(0,0,0,.65));
+
+}
+
+.logo-fallback{
+
+  display:none;
+
+  font-family:Georgia,serif;
+
+  font-size:58px;
+
+  line-height:.9;
+
+  font-weight:bold;
+
+  font-style:italic;
+
+  text-shadow:
+    3px 4px 0 #000,
+    0 10px 25px rgba(0,0,0,.6);
+}
+
+.portada h1{
+
+  font-family:Georgia,serif;
+
+  font-size:clamp(40px,10vw,76px);
+
+  line-height:.95;
+
+  text-shadow:3px 4px 0 #000;
+
+  margin-bottom:15px;
+
+}
+
+.portada-frase{
+
+  font-size:20px;
+
+  font-weight:bold;
+
+  letter-spacing:2px;
+
+  text-transform:uppercase;
+
+  text-shadow:0 3px 8px #000;
+
+  margin-bottom:12px;
+
+}
+
+.portada-datos{
+
+  font-size:16px;
+
+  line-height:1.8;
+
+  margin-bottom:30px;
+
+  text-shadow:0 2px 7px #000;
+
+}
+
+.btn-menu{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:10px;
+
+  padding:18px 42px;
+
+  border-radius:50px;
+
+  border:2px solid var(--amarillo2);
+
+  background:var(--verde);
+
+  color:white;
+
+  font-size:18px;
+
+  font-weight:bold;
+
+  text-decoration:none;
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.5);
+
+  transition:.3s;
+
+}
+
+.btn-menu:hover{
+
+  transform:translateY(-4px);
+
+  background:var(--amarillo);
+
+  color:#111;
+
+}
+
+/* =========================================================
+   ENCABEZADO DEL MENÚ
+========================================================= */
+
+.menu-header{
+
+  position:sticky;
+
+  top:0;
+
+  z-index:1000;
+
+  padding:12px 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(4,69,47,.97),
+      rgba(7,57,40,.97)
+    );
+
+  color:white;
+
+  border-bottom:3px solid var(--amarillo);
+
+  box-shadow:0 8px 30px rgba(0,0,0,.35);
+
+}
+
+.menu-header-inner{
+
+  max-width:1150px;
+
+  margin:auto;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+}
+
+.mini-logo{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  font-family:Georgia,serif;
+
+  font-size:23px;
+
+  font-weight:bold;
+
+  font-style:italic;
+
+}
+
+.mini-logo span{
+
+  font-family:Arial,sans-serif;
+
+  font-size:11px;
+
+  font-style:normal;
+
+  letter-spacing:1px;
+
+  opacity:.8;
+
+}
+
+.btn-carrito-header{
+
+  border:none;
+
+  background:var(--amarillo);
+
+  color:#111;
+
+  padding:11px 18px;
+
+  border-radius:30px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  font-size:14px;
+
+}
+
+#contadorCarrito{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  min-width:22px;
+
+  height:22px;
+
+  padding:0 6px;
+
+  margin-left:5px;
+
+  border-radius:50%;
+
+  background:#111;
+
+  color:white;
+
+}
+
+/* =========================================================
+   CONTENEDOR
+========================================================= */
+
+.contenedor{
+
+  width:min(1180px,94%);
+
+  margin:auto;
+
+}
+
+/* =========================================================
+   PRESENTACIÓN
+========================================================= */
+
+.presentacion{
+
+  padding:45px 15px 20px;
+
+  text-align:center;
+
+}
+
+.presentacion h2{
+
+  font-family:Georgia,serif;
+
+  color:var(--verde);
+
+  font-size:clamp(34px,6vw,54px);
+
+  margin-bottom:10px;
+
+}
+
+.presentacion p{
+
+  max-width:750px;
+
+  margin:auto;
+
+  font-size:17px;
+
+  line-height:1.7;
+
+  color:#30463c;
+
+}
+
+/* =========================================================
+   CATEGORÍAS
+========================================================= */
+
+.categorias{
+
+  display:flex;
+
+  gap:10px;
+
+  overflow-x:auto;
+
+  padding:15px 5px 25px;
+
+  scrollbar-width:none;
+
+  position:sticky;
+
+  top:61px;
+
+  z-index:900;
+
+  background:rgba(241,229,202,.94);
+
+  backdrop-filter:blur(10px);
+
+}
+
+.categorias::-webkit-scrollbar{
+  display:none;
+}
+
+.categoria-btn{
+
+  flex:0 0 auto;
+
+  border:1px solid var(--verde);
+
+  background:var(--verde);
+
+  color:white;
+
+  padding:11px 18px;
+
+  border-radius:30px;
+
+  font-size:14px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+}
+
+.categoria-btn:hover,
+.categoria-btn.activo{
+
+  background:var(--amarillo);
+
+  color:#111;
+
+  border-color:var(--amarillo);
+
+}
+
+/* =========================================================
+   SECCIONES
+========================================================= */
+
+.seccion-menu{
+
+  padding:25px 0 20px;
+
+  scroll-margin-top:120px;
+
+}
+
+.titulo-seccion{
+
+  position:relative;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:15px;
+
+  margin-bottom:20px;
+
+  color:white;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      var(--verde),
+      var(--verde2),
+      var(--verde)
+    );
+
+  padding:13px 20px;
+
+  border-radius:5px;
+
+  font-family:Arial,sans-serif;
+
+  font-size:25px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:.5px;
+
+  box-shadow:var(--sombra);
+
+}
+
+.titulo-seccion::after{
+
+  content:"";
+
+  height:4px;
+
+  flex:1;
+
+  background:var(--amarillo);
+
+}
+
+/* =========================================================
+   PRODUCTOS
+========================================================= */
+
+.productos{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:18px;
+
+}
+
+.producto{
+
+  background:
+    linear-gradient(
+      rgba(255,250,237,.96),
+      rgba(239,225,194,.96)
+    );
+
+  border:1px solid rgba(6,69,47,.22);
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.18);
+
+  transition:.3s;
+
+  display:flex;
+
+  flex-direction:column;
+
+}
+
+.producto:hover{
+
+  transform:translateY(-4px);
+
+  box-shadow:
+    0 20px 45px rgba(0,0,0,.28);
+
+}
+
+.producto-foto{
+
+  height:190px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(6,69,47,.95),
+      rgba(18,63,48,.90)
+    );
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  overflow:hidden;
+
+}
+
+.producto-foto img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+}
+
+.producto-foto .sin-foto{
+
+  color:white;
+
+  text-align:center;
+
+  padding:20px;
+
+  font-size:13px;
+
+  opacity:.8;
+
+}
+
+.producto-contenido{
+
+  padding:18px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  flex:1;
+
+}
+
+.producto h3{
+
+  font-family:Georgia,serif;
+
+  font-size:23px;
+
+  color:var(--verde);
+
+  line-height:1.1;
+
+  margin-bottom:8px;
+
+}
+
+.producto-descripcion{
+
+  color:#3d4b44;
+
+  font-size:14px;
+
+  line-height:1.5;
+
+  margin-bottom:10px;
+
+}
+
+.subopciones{
+
+  margin:5px 0 12px;
+
+  padding-left:20px;
+
+  color:#3d4b44;
+
+  font-size:13px;
+
+  line-height:1.7;
+
+}
+
+.precio{
+
+  color:#111;
+
+  font-size:25px;
+
+  font-weight:900;
+
+  margin-top:auto;
+
+  margin-bottom:13px;
+
+}
+
+.btn-agregar{
+
+  width:100%;
+
+  border:none;
+
+  border-radius:35px;
+
+  padding:13px;
+
+  background:var(--verde);
+
+  color:white;
+
+  font-size:15px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+}
+
+.btn-agregar:hover{
+
+  background:var(--amarillo);
+
+  color:#111;
+
+}
+
+/* =========================================================
+   CHAROLAS
+========================================================= */
+
+.charolas{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:15px;
+
+}
+
+.charola{
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff8e7,
+      #eadab5
+    );
+
+  border:2px solid rgba(6,69,47,.18);
+
+  border-radius:18px;
+
+  padding:20px;
+
+  box-shadow:var(--sombra);
+
+}
+
+.charola h3{
+
+  color:var(--verde);
+
+  font-family:Georgia,serif;
+
+  font-size:21px;
+
+  margin-bottom:8px;
+
+}
+
+.charola p{
+
+  font-size:13px;
+
+  color:#45554c;
+
+  line-height:1.5;
+
+  min-height:55px;
+
+}
+
+.charola-precios{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:10px;
+
+  margin-top:15px;
+
+}
+
+.precio-charola{
+
+  background:var(--verde);
+
+  color:white;
+
+  padding:12px;
+
+  text-align:center;
+
+  border-radius:12px;
+
+  cursor:pointer;
+
+}
+
+.precio-charola strong{
+
+  display:block;
+
+  color:var(--amarillo2);
+
+  font-size:20px;
+
+}
+
+/* =========================================================
+   BEBIDAS
+========================================================= */
+
+.bebidas-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:12px;
+
+}
+
+.bebida{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:10px;
+
+  background:rgba(255,255,255,.58);
+
+  padding:15px 17px;
+
+  border-radius:14px;
+
+  border:1px solid rgba(6,69,47,.15);
+
+}
+
+.bebida strong{
+
+  color:var(--verde);
+
+  font-size:17px;
+
+}
+
+/* =========================================================
+   AVISO
+========================================================= */
+
+.aviso{
+
+  margin:35px 0;
+
+  padding:22px;
+
+  border-radius:18px;
+
+  background:var(--verde);
+
+  color:white;
+
+  text-align:center;
+
+  box-shadow:var(--sombra);
+
+}
+
+.aviso strong{
+
+  color:var(--amarillo2);
+
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+  margin-top:45px;
+
+  padding:40px 20px;
+
+  background:var(--verde);
+
+  color:white;
+
+  text-align:center;
+
+  border-top:5px solid var(--amarillo);
+
+}
+
+footer h2{
+
+  font-family:Georgia,serif;
+
+  font-size:31px;
+
+  margin-bottom:12px;
+
+}
+
+footer p{
+
+  line-height:1.8;
+
+  opacity:.9;
+
+}
+
+.whatsapp-footer{
+
+  display:inline-block;
+
+  margin-top:20px;
+
+  padding:14px 28px;
+
+  border-radius:40px;
+
+  background:#25D366;
+
+  color:white;
+
+  font-weight:bold;
+
+  text-decoration:none;
+
+}
+
+/* =========================================================
+   CARRITO
+========================================================= */
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:5000;
+
+  background:rgba(0,0,0,.72);
+
+  backdrop-filter:blur(7px);
+
+  display:none;
+
+  align-items:flex-end;
+
+  justify-content:center;
+
+}
+
+.modal.activo{
+
+  display:flex;
+
+}
+
+.modal-contenido{
+
+  width:min(720px,100%);
+
+  max-height:92vh;
+
+  overflow-y:auto;
+
+  background:
+    linear-gradient(
+      rgba(250,241,218,.98),
+      rgba(235,220,185,.98)
+    );
+
+  border-radius:25px 25px 0 0;
+
+  padding:25px;
+
+  box-shadow:0 -20px 70px rgba(0,0,0,.5);
+
+  animation:subir .3s ease;
+
+}
+
+@keyframes subir{
+
+  from{
+    transform:translateY(100%);
+  }
+
+  to{
+    transform:translateY(0);
+  }
+
+}
+
+.modal-titulo{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:15px;
+
+  color:var(--verde);
+
+  margin-bottom:20px;
+
+}
+
+.modal-titulo h2{
+
+  font-family:Georgia,serif;
+
+  font-size:30px;
+
+}
+
+.cerrar{
+
+  width:40px;
+
+  height:40px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:var(--verde);
+
+  color:white;
+
+  font-size:22px;
+
+  cursor:pointer;
+
+}
+
+.item-carrito{
+
+  display:grid;
+
+  grid-template-columns:1fr auto;
+
+  gap:15px;
+
+  padding:15px 0;
+
+  border-bottom:1px solid rgba(0,0,0,.15);
+
+}
+
+.item-carrito h3{
+
+  color:var(--verde);
+
+  font-size:18px;
+
+}
+
+.item-carrito p{
+
+  font-size:13px;
+
+  color:#555;
+
+  margin-top:5px;
+
+}
+
+.controles{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+}
+
+.controles button{
+
+  width:30px;
+
+  height:30px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:var(--verde);
+
+  color:white;
+
+  cursor:pointer;
+
+  font-weight:bold;
+
+}
+
+.controles span{
+
+  font-weight:bold;
+
+  min-width:22px;
+
+  text-align:center;
+
+}
+
+.total{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:20px 0;
+
+  font-size:23px;
+
+  font-weight:bold;
+
+  color:var(--verde);
+
+}
+
+/* =========================================================
+   FORMULARIO PEDIDO
+========================================================= */
+
+.formulario-pedido{
+
+  display:none;
+
+  margin-top:15px;
+
+}
+
+.formulario-pedido.activo{
+
+  display:block;
+
+}
+
+.tipo-pedido{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:8px;
+
+  margin:15px 0 20px;
+
+}
+
+.tipo-pedido button{
+
+  padding:13px 8px;
+
+  border-radius:13px;
+
+  border:2px solid var(--verde);
+
+  background:transparent;
+
+  color:var(--verde);
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+}
+
+.tipo-pedido button.activo{
+
+  background:var(--verde);
+
+  color:white;
+
+}
+
+.campo{
+
+  margin-bottom:13px;
+
+}
+
+.campo label{
+
+  display:block;
+
+  color:var(--verde);
+
+  font-size:13px;
+
+  font-weight:bold;
+
+  margin-bottom:5px;
+
+}
+
+.campo input,
+.campo textarea,
+.campo select{
+
+  width:100%;
+
+  border:1px solid rgba(6,69,47,.3);
+
+  background:white;
+
+  color:#111;
+
+  padding:13px;
+
+  border-radius:11px;
+
+  outline:none;
+
+  font-size:15px;
+
+}
+
+.campo textarea{
+
+  min-height:80px;
+
+  resize:vertical;
+
+}
+
+.oculto{
+  display:none;
+}
+
+.btn-whatsapp{
+
+  width:100%;
+
+  border:none;
+
+  border-radius:45px;
+
+  padding:17px;
+
+  background:#25D366;
+
+  color:white;
+
+  font-size:17px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  margin-top:8px;
+
+}
+
+.vacio{
+
+  text-align:center;
+
+  padding:30px;
+
+  color:#59645e;
+
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:700px){
+
+  .productos{
+    grid-template-columns:1fr;
+  }
+
+  .producto-foto{
+    height:230px;
+  }
+
+  .charolas{
+    grid-template-columns:1fr;
+  }
+
+  .bebidas-grid{
+    grid-template-columns:1fr;
+  }
+
+  .menu-header{
+    padding:10px 12px;
+  }
+
+  .mini-logo{
+    font-size:19px;
+  }
+
+  .presentacion{
+    padding-top:30px;
+  }
+
+  .titulo-seccion{
+    font-size:21px;
+  }
+
+  .tipo-pedido{
+    grid-template-columns:1fr;
+  }
+
+  .modal-contenido{
+    padding:20px 16px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     PORTADA
+===================================================== -->
+
+<section class="portada" id="inicio">
+
+  <div class="portada-contenido">
+
+    <img
+      src="images/logo-mar-y-chelas.png"
+      class="logo-portada"
+      alt="Mar y Chelas"
+      onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='block';"
+    >
+
+    <div class="logo-fallback">
+      Mar y Chelas
+    </div>
+
+    <h1>Mar y Chelas</h1>
+
+    <div class="portada-frase">
+      Mariscos buenos · Chelas mejores
+    </div>
+
+    <div class="portada-datos">
+
+      📍 Chihuahua #205, Col. Bobadilla<br>
+
+      📞 Pedidos: <strong>331 740 8195</strong><br>
+
+      🕚 Miércoles – Lunes · 11 AM – 6 PM
+
+    </div>
+
+    <a href="#menu" class="btn-menu">
+      🍤 VER MENÚ
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="menu-header" id="menu">
+
+  <div class="menu-header-inner">
+
+    <div class="mini-logo">
+      🦐 Mar y Chelas
+      <span>SABOR · MAR · BUENA COMPAÑÍA</span>
+    </div>
+
+    <button
+      class="btn-carrito-header"
+      onclick="abrirCarrito()"
+    >
+      🛒 Pedido
+      <span id="contadorCarrito">0</span>
+    </button>
+
+  </div>
+
+</header>
+
+
+<main class="contenedor">
+
+
+<!-- =====================================================
+     PRESENTACIÓN
+===================================================== -->
+
+<section class="presentacion">
+
+  <h2>¡Aquí el mar sabe mejor!</h2>
+
+  <p>
+    Frescura en cada bocado. Elige tus favoritos,
+    agrégalos a tu pedido y dinos cómo quieres recibirlos.
+  </p>
+
+</section>
+
+
+<!-- =====================================================
+     CATEGORÍAS
+===================================================== -->
+
+<nav class="categorias">
+
+  <button class="categoria-btn activo" onclick="irA('entradas')">
+    Entradas
+  </button>
+
+  <button class="categoria-btn" onclick="irA('ceviches')">
+    Ceviches
+  </button>
+
+  <button class="categoria-btn" onclick="irA('calientes')">
+    Calientes
+  </button>
+
+  <button class="categoria-btn" onclick="irA('aguachiles')">
+    Aguachiles
+  </button>
+
+  <button class="categoria-btn" onclick="irA('tostadas')">
+    Tostadas
+  </button>
+
+  <button class="categoria-btn" onclick="irA('charolas')">
+    Charolas
+  </button>
+
+  <button class="categoria-btn" onclick="irA('extras')">
+    Extras
+  </button>
+
+  <button class="categoria-btn" onclick="irA('bebidas')">
+    Bebidas
+  </button>
+
+</nav>
+
+
+<!-- =====================================================
+     ENTRADAS
+===================================================== -->
+
+<section class="seccion-menu" id="entradas">
+
+  <h2 class="titulo-seccion">
+    Entradas
+  </h2>
+
+  <div class="productos">
+
+    <article class="producto">
+
+      <!-- LÁMINAS DE ATÚN -->
+<div class="producto-foto">
+  <img src="images/01-laminas-de-atun.jpg" alt="Láminas de atún">
+</div>
+      </div>
+
+      <div class="producto-contenido">
+
+        <h3>Láminas de atún</h3>
+
+        <p class="producto-descripcion">
+          Atún fresco preparado para comenzar la experiencia Mar y Chelas.
+        </p>
+
+        <div class="precio">$280</div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Láminas de atún',280)"
+        >
+          🛒 Agregar al pedido
+        </button>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     CEVICHES
+===================================================== -->
+
+<section class="seccion-menu" id="ceviches">
+
+  <h2 class="titulo-seccion">
+    Ceviches
+  </h2>
+
+  <div class="productos">
+
+    <article class="producto">
+
+   <!-- ATÚN TROPICAL -->
+<div class="producto-foto">
+  <img src="images/02-atun-tropical.jpg" alt="Atún tropical">
+</div>
+
+      <div class="producto-contenido">
+        <h3>Atún tropical</h3>
+        <div class="precio">$250</div>
+
+        <button class="btn-agregar"
+          onclick="agregar('Atún tropical',250)">
+          🛒 Agregar al pedido
+        </button>
+      </div>
+    </article>
+
+
+    <article class="producto">
+
+     <!-- BOTA ESTILO ACAPULQUEÑO -->
+<div class="producto-foto">
+  <img src="images/03-bota-estilo-acapulqueno.jpg" alt="Bota estilo acapulqueño">
+</div>
+
+      <div class="producto-contenido">
+        <h3>Bota estilo acapulqueño</h3>
+        <div class="precio">$250</div>
+
+        <button class="btn-agregar"
+          onclick="agregar('Bota estilo acapulqueño',250)">
+          🛒 Agregar al pedido
+        </button>
+      </div>
+    </article>
+
+
+    <article class="producto">
+
+      <!-- CEVICHE CAMARÓN -->
+<div class="producto-foto">
+  <img src="images/04-ceviche-camaron.jpg" alt="Ceviche de camarón">
+</div>
+
+      <div class="producto-contenido">
+        <h3>Camarón</h3>
+        <div class="precio">$250</div>
+
+        <button class="btn-agregar"
+          onclick="agregar('Camarón',250)">
+          🛒 Agregar al pedido
+        </button>
+      </div>
+    </article>
+
+
+    <article class="producto">
+
+<!-- CEVICHE VALLARTA -->
+<div class="producto-foto">
+  <img src="images/05-ceviche-vallarta.jpg" alt="Ceviche Vallarta">
+</div>
+
+      <div class="producto-contenido">
+        <h3>Vallarta</h3>
+        <div class="precio">$180</div>
+
+        <button class="btn-agregar"
+          onclick="agregar('Vallarta',180)">
+          🛒 Agregar al pedido
+        </button>
+      </div>
+    </article>
+
+
+    <article class="producto">
+
+     <!-- ENSALADA DE MARISCOS -->
+<div class="producto-foto">
+  <img src="images/06-ensalada-de-mariscos.jpg" alt="Ensalada de mariscos">
+</div>
+
+      <div class="producto-contenido">
+
+        <h3>Ensalada de mariscos</h3>
+
+        <div class="precio">$280</div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Ensalada de mariscos',280)"
+        >
+          🛒 Agregar al pedido
+        </button>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PLATILLOS CALIENTES
+===================================================== -->
+
+<section class="seccion-menu" id="calientes">
+
+  <h2 class="titulo-seccion">
+    Platillos calientes
+  </h2>
+
+  <div class="productos">
+
+
+    <article class="producto">
+
+     <!-- CÓCTEL DE CAMARÓN -->
+<div class="producto-foto">
+  <img src="images/07-coctel-de-camaron.jpg" alt="Cóctel de camarón">
+</div> 
+
+      <div class="producto-contenido">
+
+        <h3>Cóctel de camarón</h3>
+
+        <div class="precio">$250</div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Cóctel de camarón',250)"
+        >
+          🛒 Agregar al pedido
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="producto">
+
+     <!-- CÓCTEL MIXTO -->
+<div class="producto-foto">
+  <img src="images/08-coctel-mixto-camaron-pulpo.jpg" alt="Cóctel mixto de camarón y pulpo">
+</div>
+
+      <div class="producto-contenido">
+
+        <h3>Cóctel mixto camarón y pulpo</h3>
+
+        <div class="precio">$280</div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Cóctel mixto camarón y pulpo',280)"
+        >
+          🛒 Agregar al pedido
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="producto">
+
+     <!-- CAMARONES AL GUSTO -->
+<div class="producto-foto">
+  <img src="images/09-camarones-al-gusto.jpg" alt="Camarones al gusto">
+</div> 
+
+      <div class="producto-contenido">
+
+        <h3>Camarones al gusto</h3>
+
+        <ul class="subopciones">
+          <li>Empanizados</li>
+          <li>Diabla</li>
+          <li>Cucaracha</li>
+          <li>Ajillo</li>
+          <li>Ajo</li>
+        </ul>
+
+        <div class="precio">$285</div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Camarones al gusto',285,'Empanizados / Diabla / Cucaracha / Ajillo / Ajo')"
+        >
+          🛒 Agregar al pedido
+        </button>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     AGUACHILES
+===================================================== -->
+
+<section class="seccion-menu" id="aguachiles">
+
+  <h2 class="titulo-seccion">
+    Aguachiles
+  </h2>
+
+  <div class="productos">
+
+    <article class="producto">
+
+     <!-- AGUACHILE VERDE -->
+<div class="producto-foto">
+  <img src="images/10-aguachile-verde.jpg" alt="Aguachile verde">
+</div>
+
+      <div class="producto-contenido">
+
+        <h3>Aguachile Verde</h3>
+
+        <div class="precio">$250</div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Aguachile Verde',250)"
+        >
+          🛒 Agregar al pedido
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="producto">
+
+      <!-- AGUACHILE ROJO -->
+<div class="producto-foto">
+  <img src="images/11-aguachile-rojo.jpg" alt="Aguachile rojo">
+</div>
+
+      <div class="producto-contenido">
+
+        <h3>Aguachile Rojo</h3>
+
+        <div class="precio">$250</div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Aguachile Rojo',250)"
+        >
+          🛒 Agregar al pedido
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="producto">
+
+     <!-- AGUACHILE NEGRO -->
+<div class="producto-foto">
+  <img src="images/12-aguachile-negro.jpg" alt="Aguachile negro">
+</div> 
+
+      <div class="producto-contenido">
+
+        <h3>Aguachile Negro</h3>
+
+        <div class="precio">$250</div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Aguachile Negro',250)"
+        >
+          🛒 Agregar al pedido
+        </button>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     TOSTADAS
+===================================================== -->
+
+<section class="seccion-menu" id="tostadas">
+
+  <h2 class="titulo-seccion">
+    Tostadas
+  </h2>
+
+  <div class="productos">
+
+
+    <article class="producto">
+
+      <!-- TOSTADA CEVICHE CAMARÓN -->
+<div class="producto-foto">
+  <img src="images/13-tostada-ceviche-camaron.jpg" alt="Tostada de ceviche de camarón">
+</div>
+
+      <div class="producto-contenido">
+        <h3>Ceviche camarón</h3>
+        <div class="precio">$75</div>
+
+        <button class="btn-agregar"
+          onclick="agregar('Tostada de ceviche camarón',75)">
+          🛒 Agregar al pedido
+        </button>
+      </div>
+    </article>
+
+
+    <article class="producto">
+
+      <!-- TOSTADA DE ATÚN -->
+<div class="producto-foto">
+  <img src="images/14-tostada-atun.jpg" alt="Tostada de atún">
+</div>
+
+      <div class="producto-contenido">
+        <h3>Atún</h3>
+        <div class="precio">$85</div>
+
+        <button class="btn-agregar"
+          onclick="agregar('Tostada de atún',85)">
+          🛒 Agregar al pedido
+        </button>
+      </div>
+    </article>
+
+
+    <article class="producto">
+
+      <!-- TOSTADA DE AGUACHILES -->
+<div class="producto-foto">
+  <img src="images/15-tostada-aguachiles.jpg" alt="Tostada de aguachiles">
+</div>
+
+      <div class="producto-contenido">
+        <h3>Aguachiles</h3>
+        <div class="precio">$75</div>
+
+        <button class="btn-agregar"
+          onclick="agregar('Tostada de aguachiles',75)">
+          🛒 Agregar al pedido
+        </button>
+      </div>
+    </article>
+
+
+    <article class="producto">
+
+      <!-- TOSTADA CEVICHE VALLARTA -->
+<div class="producto-foto">
+  <img src="images/16-tostada-ceviche-vallarta.jpg" alt="Tostada de ceviche Vallarta">
+</div>
+
+      <div class="producto-contenido">
+        <h3>Ceviche Vallarta</h3>
+        <div class="precio">$45</div>
+
+        <button class="btn-agregar"
+          onclick="agregar('Tostada de ceviche Vallarta',45)">
+          🛒 Agregar al pedido
+        </button>
+      </div>
+    </article>
+
+
+    <article class="producto">
+
+      <!-- TOSTADA CEVICHE CUADRO ACAPULQUEÑO -->
+<div class="producto-foto">
+  <img src="images/17-tostada-ceviche-cuadro-acapulqueno.jpg" alt="Tostada de ceviche cuadro tipo acapulqueño">
+</div>
+
+      <div class="producto-contenido">
+        <h3>Ceviche cuadro tipo acapulqueño</h3>
+        <div class="precio">$75</div>
+
+        <button class="btn-agregar"
+          onclick="agregar('Tostada de ceviche cuadro tipo acapulqueño',75)">
+          🛒 Agregar al pedido
+        </button>
+      </div>
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     CHAROLAS
+===================================================== -->
+
+<section class="seccion-menu" id="charolas">
+
+  <h2 class="titulo-seccion">
+    Charolas para compartir
+  </h2>
+
+  <div class="charolas">
+
+
+    <article class="charola">
+
+      <h3>Charola Aguachiles</h3>
+
+      <p>
+        Negro, rojo y verde.
+        Ideal para compartir.
+      </p>
+
+      <div class="charola-precios">
+
+        <div
+          class="precio-charola"
+          onclick="agregar('Charola Aguachiles Chica — 5 personas',700)"
+        >
+          Chica<br>
+          <small>5 personas</small>
+          <strong>$700</strong>
+        </div>
+
+        <div
+          class="precio-charola"
+          onclick="agregar('Charola Aguachiles Grande — 10 personas',950)"
+        >
+          Grande<br>
+          <small>10 personas</small>
+          <strong>$950</strong>
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="charola">
+
+      <h3>Charola Ceviches</h3>
+
+      <p>
+        Bota tipo acapulqueño,
+        camarón cocido y atún.
+      </p>
+
+      <div class="charola-precios">
+
+        <div
+          class="precio-charola"
+          onclick="agregar('Charola Ceviches Chica — 5 personas',700)"
+        >
+          Chica<br>
+          <small>5 personas</small>
+          <strong>$700</strong>
+        </div>
+
+        <div
+          class="precio-charola"
+          onclick="agregar('Charola Ceviches Grande — 10 personas',950)"
+        >
+          Grande<br>
+          <small>10 personas</small>
+          <strong>$950</strong>
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="charola">
+
+      <h3>Charola Ensaladas</h3>
+
+      <p>
+        Pulpo, camarón y atún.
+      </p>
+
+      <div class="charola-precios">
+
+        <div
+          class="precio-charola"
+          onclick="agregar('Charola Ensaladas Chica — 5 personas',800)"
+        >
+          Chica<br>
+          <small>5 personas</small>
+          <strong>$800</strong>
+        </div>
+
+        <div
+          class="precio-charola"
+          onclick="agregar('Charola Ensaladas Grande — 10 personas',1000)"
+        >
+          Grande<br>
+          <small>10 personas</small>
+          <strong>$1,000</strong>
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     EXTRAS
+===================================================== -->
+
+<section class="seccion-menu" id="extras">
+
+  <h2 class="titulo-seccion">
+    Extras
+  </h2>
+
+  <div class="bebidas-grid">
+
+
+    <div class="bebida">
+      <span>Arroz</span>
+      <strong>$50</strong>
+
+      <button
+        class="categoria-btn"
+        onclick="agregar('Arroz',50)"
+      >
+        +
+      </button>
+    </div>
+
+
+    <div class="bebida">
+      <span>Salsa aguachile</span>
+      <strong>$20</strong>
+
+      <button
+        class="categoria-btn"
+        onclick="agregar('Salsa aguachile',20)"
+      >
+        +
+      </button>
+    </div>
+
+
+    <div class="bebida">
+      <span>Salsa ajillo, diabla</span>
+      <strong>$50</strong>
+
+      <button
+        class="categoria-btn"
+        onclick="agregar('Salsa ajillo, diabla',50)"
+      >
+        +
+      </button>
+    </div>
+
+
+    <div class="bebida">
+      <span>Aderezo</span>
+      <strong>$30</strong>
+
+      <button
+        class="categoria-btn"
+        onclick="agregar('Aderezo',30)"
+      >
+        +
+      </button>
+    </div>
+
+
+    <div class="bebida">
+      <span>Guacamole</span>
+      <strong>$125</strong>
+
+      <button
+        class="categoria-btn"
+        onclick="agregar('Guacamole',125)"
+      >
+        +
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     BEBIDAS
+===================================================== -->
+
+<section class="seccion-menu" id="bebidas">
+
+  <h2 class="titulo-seccion">
+    Bebidas
+  </h2>
+
+  <div class="bebidas-grid">
+
+
+    <div class="bebida">
+
+      <span>
+        Agua del día
+        <br>
+        <small>Chica / Grande</small>
+      </span>
+
+      <strong>
+        $35 / $45
+      </strong>
+
+      <button
+        class="categoria-btn"
+        onclick="seleccionarAgua()"
+      >
+        +
+      </button>
+
+    </div>
+
+
+    <div class="bebida">
+
+      <span>Refresco Coca-Cola</span>
+
+      <strong>$40</strong>
+
+      <button
+        class="categoria-btn"
+        onclick="agregar('Refresco Coca-Cola',40)"
+      >
+        +
+      </button>
+
+    </div>
+
+
+    <div class="bebida">
+
+      <span>Naranjada</span>
+
+      <strong>$60</strong>
+
+      <button
+        class="categoria-btn"
+        onclick="agregar('Naranjada',60)"
+      >
+        +
+      </button>
+
+    </div>
+
+
+    <div class="bebida">
+
+      <span>Limonada</span>
+
+      <strong>$60</strong>
+
+      <button
+        class="categoria-btn"
+        onclick="agregar('Limonada',60)"
+      >
+        +
+      </button>
+
+    </div>
+
+
+    <div class="bebida">
+
+      <span>Rusa</span>
+
+      <strong>$60</strong>
+
+      <button
+        class="categoria-btn"
+        onclick="agregar('Rusa',60)"
+      >
+        +
+      </button>
+
+    </div>
+
+
+    <div class="bebida">
+
+      <span>Agua embotellada</span>
+
+      <strong>$25</strong>
+
+      <button
+        class="categoria-btn"
+        onclick="agregar('Agua embotellada',25)"
+      >
+        +
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     AVISO
+===================================================== -->
+
+<div class="aviso">
+
+  📲 <strong>Haz tu pedido fácilmente</strong><br>
+
+  Agrega tus favoritos, revisa tu pedido
+  y envíalo directamente por WhatsApp.
+
+</div>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+  <h2>Mar y Chelas</h2>
+
+  <p>
+    Mariscos buenos · Chelas mejores
+  </p>
+
+  <p>
+    📍 Chihuahua #205, Col. Bobadilla
+  </p>
+
+  <p>
+    🕚 Miércoles – Lunes · 11 AM – 6 PM
+  </p>
+
+  <p>
+    📞 Pedidos: <strong>331 740 8195</strong>
+  </p>
+
+  <a
+    class="whatsapp-footer"
+    href="https://wa.me/523317408195"
+    target="_blank"
+  >
+    💬 WhatsApp
+  </a>
+
+</footer>
+
+
+<!-- =====================================================
+     MODAL CARRITO
+===================================================== -->
+
+<div class="modal" id="modalCarrito">
+
+  <div class="modal-contenido">
+
+    <div class="modal-titulo">
+
+      <h2>🛒 Tu pedido</h2>
+
+      <button
+        class="cerrar"
+        onclick="cerrarCarrito()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div id="listaCarrito">
+
+      <div class="vacio">
+        Tu pedido está vacío.
+      </div>
+
+    </div>
+
+
+    <div class="total">
+
+      <span>Total</span>
+
+      <span id="totalCarrito">
+        $0
+      </span>
+
+    </div>
+
+
+    <button
+      class="btn-agregar"
+      onclick="mostrarFormulario()"
+    >
+      CONTINUAR CON EL PEDIDO
+    </button>
+
+
+    <!-- =================================================
+         FORMULARIO
+    ================================================= -->
+
+    <div
+      class="formulario-pedido"
+      id="formularioPedido"
+    >
+
+      <h3 style="
+        color:var(--verde);
+        font-family:Georgia,serif;
+        font-size:25px;
+        margin-bottom:12px;
+      ">
+        ¿Cómo quieres recibir tu pedido?
+      </h3>
+
+
+      <div class="tipo-pedido">
+
+        <button
+          id="btnDomicilio"
+          onclick="seleccionarTipo('domicilio')"
+        >
+          🏠 Domicilio
+        </button>
+
+        <button
+          id="btnRestaurante"
+          onclick="seleccionarTipo('restaurante')"
+        >
+          🍽️ Restaurante
+        </button>
+
+        <button
+          id="btnRecoger"
+          onclick="seleccionarTipo('recoger')"
+        >
+          📦 Para llevar
+        </button>
+
+      </div>
+
+
+      <div class="campo">
+
+        <label>
+          Nombre
+        </label>
+
+        <input
+          id="clienteNombre"
+          type="text"
+          placeholder="Tu nombre"
+        >
+
+      </div>
+
+
+      <div class="campo">
+
+        <label>
+          Teléfono
+        </label>
+
+        <input
+          id="clienteTelefono"
+          type="tel"
+          placeholder="Tu teléfono"
+        >
+
+      </div>
+
+
+      <!-- DOMICILIO -->
+
+      <div
+        id="datosDomicilio"
+        class="oculto"
+      >
+
+        <div class="campo">
+
+          <label>
+            Dirección
+          </label>
+
+          <input
+            id="clienteDireccion"
+            type="text"
+            placeholder="Calle, número y colonia"
+          >
+
+        </div>
+
+
+        <div class="campo">
+
+          <label>
+            Referencias
+          </label>
+
+          <textarea
+            id="clienteReferencia"
+            placeholder="Entre calles, color de casa, referencias..."
+          ></textarea>
+
+        </div>
+
+      </div>
+
+
+      <!-- RESTAURANTE -->
+
+      <div
+        id="datosRestaurante"
+        class="oculto"
+      >
+
+        <div class="campo">
+
+          <label>
+            Número de mesa
+          </label>
+
+          <input
+            id="numeroMesa"
+            type="text"
+            placeholder="Ej. Mesa 5"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- RECOGER -->
+
+      <div
+        id="datosRecoger"
+        class="oculto"
+      >
+
+        <div class="campo">
+
+          <label>
+            Hora aproximada para recoger
+          </label>
+
+          <input
+            id="horaRecoger"
+            type="time"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="campo">
+
+        <label>
+          Forma de pago
+        </label>
+
+        <select id="formaPago">
+
+          <option value="">
+            Seleccionar
+          </option>
+
+          <option value="Efectivo">
+            Efectivo
+          </option>
+
+          <option value="Transferencia">
+            Transferencia
+          </option>
+
+          <option value="Tarjeta">
+            Tarjeta
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="campo">
+
+        <label>
+          Observaciones
+        </label>
+
+        <textarea
+          id="observaciones"
+          placeholder="Algo más que debamos saber..."
+        ></textarea>
+
+      </div>
+
+
+      <button
+        class="btn-whatsapp"
+        onclick="enviarWhatsApp()"
+      >
+        💬 ENVIAR PEDIDO POR WHATSAPP
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   CARRITO
+========================================================= */
+
+let carrito = [];
+
+let tipoPedido = "";
+
+
+/* =========================================================
+   AGREGAR PRODUCTO
+========================================================= */
+
+function agregar(nombre,precio,detalle=""){
+
+  const existente = carrito.find(
+    item =>
+      item.nombre === nombre &&
+      item.detalle === detalle
+  );
+
+  if(existente){
+
+    existente.cantidad++;
+
+  }else{
+
+    carrito.push({
+
+      nombre,
+      precio,
+      cantidad:1,
+      detalle
+
+    });
+
+  }
+
+  actualizarCarrito();
+
+  abrirCarrito();
+
+}
+
+
+/* =========================================================
+   AGUA DEL DÍA
+========================================================= */
+
+function seleccionarAgua(){
+
+  const opcion = confirm(
+    "Agua del día:\n\nAceptar = Chica $35\nCancelar = Grande $45"
+  );
+
+  if(opcion){
+
+    agregar(
+      "Agua del día — Chica",
+      35
+    );
+
+  }else{
+
+    agregar(
+      "Agua del día — Grande",
+      45
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ACTUALIZAR
+========================================================= */
+
+function actualizarCarrito(){
+
+  const lista =
+    document.getElementById("listaCarrito");
+
+  const contador =
+    document.getElementById("contadorCarrito");
+
+  const totalElemento =
+    document.getElementById("totalCarrito");
+
+
+  const totalItems =
+    carrito.reduce(
+      (sum,item) =>
+        sum + item.cantidad,
+      0
+    );
+
+
+  contador.textContent =
+    totalItems;
+
+
+  if(carrito.length === 0){
+
+    lista.innerHTML =
+      `<div class="vacio">
+        Tu pedido está vacío.
+      </div>`;
+
+    totalElemento.textContent =
+      "$0";
+
+    return;
+
+  }
+
+
+  lista.innerHTML =
+    carrito.map(
+      (item,index) => `
+
+      <div class="item-carrito">
+
+        <div>
+
+          <h3>
+            ${item.nombre}
+          </h3>
+
+          ${
+            item.detalle
+            ? `<p>${item.detalle}</p>`
+            : ""
+          }
+
+          <p>
+            $${item.precio.toLocaleString("es-MX")}
+            c/u
+          </p>
+
+        </div>
+
+
+        <div class="controles">
+
+          <button
+            onclick="cambiarCantidad(${index},-1)"
+          >
+            −
+          </button>
+
+          <span>
+            ${item.cantidad}
+          </span>
+
+          <button
+            onclick="cambiarCantidad(${index},1)"
+          >
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+    `
+    ).join("");
+
+
+  const total =
+    carrito.reduce(
+      (sum,item) =>
+        sum +
+        item.precio *
+        item.cantidad,
+      0
+    );
+
+
+  totalElemento.textContent =
+    "$" +
+    total.toLocaleString("es-MX");
+
+}
+
+
+/* =========================================================
+   CANTIDAD
+========================================================= */
+
+function cambiarCantidad(index,cambio){
+
+  carrito[index].cantidad += cambio;
+
+  if(carrito[index].cantidad <= 0){
+
+    carrito.splice(index,1);
+
+  }
+
+  actualizarCarrito();
+
+}
+
+
+/* =========================================================
+   ABRIR / CERRAR
+========================================================= */
+
+function abrirCarrito(){
+
+  document
+    .getElementById("modalCarrito")
+    .classList.add("activo");
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+function cerrarCarrito(){
+
+  document
+    .getElementById("modalCarrito")
+    .classList.remove("activo");
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+/* =========================================================
+   FORMULARIO
+========================================================= */
+
+function mostrarFormulario(){
+
+  if(carrito.length === 0){
+
+    alert(
+      "Agrega al menos un producto a tu pedido."
+    );
+
+    return;
+
+  }
+
+  document
+    .getElementById("formularioPedido")
+    .classList.add("activo");
+
+}
+
+
+function seleccionarTipo(tipo){
+
+  tipoPedido = tipo;
+
+
+  document
+    .querySelectorAll(".tipo-pedido button")
+    .forEach(btn =>
+      btn.classList.remove("activo")
+    );
+
+
+  if(tipo === "domicilio"){
+
+    document
+      .getElementById("btnDomicilio")
+      .classList.add("activo");
+
+  }
+
+  if(tipo === "restaurante"){
+
+    document
+      .getElementById("btnRestaurante")
+      .classList.add("activo");
+
+  }
+
+  if(tipo === "recoger"){
+
+    document
+      .getElementById("btnRecoger")
+      .classList.add("activo");
+
+  }
+
+
+  document
+    .getElementById("datosDomicilio")
+    .classList.add("oculto");
+
+  document
+    .getElementById("datosRestaurante")
+    .classList.add("oculto");
+
+  document
+    .getElementById("datosRecoger")
+    .classList.add("oculto");
+
+
+  if(tipo === "domicilio"){
+
+    document
+      .getElementById("datosDomicilio")
+      .classList.remove("oculto");
+
+  }
+
+  if(tipo === "restaurante"){
+
+    document
+      .getElementById("datosRestaurante")
+      .classList.remove("oculto");
+
+  }
+
+  if(tipo === "recoger"){
+
+    document
+      .getElementById("datosRecoger")
+      .classList.remove("oculto");
+
+  }
+
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+function enviarWhatsApp(){
+
+  if(carrito.length === 0){
+
+    alert(
+      "Tu pedido está vacío."
+    );
+
+    return;
+
+  }
+
+
+  const nombre =
+    document
+      .getElementById("clienteNombre")
+      .value.trim();
+
+
+  const telefono =
+    document
+      .getElementById("clienteTelefono")
+      .value.trim();
+
+
+  const pago =
+    document
+      .getElementById("formaPago")
+      .value;
+
+
+  const observaciones =
+    document
+      .getElementById("observaciones")
+      .value.trim();
+
+
+  if(!nombre){
+
+    alert(
+      "Por favor escribe tu nombre."
+    );
+
+    return;
+
+  }
+
+
+  if(!telefono){
+
+    alert(
+      "Por favor escribe tu teléfono."
+    );
+
+    return;
+
+  }
+
+
+  if(!tipoPedido){
+
+    alert(
+      "Selecciona cómo quieres recibir tu pedido."
+    );
+
+    return;
+
+  }
+
+
+  if(!pago){
+
+    alert(
+      "Selecciona una forma de pago."
+    );
+
+    return;
+
+  }
+
+
+  let mensaje =
+    "🌊 *MAR Y CHELAS* 🌊\n";
+
+  mensaje +=
+    "🍤 *NUEVO PEDIDO*\n\n";
+
+
+  mensaje +=
+    "👤 *Cliente:* " +
+    nombre +
+    "\n";
+
+
+  mensaje +=
+    "📱 *Teléfono:* " +
+    telefono +
+    "\n";
+
+
+  if(tipoPedido === "domicilio"){
+
+    const direccion =
+      document
+        .getElementById("clienteDireccion")
+        .value.trim();
+
+
+    const referencia =
+      document
+        .getElementById("clienteReferencia")
+        .value.trim();
+
+
+    if(!direccion){
+
+      alert(
+        "Escribe la dirección de entrega."
+      );
+
+      return;
+
+    }
+
+
+    mensaje +=
+      "🏠 *Domicilio*\n";
+
+    mensaje +=
+      "📍 " +
+      direccion +
+      "\n";
+
+
+    if(referencia){
+
+      mensaje +=
+        "🧭 Referencia: " +
+        referencia +
+        "\n";
+
+    }
+
+  }
+
+
+  if(tipoPedido === "restaurante"){
+
+    const mesa =
+      document
+        .getElementById("numeroMesa")
+        .value.trim();
+
+
+    mensaje +=
+      "🍽️ *Consumir en restaurante*\n";
+
+
+    if(mesa){
+
+      mensaje +=
+        "🪑 Mesa: " +
+        mesa +
+        "\n";
+
+    }
+
+  }
+
+
+  if(tipoPedido === "recoger"){
+
+    const hora =
+      document
+        .getElementById("horaRecoger")
+        .value;
+
+
+    mensaje +=
+      "📦 *Para llevar / recoger*\n";
+
+
+    if(hora){
+
+      mensaje +=
+        "⏰ Hora aproximada: " +
+        hora +
+        "\n";
+
+    }
+
+  }
+
+
+  mensaje +=
+    "\n🧾 *PEDIDO:*\n";
+
+
+  carrito.forEach(
+    item => {
+
+      mensaje +=
+        "• " +
+        item.cantidad +
+        " x " +
+        item.nombre;
+
+      if(item.detalle){
+
+        mensaje +=
+          " (" +
+          item.detalle +
+          ")";
+
+      }
+
+      mensaje +=
+        " — $" +
+        (
+          item.precio *
+          item.cantidad
+        ).toLocaleString("es-MX") +
+        "\n";
+
+    }
+  );
+
+
+  const total =
+    carrito.reduce(
+      (sum,item) =>
+        sum +
+        item.precio *
+        item.cantidad,
+      0
+    );
+
+
+  mensaje +=
+    "\n💰 *TOTAL: $" +
+    total.toLocaleString("es-MX") +
+    "*\n";
+
+
+  mensaje +=
+    "💳 *Pago:* " +
+    pago +
+    "\n";
+
+
+  if(observaciones){
+
+    mensaje +=
+      "📝 *Observaciones:* " +
+      observaciones +
+      "\n";
+
+  }
+
+
+  mensaje +=
+    "\n¡Gracias por elegir Mar y Chelas! 🌊🍤";
+
+
+  const numero =
+    "523317408195";
+
+
+  const url =
+    "https://wa.me/" +
+    numero +
+    "?text=" +
+    encodeURIComponent(mensaje);
+
+
+  window.open(
+    url,
+    "_blank"
+  );
+
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+function irA(id){
+
+  const elemento =
+    document.getElementById(id);
+
+  if(elemento){
+
+    elemento.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  }
+
+}
+
+
+/* =========================================================
+   SERVICE WORKER
+========================================================= */
+
+if("serviceWorker" in navigator){
+
+  window.addEventListener(
+    "load",
+    () => {
+
+      navigator.serviceWorker
+        .register("./service-worker.js")
+        .then(
+          registro => {
+
+            console.log(
+              "Mar y Chelas PWA activa:",
+              registro.scope
+            );
+
+          }
+        )
+        .catch(
+          error => {
+
+            console.error(
+              "Error PWA:",
+              error
+            );
+
+          }
+        );
+
+    }
+  );
+
+}
+
+</script>
+
+</body>
+</html>
