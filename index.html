@@ -3,7 +3,7 @@
 
 <head>
 
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -748,6 +748,55 @@ body{
 }
 
 /* =========================================================
+   CAMARONES AL GUSTO
+========================================================= */
+
+.opciones-camarones{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:8px;
+
+  margin:8px 0 13px;
+
+}
+
+.opcion-camaron{
+
+  border:1px solid var(--verde);
+
+  background:white;
+
+  color:var(--verde);
+
+  border-radius:12px;
+
+  padding:10px 8px;
+
+  font-size:13px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+}
+
+.opcion-camaron:hover{
+
+  background:var(--amarillo);
+
+  color:#111;
+
+  border-color:var(--amarillo);
+
+}
+
+/* =========================================================
    CHAROLAS
 ========================================================= */
 
@@ -1363,6 +1412,10 @@ footer p{
     padding:20px 16px;
   }
 
+  .opciones-camarones{
+    grid-template-columns:1fr;
+  }
+
 }
 
 </style>
@@ -1371,7 +1424,10 @@ footer p{
 
 <body>
 
-<!-- MÚSICA DE MAR Y CHELAS -->
+<!-- =====================================================
+     MÚSICA
+===================================================== -->
+
 <audio id="musicaMarYChelas" loop preload="auto">
   <source src="music/musica-mar-y-chelas.mp3" type="audio/mpeg">
 </audio>
@@ -1397,7 +1453,7 @@ footer p{
   "
 >
   🔇
-</button>   
+</button>
 
 
 <!-- =====================================================
@@ -1411,7 +1467,7 @@ footer p{
     <img
       src="images/logo-mar-y-chelas.png"
       class="logo-portada"
-      alt="Mar y ChelasP.V."
+      alt="Mar y Chelas P.V."
       onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='block';"
     >
 
@@ -1544,10 +1600,11 @@ footer p{
 
     <article class="producto">
 
-      <!-- LÁMINAS DE ATÚN -->
-<div class="producto-foto">
-  <img src="images/01-laminas-de-atun.jpg" alt="Láminas de atún">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/01-laminas-de-atun.jpg"
+          alt="Láminas de atún"
+        >
       </div>
 
       <div class="producto-contenido">
@@ -1558,7 +1615,9 @@ footer p{
           Atún fresco preparado para comenzar la experiencia Mar y Chelas.
         </p>
 
-        <div class="precio">$280</div>
+        <div class="precio">
+          $280
+        </div>
 
         <button
           class="btn-agregar"
@@ -1588,94 +1647,139 @@ footer p{
 
   <div class="productos">
 
+
     <article class="producto">
 
-   <!-- ATÚN TROPICAL -->
-<div class="producto-foto">
-  <img src="images/02-atun-tropical.jpg" alt="Atún tropical">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/02-atun-tropical.jpg"
+          alt="Atún tropical"
+        >
+      </div>
 
       <div class="producto-contenido">
+
         <h3>Atún tropical</h3>
-        <div class="precio">$250</div>
 
-        <button class="btn-agregar"
-          onclick="agregar('Atún tropical',250)">
+        <div class="precio">
+          $250
+        </div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Atún tropical',250)"
+        >
           🛒 Agregar al pedido
         </button>
+
       </div>
+
     </article>
 
 
     <article class="producto">
 
-     <!-- BOTA ESTILO ACAPULQUEÑO -->
-<div class="producto-foto">
-  <img src="images/03-bota-estilo-acapulqueno.jpg" alt="Bota estilo acapulqueño">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/03-bota-estilo-acapulqueno.jpg"
+          alt="Bota estilo acapulqueño"
+        >
+      </div>
 
       <div class="producto-contenido">
+
         <h3>Bota estilo acapulqueño</h3>
-        <div class="precio">$250</div>
 
-        <button class="btn-agregar"
-          onclick="agregar('Bota estilo acapulqueño',250)">
+        <div class="precio">
+          $250
+        </div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Bota estilo acapulqueño',250)"
+        >
           🛒 Agregar al pedido
         </button>
+
       </div>
+
     </article>
 
 
     <article class="producto">
 
-      <!-- CEVICHE CAMARÓN -->
-<div class="producto-foto">
-  <img src="images/04-ceviche-camaron.jpg" alt="Ceviche de camarón">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/04-ceviche-camaron.jpg"
+          alt="Ceviche de camarón"
+        >
+      </div>
 
       <div class="producto-contenido">
+
         <h3>Camarón</h3>
-        <div class="precio">$250</div>
 
-        <button class="btn-agregar"
-          onclick="agregar('Camarón',250)">
+        <div class="precio">
+          $250
+        </div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Camarón',250)"
+        >
           🛒 Agregar al pedido
         </button>
+
       </div>
+
     </article>
 
 
     <article class="producto">
 
-<!-- CEVICHE VALLARTA -->
-<div class="producto-foto">
-  <img src="images/05-ceviche-vallarta.jpg" alt="Ceviche Vallarta">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/05-ceviche-vallarta.jpg"
+          alt="Ceviche Vallarta"
+        >
+      </div>
 
       <div class="producto-contenido">
-        <h3>Vallarta</h3>
-        <div class="precio">$180</div>
 
-        <button class="btn-agregar"
-          onclick="agregar('Vallarta',180)">
+        <h3>Vallarta</h3>
+
+        <div class="precio">
+          $180
+        </div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Vallarta',180)"
+        >
           🛒 Agregar al pedido
         </button>
+
       </div>
+
     </article>
 
 
     <article class="producto">
 
-     <!-- ENSALADA DE MARISCOS -->
-<div class="producto-foto">
-  <img src="images/06-ensalada-de-mariscos.jpg" alt="Ensalada de mariscos">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/06-ensalada-de-mariscos.jpg"
+          alt="Ensalada de mariscos"
+        >
+      </div>
 
       <div class="producto-contenido">
 
         <h3>Ensalada de mariscos</h3>
 
-        <div class="precio">$280</div>
+        <div class="precio">
+          $280
+        </div>
 
         <button
           class="btn-agregar"
@@ -1708,16 +1812,20 @@ footer p{
 
     <article class="producto">
 
-     <!-- CÓCTEL DE CAMARÓN -->
-<div class="producto-foto">
-  <img src="images/07-coctel-de-camaron.jpg" alt="Cóctel de camarón">
-</div> 
+      <div class="producto-foto">
+        <img
+          src="images/07-coctel-de-camaron.jpg"
+          alt="Cóctel de camarón"
+        >
+      </div>
 
       <div class="producto-contenido">
 
         <h3>Cóctel de camarón</h3>
 
-        <div class="precio">$250</div>
+        <div class="precio">
+          $250
+        </div>
 
         <button
           class="btn-agregar"
@@ -1733,16 +1841,20 @@ footer p{
 
     <article class="producto">
 
-     <!-- CÓCTEL MIXTO -->
-<div class="producto-foto">
-  <img src="images/08-coctel-mixto-camaron-pulpo.jpg" alt="Cóctel mixto de camarón y pulpo">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/08-coctel-mixto-camaron-pulpo.jpg"
+          alt="Cóctel mixto de camarón y pulpo"
+        >
+      </div>
 
       <div class="producto-contenido">
 
         <h3>Cóctel mixto camarón y pulpo</h3>
 
-        <div class="precio">$280</div>
+        <div class="precio">
+          $280
+        </div>
 
         <button
           class="btn-agregar"
@@ -1756,33 +1868,78 @@ footer p{
     </article>
 
 
+    <!-- =================================================
+         CAMARONES AL GUSTO
+    ================================================= -->
+
     <article class="producto">
 
-     <!-- CAMARONES AL GUSTO -->
-<div class="producto-foto">
-  <img src="images/09-camarones-al-gusto.jpg" alt="Camarones al gusto">
-</div> 
+      <div class="producto-foto">
+        <img
+          src="images/09-camarones-al-gusto.jpg"
+          alt="Camarones al gusto"
+        >
+      </div>
 
       <div class="producto-contenido">
 
         <h3>Camarones al gusto</h3>
 
-        <ul class="subopciones">
-          <li>Empanizados</li>
-          <li>Diabla</li>
-          <li>Cucaracha</li>
-          <li>Ajillo</li>
-          <li>Ajo</li>
-        </ul>
+        <p class="producto-descripcion">
+          Elige tu preparación favorita:
+        </p>
 
-        <div class="precio">$285</div>
+        <div class="opciones-camarones">
 
-        <button
-          class="btn-agregar"
-          onclick="agregar('Camarones al gusto',285,'Empanizados / Diabla / Cucaracha / Ajillo / Ajo')"
-        >
-          🛒 Agregar al pedido
-        </button>
+          <button
+            class="opcion-camaron"
+            onclick="agregar('Camarones al gusto',285,'Empanizados')"
+          >
+            Empanizados
+          </button>
+
+          <button
+            class="opcion-camaron"
+            onclick="agregar('Camarones al gusto',285,'Diabla')"
+          >
+            Diabla
+          </button>
+
+          <button
+            class="opcion-camaron"
+            onclick="agregar('Camarones al gusto',285,'Cucaracha')"
+          >
+            Cucaracha
+          </button>
+
+          <button
+            class="opcion-camaron"
+            onclick="agregar('Camarones al gusto',285,'Ajillo')"
+          >
+            Ajillo
+          </button>
+
+          <button
+            class="opcion-camaron"
+            onclick="agregar('Camarones al gusto',285,'Ajo')"
+          >
+            Ajo
+          </button>
+
+        </div>
+
+        <div class="precio">
+          $285
+        </div>
+
+        <small style="
+          display:block;
+          color:#59645e;
+          text-align:center;
+          margin-bottom:8px;
+        ">
+          Selecciona una preparación
+        </small>
 
       </div>
 
@@ -1805,18 +1962,23 @@ footer p{
 
   <div class="productos">
 
+
     <article class="producto">
 
-     <!-- AGUACHILE VERDE -->
-<div class="producto-foto">
-  <img src="images/10-aguachile-verde.jpg" alt="Aguachile verde">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/10-aguachile-verde.jpg"
+          alt="Aguachile verde"
+        >
+      </div>
 
       <div class="producto-contenido">
 
         <h3>Aguachile Verde</h3>
 
-        <div class="precio">$250</div>
+        <div class="precio">
+          $250
+        </div>
 
         <button
           class="btn-agregar"
@@ -1832,16 +1994,20 @@ footer p{
 
     <article class="producto">
 
-      <!-- AGUACHILE ROJO -->
-<div class="producto-foto">
-  <img src="images/11-aguachile-rojo.jpg" alt="Aguachile rojo">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/11-aguachile-rojo.jpg"
+          alt="Aguachile rojo"
+        >
+      </div>
 
       <div class="producto-contenido">
 
         <h3>Aguachile Rojo</h3>
 
-        <div class="precio">$250</div>
+        <div class="precio">
+          $250
+        </div>
 
         <button
           class="btn-agregar"
@@ -1857,16 +2023,20 @@ footer p{
 
     <article class="producto">
 
-     <!-- AGUACHILE NEGRO -->
-<div class="producto-foto">
-  <img src="images/12-aguachile-negro.jpg" alt="Aguachile negro">
-</div> 
+      <div class="producto-foto">
+        <img
+          src="images/12-aguachile-negro.jpg"
+          alt="Aguachile negro"
+        >
+      </div>
 
       <div class="producto-contenido">
 
         <h3>Aguachile Negro</h3>
 
-        <div class="precio">$250</div>
+        <div class="precio">
+          $250
+        </div>
 
         <button
           class="btn-agregar"
@@ -1899,96 +2069,146 @@ footer p{
 
     <article class="producto">
 
-      <!-- TOSTADA CEVICHE CAMARÓN -->
-<div class="producto-foto">
-  <img src="images/13-tostada-ceviche-camaron.jpg" alt="Tostada de ceviche de camarón">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/13-tostada-ceviche-camaron.jpg"
+          alt="Tostada de ceviche de camarón"
+        >
+      </div>
 
       <div class="producto-contenido">
+
         <h3>Tostada De Ceviche camarón</h3>
-        <div class="precio">$75</div>
 
-        <button class="btn-agregar"
-          onclick="agregar('Tostada de ceviche camarón',75)">
+        <div class="precio">
+          $75
+        </div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Tostada de ceviche camarón',75)"
+        >
           🛒 Agregar al pedido
         </button>
+
       </div>
+
     </article>
 
 
     <article class="producto">
 
-      <!-- TOSTADA DE ATÚN -->
-<div class="producto-foto">
-  <img src="images/14-tostada-atun.jpg" alt="Tostada de atún">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/14-tostada-atun.jpg"
+          alt="Tostada de atún"
+        >
+      </div>
 
       <div class="producto-contenido">
+
         <h3>Atún</h3>
-        <div class="precio">$85</div>
 
-        <button class="btn-agregar"
-          onclick="agregar('Tostada de atún',85)">
+        <div class="precio">
+          $85
+        </div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Tostada de atún',85)"
+        >
           🛒 Agregar al pedido
         </button>
+
       </div>
+
     </article>
 
 
     <article class="producto">
 
-      <!-- TOSTADA DE AGUACHILES -->
-<div class="producto-foto">
-  <img src="images/15-tostada-aguachiles.jpg" alt="Tostada de aguachiles">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/15-tostada-aguachiles.jpg"
+          alt="Tostada de aguachiles"
+        >
+      </div>
 
       <div class="producto-contenido">
+
         <h3>Aguachiles</h3>
-        <div class="precio">$85</div>
 
-        <button class="btn-agregar"
-          onclick="agregar('Tostada de aguachiles',75)">
+        <div class="precio">
+          $85
+        </div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Tostada de aguachiles',85)"
+        >
           🛒 Agregar al pedido
         </button>
+
       </div>
+
     </article>
 
 
     <article class="producto">
 
-      <!-- TOSTADA CEVICHE VALLARTA -->
-<div class="producto-foto">
-  <img src="images/16-tostada-ceviche-vallarta.jpg" alt="Tostada de ceviche Vallarta">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/16-tostada-ceviche-vallarta.jpg"
+          alt="Tostada de ceviche Vallarta"
+        >
+      </div>
 
       <div class="producto-contenido">
+
         <h3>Ceviche Vallarta</h3>
-        <div class="precio">$55</div>
 
-        <button class="btn-agregar"
-          onclick="agregar('Tostada de ceviche Vallarta',45)">
+        <div class="precio">
+          $55
+        </div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Tostada de ceviche Vallarta',55)"
+        >
           🛒 Agregar al pedido
         </button>
+
       </div>
+
     </article>
 
 
     <article class="producto">
 
-      <!-- TOSTADA CEVICHE CUADRO ACAPULQUEÑO -->
-<div class="producto-foto">
-  <img src="images/17-tostada-ceviche-cuadro-acapulqueno.jpg" alt="Tostada de ceviche cuadro tipo acapulqueño">
-</div>
+      <div class="producto-foto">
+        <img
+          src="images/17-tostada-ceviche-cuadro-acapulqueno.jpg"
+          alt="Tostada de ceviche cuadro tipo acapulqueño"
+        >
+      </div>
 
       <div class="producto-contenido">
-        <h3>Ceviche cuadro tipo acapulqueño</h3>
-        <div class="precio">$75</div>
 
-        <button class="btn-agregar"
-          onclick="agregar('Tostada de ceviche cuadro tipo acapulqueño',75)">
+        <h3>Ceviche cuadro tipo acapulqueño</h3>
+
+        <div class="precio">
+          $75
+        </div>
+
+        <button
+          class="btn-agregar"
+          onclick="agregar('Tostada de ceviche cuadro tipo acapulqueño',75)"
+        >
           🛒 Agregar al pedido
         </button>
+
       </div>
+
     </article>
 
   </div>
@@ -2128,7 +2348,9 @@ footer p{
 
 
     <div class="bebida">
+
       <span>Arroz</span>
+
       <strong>$50</strong>
 
       <button
@@ -2137,11 +2359,14 @@ footer p{
       >
         +
       </button>
+
     </div>
 
 
     <div class="bebida">
+
       <span>Salsa aguachile</span>
+
       <strong>$20</strong>
 
       <button
@@ -2150,11 +2375,14 @@ footer p{
       >
         +
       </button>
+
     </div>
 
 
     <div class="bebida">
+
       <span>Salsa ajillo, diabla</span>
+
       <strong>$50</strong>
 
       <button
@@ -2163,11 +2391,14 @@ footer p{
       >
         +
       </button>
+
     </div>
 
 
     <div class="bebida">
+
       <span>Aderezo</span>
+
       <strong>$30</strong>
 
       <button
@@ -2176,11 +2407,14 @@ footer p{
       >
         +
       </button>
+
     </div>
 
 
     <div class="bebida">
+
       <span>Guacamole</span>
+
       <strong>$125</strong>
 
       <button
@@ -2189,6 +2423,7 @@ footer p{
       >
         +
       </button>
+
     </div>
 
   </div>
@@ -2209,21 +2444,43 @@ footer p{
   <div class="bebidas-grid">
 
 
+    <!-- AGUA CHICA -->
+
     <div class="bebida">
 
       <span>
-        Agua del día
-        <br>
-        <small>Chica / Grande</small>
+        Agua del día — Chica
       </span>
 
       <strong>
-        $35 / $65
+        $35
       </strong>
 
       <button
         class="categoria-btn"
-        onclick="seleccionarAgua()"
+        onclick="agregar('Agua del día — Chica',35)"
+      >
+        +
+      </button>
+
+    </div>
+
+
+    <!-- AGUA GRANDE -->
+
+    <div class="bebida">
+
+      <span>
+        Agua del día — Grande
+      </span>
+
+      <strong>
+        $65
+      </strong>
+
+      <button
+        class="categoria-btn"
+        onclick="agregar('Agua del día — Grande',65)"
       >
         +
       </button>
@@ -2233,9 +2490,13 @@ footer p{
 
     <div class="bebida">
 
-      <span>Refresco Coca-Cola</span>
+      <span>
+        Refresco Coca-Cola
+      </span>
 
-      <strong>$40</strong>
+      <strong>
+        $40
+      </strong>
 
       <button
         class="categoria-btn"
@@ -2249,9 +2510,13 @@ footer p{
 
     <div class="bebida">
 
-      <span>Naranjada</span>
+      <span>
+        Naranjada
+      </span>
 
-      <strong>$60</strong>
+      <strong>
+        $60
+      </strong>
 
       <button
         class="categoria-btn"
@@ -2265,9 +2530,13 @@ footer p{
 
     <div class="bebida">
 
-      <span>Limonada</span>
+      <span>
+        Limonada
+      </span>
 
-      <strong>$60</strong>
+      <strong>
+        $60
+      </strong>
 
       <button
         class="categoria-btn"
@@ -2281,9 +2550,13 @@ footer p{
 
     <div class="bebida">
 
-      <span>Rusa</span>
+      <span>
+        Rusa
+      </span>
 
-      <strong>$60</strong>
+      <strong>
+        $60
+      </strong>
 
       <button
         class="categoria-btn"
@@ -2297,9 +2570,13 @@ footer p{
 
     <div class="bebida">
 
-      <span>Agua embotellada</span>
+      <span>
+        Agua embotellada
+      </span>
 
-      <strong>$25</strong>
+      <strong>
+        $25
+      </strong>
 
       <button
         class="categoria-btn"
@@ -2682,35 +2959,6 @@ function agregar(nombre,precio,detalle=""){
 
 
 /* =========================================================
-   AGUA DEL DÍA
-========================================================= */
-
-function seleccionarAgua(){
-
-  const opcion = confirm(
-    "Agua del día:\n\nAceptar = Chica $35\nCancelar = Grande $45"
-  );
-
-  if(opcion){
-
-    agregar(
-      "Agua del día — Chica",
-      35
-    );
-
-  }else{
-
-    agregar(
-      "Agua del día — Grande",
-      45
-    );
-
-  }
-
-}
-
-
-/* =========================================================
    ACTUALIZAR
 ========================================================= */
 
@@ -2767,7 +3015,7 @@ function actualizarCarrito(){
 
           ${
             item.detalle
-            ? `<p>${item.detalle}</p>`
+            ? `<p>Preparación: ${item.detalle}</p>`
             : ""
           }
 
@@ -2892,6 +3140,10 @@ function mostrarFormulario(){
 }
 
 
+/* =========================================================
+   TIPO DE PEDIDO
+========================================================= */
+
 function seleccionarTipo(tipo){
 
   tipoPedido = tipo;
@@ -2912,6 +3164,7 @@ function seleccionarTipo(tipo){
 
   }
 
+
   if(tipo === "restaurante"){
 
     document
@@ -2919,6 +3172,7 @@ function seleccionarTipo(tipo){
       .classList.add("activo");
 
   }
+
 
   if(tipo === "recoger"){
 
@@ -2950,6 +3204,7 @@ function seleccionarTipo(tipo){
 
   }
 
+
   if(tipo === "restaurante"){
 
     document
@@ -2957,6 +3212,7 @@ function seleccionarTipo(tipo){
       .classList.remove("oculto");
 
   }
+
 
   if(tipo === "recoger"){
 
@@ -3101,6 +3357,7 @@ function enviarWhatsApp(){
     mensaje +=
       "🏠 *Domicilio*\n";
 
+
     mensaje +=
       "📍 " +
       direccion +
@@ -3180,14 +3437,15 @@ function enviarWhatsApp(){
         " x " +
         item.nombre;
 
+
       if(item.detalle){
 
         mensaje +=
-          " (" +
-          item.detalle +
-          ")";
+          " — " +
+          item.detalle;
 
       }
+
 
       mensaje +=
         " — $" +
@@ -3317,9 +3575,19 @@ if("serviceWorker" in navigator){
 
 </script>
 
+
+<!-- =====================================================
+     MÚSICA
+===================================================== -->
+
 <script>
-const musicaMarYChelas = document.getElementById("musicaMarYChelas");
-const botonMusica = document.getElementById("botonMusica");
+
+const musicaMarYChelas =
+  document.getElementById("musicaMarYChelas");
+
+const botonMusica =
+  document.getElementById("botonMusica");
+
 
 function alternarMusica(){
 
@@ -3327,20 +3595,29 @@ function alternarMusica(){
 
     musicaMarYChelas.play()
       .then(() => {
+
         botonMusica.textContent = "🔊";
+
       })
       .catch(() => {
+
         botonMusica.textContent = "🔇";
+
       });
 
   }else{
 
     musicaMarYChelas.pause();
+
     botonMusica.textContent = "🔇";
 
   }
+
 }
-</script>   
+
+</script>
+
 
 </body>
+
 </html>
