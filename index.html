@@ -3536,37 +3536,96 @@ function irA(id){
 
 
 /* =========================================================
-   SERVICE WORKER
+   SERVICE WORKER — ACTUALIZACIÓN AUTOMÁTICA
 ========================================================= */
 
-if("serviceWorker" in navigator){
+if ("serviceWorker" in navigator) {
 
-  window.addEventListener(
-    "load",
-    () => {
+  window.addEventListener("load", async () => {
 
-      navigator.serviceWorker
-        .register("./service-worker.js")
-        .then(
-          registro => {
+    try {
 
-            console.log(
-              "Mar y Chelas PWA activa:",
-              registro.scope
-            );
-
-          }
-        )
-        .catch(
-          error => {
-
-            console.error(
-              "Error PWA:",
-              error
-            );
-
+      const registro =
+        await navigator.serviceWorker.register(
+          "./service-worker.js",
+          {
+            updateViaCache: "none"
           }
         );
+
+      console.log(
+        "Mar y Chelas PWA activa:",
+        registro.scope
+      );
+
+      /* Buscar actualizaciones inmediatamente */
+      await registro.update();
+
+      /* Si hay una nueva versión esperando */
+      if (registro.waiting) {
+
+        registro.waiting.postMessage({
+          type: "SKIP_WAITING"
+        });
+
+      }
+
+      registro.addEventListener(
+        "updatefound",
+        () => {
+
+          const nuevoWorker =
+            registro.installing;
+
+          if (!nuevoWorker) return;
+
+          nuevoWorker.addEventListener(
+            "statechange",
+            () => {
+
+              if (
+                nuevoWorker.state === "installed" &&
+                navigator.serviceWorker.controller
+              ) {
+
+                nuevoWorker.postMessage({
+                  type: "SKIP_WAITING"
+                });
+
+              }
+
+            }
+          );
+
+        }
+      );
+
+    } catch (error) {
+
+      console.error(
+        "Error PWA:",
+        error
+      );
+
+    }
+
+  });
+
+
+  /* Recargar una sola vez cuando entra
+     el nuevo Service Worker */
+
+  let recargando = false;
+
+  navigator.serviceWorker.addEventListener(
+    "controllerchange",
+    () => {
+
+      if (recargando) return;
+
+      recargando = true;
+
+      window.location.reload();
 
     }
   );
