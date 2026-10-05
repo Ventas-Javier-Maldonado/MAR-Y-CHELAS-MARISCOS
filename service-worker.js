@@ -1,87 +1,120 @@
-if ("serviceWorker" in navigator) {
+const CACHE_NAME = "mar-y-chelas-v3";
 
-  window.addEventListener("load", async () => {
-
-    try {
-
-      const registro =
-        await navigator.serviceWorker.register(
-          "./service-worker.js",
-          {
-            updateViaCache: "none"
-          }
-        );
-
-      console.log(
-        "Mar y Chelas PWA activa:",
-        registro.scope
-      );
-
-      await registro.update();
-
-      if (registro.waiting) {
-
-        registro.waiting.postMessage({
-          type: "SKIP_WAITING"
-        });
-
-      }
-
-      registro.addEventListener(
-        "updatefound",
-        () => {
-
-          const nuevoWorker =
-            registro.installing;
-
-          if (!nuevoWorker) return;
-
-          nuevoWorker.addEventListener(
-            "statechange",
-            () => {
-
-              if (
-                nuevoWorker.state === "installed" &&
-                navigator.serviceWorker.controller
-              ) {
-
-                nuevoWorker.postMessage({
-                  type: "SKIP_WAITING"
-                });
-
-              }
-
-            }
-          );
-
-        }
-      );
-
-    } catch (error) {
-
-      console.error(
-        "Error PWA:",
-        error
-      );
-
-    }
-
-  });
+const ARCHIVOS = [
+  "./",
+  "./index.html",
+  "./manifest.webmanifest",
+  "./images/menu-mar-y-chelas.jpg",
+  "./music/musica-mar-y-chelas.mp3"
+];
 
 
-  let recargando = false;
+/* =========================================================
+   INSTALACIÓN
+========================================================= */
 
-  navigator.serviceWorker.addEventListener(
-    "controllerchange",
-    () => {
+self.addEventListener("install", event => {
 
-      if (recargando) return;
+  event.waitUntil(
 
-      recargando = true;
+    caches.open(CACHE_NAME)
+      .then(cache => {
 
-      window.location.reload();
+        return cache.addAll(ARCHIVOS);
 
-    }
+      })
+
   );
 
-}
+  self.skipWaiting();
+
+});
+
+
+/* =========================================================
+   ACTIVACIÓN
+========================================================= */
+
+self.addEventListener("activate", event => {
+
+  event.waitUntil(
+
+    caches.keys()
+      .then(nombres => {
+
+        return Promise.all(
+
+          nombres
+            .filter(nombre => nombre !== CACHE_NAME)
+            .map(nombre => caches.delete(nombre))
+
+        );
+
+      })
+
+  );
+
+  self.clients.claim();
+
+});
+
+
+/* =========================================================
+   MENSAJES
+========================================================= */
+
+self.addEventListener("message", event => {
+
+  if (
+    event.data &&
+    event.data.type === "SKIP_WAITING"
+  ) {
+
+    self.skipWaiting();
+
+  }
+
+});
+
+
+/* =========================================================
+   FETCH
+========================================================= */
+
+self.addEventListener("fetch", event => {
+
+  if (event.request.method !== "GET") {
+    return;
+  }
+
+  event.respondWith(
+
+    fetch(event.request)
+      .then(respuesta => {
+
+        const copia = respuesta.clone();
+
+        caches.open(CACHE_NAME)
+          .then(cache => {
+
+            cache.put(
+              event.request,
+              copia
+            );
+
+          });
+
+        return respuesta;
+
+      })
+      .catch(() => {
+
+        return caches.match(
+          event.request
+        );
+
+      })
+
+  );
+
+});
