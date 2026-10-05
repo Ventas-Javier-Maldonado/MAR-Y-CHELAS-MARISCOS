@@ -779,12 +779,16 @@ body{
 
 }
 
-<button
-  class="btn-ver-camarones"
-  onclick="abrirCamarones()"
->
-  🍤 VER PREPARACIONES
-</button>
+.btn-ver-camarones:hover{
+
+  background:var(--amarillo);
+
+  color:#111;
+
+  transform:translateY(-1px);
+
+}
+
 
 /* =========================================================
    MODAL CAMARONES
@@ -2180,9 +2184,12 @@ footer p{
 
         <h3>Camarones al gusto</h3>
 
-        <p class="producto-descripcion">
-          Elige tu preparación favorita:
-        </p>
+       <button
+  class="btn-ver-camarones"
+  onclick="abrirCamarones()"
+>
+  🍤 VER PREPARACIONES
+</button>
 
         <div class="opciones-camarones">
 
@@ -3205,6 +3212,261 @@ footer p{
 
 </div>
 
+<!-- =====================================================
+     MODAL CAMARONES AL GUSTO
+===================================================== -->
+
+<div
+  class="modal-camarones"
+  id="modalCamarones"
+>
+
+  <div class="modal-camarones-contenido">
+
+
+    <div class="modal-camarones-encabezado">
+
+      <div>
+
+        <h2>
+          🍤 Camarones al gusto
+        </h2>
+
+        <p>
+          Elige tu preparación favorita
+        </p>
+
+      </div>
+
+
+      <button
+        class="cerrar-camarones"
+        onclick="cerrarCamarones()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="camarones-grid">
+
+
+      <!-- CAMARONES EMPANIZADOS -->
+
+      <article class="camaron-card">
+
+        <div class="camaron-card-foto">
+
+          <img
+            src="images/09-1-camarones-empanizados.jpg"
+            alt="Camarones empanizados"
+          >
+
+        </div>
+
+
+        <div class="camaron-card-contenido">
+
+          <h3>
+            Camarones Empanizados
+          </h3>
+
+          <p>
+            Camarones crujientes y doraditos,
+            preparados al momento.
+          </p>
+
+          <div class="camaron-card-precio">
+            $285
+          </div>
+
+          <button
+            class="btn-ordenar-camaron"
+            onclick="ordenarCamaron('Empanizados')"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CAMARONES A LA DIABLA -->
+
+      <article class="camaron-card">
+
+        <div class="camaron-card-foto">
+
+          <img
+            src="images/09-2-camarones-diabla.jpg"
+            alt="Camarones a la diabla"
+          >
+
+        </div>
+
+
+        <div class="camaron-card-contenido">
+
+          <h3>
+            Camarones a la Diabla
+          </h3>
+
+          <p>
+            Una preparación de sabor intenso
+            y toque picante.
+          </p>
+
+          <div class="camaron-card-precio">
+            $285
+          </div>
+
+          <button
+            class="btn-ordenar-camaron"
+            onclick="ordenarCamaron('Diabla')"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CAMARONES CUCARACHA -->
+
+      <article class="camaron-card">
+
+        <div class="camaron-card-foto">
+
+          <img
+            src="images/09-3-camarones-cucaracha.jpg"
+            alt="Camarones cucaracha"
+          >
+
+        </div>
+
+
+        <div class="camaron-card-contenido">
+
+          <h3>
+            Camarones Cucaracha
+          </h3>
+
+          <p>
+            Camarones dorados con el toque
+            especial de la casa.
+          </p>
+
+          <div class="camaron-card-precio">
+            $285
+          </div>
+
+          <button
+            class="btn-ordenar-camaron"
+            onclick="ordenarCamaron('Cucaracha')"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CAMARONES AL AJILLO -->
+
+      <article class="camaron-card">
+
+        <div class="camaron-card-foto">
+
+          <img
+            src="images/09-4-camarones-ajillo.jpg"
+            alt="Camarones al ajillo"
+          >
+
+        </div>
+
+
+        <div class="camaron-card-contenido">
+
+          <h3>
+            Camarones al Ajillo
+          </h3>
+
+          <p>
+            Camarones preparados con ajo
+            y un delicioso toque de ajillo.
+          </p>
+
+          <div class="camaron-card-precio">
+            $285
+          </div>
+
+          <button
+            class="btn-ordenar-camaron"
+            onclick="ordenarCamaron('Ajillo')"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CAMARONES AL AJO -->
+
+      <article class="camaron-card">
+
+        <div class="camaron-card-foto">
+
+          <img
+            src="images/09-5-camarones-ajo.jpg"
+            alt="Camarones al ajo"
+          >
+
+        </div>
+
+
+        <div class="camaron-card-contenido">
+
+          <h3>
+            Camarones al Ajo
+          </h3>
+
+          <p>
+            Camarones con un delicioso sabor
+            a ajo, preparados al momento.
+          </p>
+
+          <div class="camaron-card-precio">
+            $285
+          </div>
+
+          <button
+            class="btn-ordenar-camaron"
+            onclick="ordenarCamaron('Ajo')"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
+
+    </div>
+
+  </div>
+
+</div>   
+
 
 <script>
 
@@ -3215,6 +3477,50 @@ footer p{
 let carrito = [];
 
 let tipoPedido = "";
+
+/* =========================================================
+   CAMARONES AL GUSTO
+========================================================= */
+
+function abrirCamarones(){
+
+  document
+    .getElementById("modalCamarones")
+    .classList.add("activo");
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+function cerrarCamarones(){
+
+  document
+    .getElementById("modalCamarones")
+    .classList.remove("activo");
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+/* =========================================================
+   ORDENAR CAMARÓN
+========================================================= */
+
+function ordenarCamaron(preparacion){
+
+  agregar(
+    "Camarones al gusto",
+    285,
+    preparacion
+  );
+
+  cerrarCamarones();
+
+}   
 
 
 /* =========================================================
