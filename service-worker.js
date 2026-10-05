@@ -8,11 +8,6 @@ const ARCHIVOS = [
   "./music/musica-mar-y-chelas.mp3"
 ];
 
-
-/* =========================================================
-   INSTALACIÓN
-========================================================= */
-
 self.addEventListener("install", event => {
 
   event.waitUntil(
@@ -30,10 +25,6 @@ self.addEventListener("install", event => {
 
 });
 
-
-/* =========================================================
-   ACTIVACIÓN
-========================================================= */
 
 self.addEventListener("activate", event => {
 
@@ -59,10 +50,6 @@ self.addEventListener("activate", event => {
 });
 
 
-/* =========================================================
-   MENSAJES
-========================================================= */
-
 self.addEventListener("message", event => {
 
   if (
@@ -76,10 +63,6 @@ self.addEventListener("message", event => {
 
 });
 
-
-/* =========================================================
-   FETCH
-========================================================= */
 
 self.addEventListener("fetch", event => {
 
