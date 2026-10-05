@@ -751,32 +751,284 @@ body{
    CAMARONES AL GUSTO
 ========================================================= */
 
-.opciones-camarones{
+.btn-ver-camarones{
+
+  width:100%;
+
+  border:none;
+
+  background:var(--verde);
+
+  color:white;
+
+  border-radius:14px;
+
+  padding:14px 16px;
+
+  font-size:14px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  margin:8px 0 13px;
+
+  transition:.25s;
+
+  box-shadow:0 4px 10px rgba(6,69,47,.15);
+
+}
+
+.btn-ver-camarones:hover{
+
+  background:var(--amarillo);
+
+  color:#111;
+
+  transform:translateY(-1px);
+
+}
+
+
+/* =========================================================
+   MODAL CAMARONES
+========================================================= */
+
+.modal-camarones{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:9999;
+
+  background:rgba(0,0,0,.72);
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+}
+
+.modal-camarones.activo{
+
+  display:flex;
+
+}
+
+.modal-camarones-contenido{
+
+  width:min(1000px,96vw);
+
+  max-height:92vh;
+
+  overflow-y:auto;
+
+  background:var(--crema);
+
+  border-radius:24px;
+
+  padding:24px;
+
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+
+}
+
+.modal-camarones-encabezado{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:15px;
+
+  margin-bottom:20px;
+
+  border-bottom:1px solid rgba(6,69,47,.15);
+
+  padding-bottom:15px;
+
+}
+
+.modal-camarones-encabezado h2{
+
+  margin:0;
+
+  color:var(--verde);
+
+  font-family:Georgia,serif;
+
+  font-size:27px;
+
+}
+
+.modal-camarones-encabezado p{
+
+  margin:5px 0 0;
+
+  color:#59645e;
+
+  font-size:14px;
+
+}
+
+.cerrar-camarones{
+
+  width:42px;
+
+  height:42px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:var(--verde);
+
+  color:white;
+
+  font-size:28px;
+
+  line-height:1;
+
+  cursor:pointer;
+
+  flex-shrink:0;
+
+}
+
+.cerrar-camarones:hover{
+
+  background:var(--amarillo);
+
+  color:#111;
+
+}
+
+
+/* =========================================================
+   TARJETAS DE PREPARACIONES
+========================================================= */
+
+.camarones-grid{
 
   display:grid;
 
   grid-template-columns:
     repeat(2,minmax(0,1fr));
 
-  gap:8px;
-
-  margin:8px 0 13px;
+  gap:18px;
 
 }
 
-.opcion-camaron{
-
-  border:1px solid var(--verde);
+.camaron-card{
 
   background:white;
 
+  border-radius:18px;
+
+  overflow:hidden;
+
+  border:1px solid rgba(6,69,47,.14);
+
+  box-shadow:var(--sombra);
+
+}
+
+.camaron-card-foto{
+
+  width:100%;
+
+  height:220px;
+
+  overflow:hidden;
+
+}
+
+.camaron-card-foto img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+
+  transition:.35s;
+
+}
+
+.camaron-card:hover .camaron-card-foto img{
+
+  transform:scale(1.04);
+
+}
+
+.camaron-card-contenido{
+
+  padding:17px;
+
+}
+
+.camaron-card-contenido h3{
+
+  margin:0 0 7px;
+
   color:var(--verde);
+
+  font-family:Georgia,serif;
+
+  font-size:21px;
+
+}
+
+.camaron-card-contenido p{
+
+  margin:0 0 12px;
+
+  color:#59645e;
+
+  font-size:14px;
+
+  line-height:1.5;
+
+  min-height:42px;
+
+}
+
+.camaron-card-precio{
+
+  color:var(--verde);
+
+  font-size:23px;
+
+  font-weight:bold;
+
+  margin-bottom:12px;
+
+}
+
+.btn-ordenar-camaron{
+
+  width:100%;
+
+  border:none;
+
+  background:var(--verde);
+
+  color:white;
 
   border-radius:12px;
 
-  padding:10px 8px;
+  padding:13px;
 
-  font-size:13px;
+  font-size:14px;
 
   font-weight:bold;
 
@@ -786,13 +1038,60 @@ body{
 
 }
 
-.opcion-camaron:hover{
+.btn-ordenar-camaron:hover{
 
   background:var(--amarillo);
 
   color:#111;
 
-  border-color:var(--amarillo);
+}
+
+
+/* =========================================================
+   RESPONSIVE CAMARONES
+========================================================= */
+
+@media(max-width:700px){
+
+  .modal-camarones{
+
+    padding:10px;
+
+    align-items:flex-end;
+
+  }
+
+  .modal-camarones-contenido{
+
+    width:100%;
+
+    max-height:94vh;
+
+    border-radius:22px 22px 0 0;
+
+    padding:17px;
+
+  }
+
+  .modal-camarones-encabezado h2{
+
+    font-size:22px;
+
+  }
+
+  .camarones-grid{
+
+    grid-template-columns:1fr;
+
+    gap:15px;
+
+  }
+
+  .camaron-card-foto{
+
+    height:210px;
+
+  }
 
 }
 
