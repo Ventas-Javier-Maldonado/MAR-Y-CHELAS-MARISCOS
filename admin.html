@@ -1,589 +1,432 @@
+```html
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
 
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
->
+<meta name="theme-color"
+      content="#06452f">
 
-<meta
-name="theme-color"
-content="#06452f"
-
->
-
-<title>
-  Administrador | Mar y Chelas P.V.
-</title>
+<title>Administrador | Mar y Chelas P.V.</title>
 
 <style>
 
-/* =========================================================
-   VARIABLES
-========================================================= */
-
 :root{
-
   --verde:#06452f;
   --verde2:#0b6847;
   --verde3:#123f30;
-
   --crema:#f1e5ca;
   --crema2:#fff7e6;
-
   --amarillo:#d8c52b;
-  --amarillo2:#f1df55;
-
   --negro:#101714;
   --blanco:#ffffff;
-
-  --gris:#59645e;
+  --gris:#647067;
   --rojo:#b42318;
-
-  --sombra:
-    0 18px 50px rgba(0,0,0,.18);
-
 }
-
-
-/* =========================================================
-   GENERAL
-========================================================= */
 
 *{
   box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-
-  margin:0;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family:Arial,Helvetica,sans-serif;
   background:
     linear-gradient(
-      rgba(6,69,47,.96),
-      rgba(18,63,48,.98)
+      rgba(6,69,47,.94),
+      rgba(6,69,47,.97)
     );
-
-  color:var(--negro);
-
   min-height:100vh;
-
+  color:var(--negro);
 }
 
-
-/* =========================================================
-   CONTENEDOR
-========================================================= */
-
-.admin{
-
-  width:100%;
-
-  max-width:1100px;
-
+.contenedor{
+  width:min(1100px,94%);
   margin:auto;
-
-  padding:20px;
-
+  padding:25px 0 50px;
 }
-
 
 /* =========================================================
    ENCABEZADO
 ========================================================= */
 
 .encabezado{
-
-  background:var(--crema2);
-
-  border-radius:20px;
-
-  padding:22px;
-
+  background:linear-gradient(
+    135deg,
+    var(--verde),
+    var(--verde3)
+  );
+  color:white;
+  border-radius:22px;
+  padding:25px;
   margin-bottom:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
 
-  box-shadow:var(--sombra);
+.marca{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
 
-  text-align:center;
-
+.logo{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  background:var(--amarillo);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
 }
 
 .encabezado h1{
-
-  margin:0;
-
-  color:var(--verde);
-
   font-family:Georgia,serif;
-
   font-size:30px;
-
 }
 
 .encabezado p{
-
-  margin:8px 0 0;
-
-  color:var(--gris);
-
+  margin-top:5px;
+  opacity:.85;
 }
-
 
 /* =========================================================
    PANEL
 ========================================================= */
 
 .panel{
-
   background:var(--crema2);
-
-  border-radius:20px;
-
-  padding:22px;
-
-  margin-bottom:20px;
-
-  box-shadow:var(--sombra);
-
+  border-radius:22px;
+  padding:25px;
+  box-shadow:0 15px 40px rgba(0,0,0,.20);
 }
 
-.panel h2{
-
-  margin-top:0;
-
-  color:var(--verde);
-
-  font-family:Georgia,serif;
-
+.grupo{
+  margin-bottom:22px;
 }
 
-
-/* =========================================================
-   CAMPOS
-========================================================= */
-
-.campo{
-
-  margin-bottom:16px;
-
-}
-
-.campo label{
-
+.grupo label{
   display:block;
-
-  margin-bottom:7px;
-
-  color:var(--verde);
-
   font-weight:bold;
-
+  color:var(--verde);
+  margin-bottom:8px;
 }
 
-.campo input,
-.campo select,
-.campo textarea{
-
+select,
+input,
+textarea{
   width:100%;
-
-  border:1px solid
-    rgba(6,69,47,.25);
-
+  border:1px solid rgba(6,69,47,.25);
   border-radius:12px;
-
-  padding:13px;
-
+  padding:13px 14px;
   font-size:15px;
-
   background:white;
-
-  color:var(--negro);
-
+  outline:none;
 }
 
-.campo textarea{
+select:focus,
+input:focus,
+textarea:focus{
+  border-color:var(--verde2);
+  box-shadow:0 0 0 3px rgba(11,104,71,.10);
+}
 
-  min-height:100px;
-
+textarea{
+  min-height:90px;
   resize:vertical;
-
 }
 
 .contador{
-
   display:block;
-
-  margin-top:5px;
-
   text-align:right;
-
+  margin-top:5px;
   font-size:12px;
-
   color:var(--gris);
-
 }
-
 
 /* =========================================================
-   BOTONES
-========================================================= */
-
-.botones{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
-  gap:12px;
-
-  margin-top:18px;
-
-}
-
-button{
-
-  border:none;
-
-  border-radius:14px;
-
-  padding:14px 16px;
-
-  font-size:14px;
-
-  font-weight:bold;
-
-  cursor:pointer;
-
-}
-
-.btn-principal{
-
-  background:var(--verde);
-
-  color:white;
-
-}
-
-.btn-secundario{
-
-  background:var(--amarillo);
-
-  color:#171717;
-
-}
-
-.btn-peligro{
-
-  background:var(--rojo);
-
-  color:white;
-
-}
-
-.btn-gris{
-
-  background:#d8ddd9;
-
-  color:#18211d;
-
-}
-
-
-/* =========================================================
-   LISTA DE PLATILLOS
+   LISTA
 ========================================================= */
 
 .lista{
-
   display:grid;
-
-  gap:10px;
-
-}
-
-.platillo{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
   gap:15px;
+  margin-bottom:25px;
+}
 
+.item-lista{
+  border:1px solid rgba(6,69,47,.16);
+  border-radius:16px;
+  padding:15px;
   background:white;
-
-  border:1px solid
-    rgba(6,69,47,.15);
-
-  border-radius:14px;
-
-  padding:13px;
-
+  cursor:pointer;
+  transition:.2s;
 }
 
-.platillo-info{
-
-  min-width:0;
-
+.item-lista:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(0,0,0,.10);
 }
 
-.platillo-info strong{
+.item-lista.activo{
+  border:2px solid var(--verde);
+  background:#f3faf6;
+}
 
+.item-lista strong{
   display:block;
-
   color:var(--verde);
-
-  font-size:16px;
-
+  margin-bottom:5px;
 }
 
-.platillo-info span{
-
-  display:block;
-
-  margin-top:4px;
-
-  color:var(--gris);
-
-  font-size:13px;
-
+.item-lista span{
+  font-weight:bold;
 }
-
-.platillo button{
-
-  flex-shrink:0;
-
-  background:var(--verde);
-
-  color:white;
-
-  padding:10px 13px;
-
-}
-
 
 /* =========================================================
    FOTO
 ========================================================= */
 
-.foto-actual{
-
+.foto-preview{
   width:100%;
-
-  max-width:300px;
-
-  height:190px;
-
-  margin:10px auto 18px;
-
-  border-radius:16px;
-
+  height:260px;
+  border-radius:18px;
   overflow:hidden;
-
   background:
     linear-gradient(
       135deg,
       var(--verde),
       var(--verde3)
     );
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
-}
-
-.foto-actual img{
-
-  width:100%;
-
-  height:100%;
-
-  object-fit:cover;
-
-}
-
-.sin-foto{
-
+  margin-bottom:12px;
   color:white;
-
-  font-weight:bold;
-
+  text-align:center;
 }
 
+.foto-preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
 /* =========================================================
-   VISTA PREVIA
+   PREVISUALIZACIÓN DEL PRODUCTO
 ========================================================= */
 
-.preview{
-
-  margin-top:20px;
-
-}
-
-.preview h3{
-
-  color:var(--verde);
-
-  margin-bottom:12px;
-
-}
-
-
-/* Tarjeta similar al menú real */
-
-.producto-preview{
-
-  max-width:500px;
-
-  margin:auto;
-
+.preview-producto{
   background:
     linear-gradient(
       rgba(255,250,237,.96),
       rgba(239,225,194,.96)
     );
-
-  border:1px solid
-    rgba(6,69,47,.22);
-
+  border:1px solid rgba(6,69,47,.22);
   border-radius:18px;
-
   overflow:hidden;
-
-  box-shadow:
-    0 12px 35px rgba(0,0,0,.18);
-
+  box-shadow:0 12px 35px rgba(0,0,0,.18);
 }
 
-.producto-preview-foto{
-
+.preview-foto{
   height:230px;
-
   background:
     linear-gradient(
       135deg,
       rgba(6,69,47,.95),
       rgba(18,63,48,.90)
     );
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
   overflow:hidden;
-
 }
 
-.producto-preview-foto img{
-
+.preview-foto img{
   width:100%;
-
   height:100%;
-
   object-fit:cover;
-
 }
 
-.producto-preview-contenido{
-
+.preview-contenido{
   padding:18px;
-
 }
 
-.producto-preview h4{
-
+.preview-contenido h3{
   font-family:Georgia,serif;
-
   font-size:23px;
-
-  line-height:1.1;
-
   color:var(--verde);
-
-  margin:
-    0 0 8px;
-
+  line-height:1.1;
+  margin-bottom:8px;
 }
 
-.producto-preview-descripcion{
-
+.preview-descripcion{
   color:#3d4b44;
-
   font-size:14px;
-
   line-height:1.5;
-
   margin-bottom:10px;
-
 }
 
-.producto-preview-precio{
-
+.preview-precio{
   color:#111;
-
   font-size:25px;
-
   font-weight:900;
-
   margin-bottom:13px;
-
 }
 
 .preview-boton{
-
   width:100%;
-
+  border:none;
+  border-radius:35px;
+  padding:13px;
   background:var(--verde);
-
   color:white;
-
+  font-size:15px;
+  font-weight:bold;
 }
 
+/* =========================================================
+   BOTONES
+========================================================= */
+
+.botones{
+  display:grid;
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:20px;
+}
+
+button{
+  border:none;
+  border-radius:14px;
+  padding:14px 16px;
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+button:hover{
+  transform:translateY(-1px);
+}
+
+.btn-principal{
+  background:var(--verde);
+  color:white;
+}
+
+.btn-secundario{
+  background:var(--amarillo);
+  color:#111;
+}
+
+.btn-peligro{
+  background:var(--rojo);
+  color:white;
+}
+
+.btn-gris{
+  background:#dfe5e1;
+  color:#253029;
+}
+
+.btn-completo{
+  grid-column:1/-1;
+}
 
 /* =========================================================
-   MENSAJE
+   MENSAJES
 ========================================================= */
 
 .mensaje{
-
-  display:none;
-
-  background:#e4f5ec;
-
-  color:var(--verde);
-
-  border:1px solid
-    rgba(6,69,47,.2);
-
+  padding:14px;
   border-radius:12px;
-
-  padding:13px;
-
-  margin-bottom:15px;
-
+  margin-bottom:18px;
   font-weight:bold;
-
+  display:none;
 }
 
+.mensaje.activo{
+  display:block;
+}
+
+.mensaje.ok{
+  background:#dff5e8;
+  color:#145c35;
+}
+
+.mensaje.error{
+  background:#fde2e2;
+  color:#8c1d1d;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.70);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:1000;
+}
+
+.modal.activo{
+  display:flex;
+}
+
+.modal-contenido{
+  background:var(--crema2);
+  width:min(650px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border-radius:22px;
+  padding:22px;
+}
+
+.modal-encabezado{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.modal-encabezado h2{
+  color:var(--verde);
+  font-family:Georgia,serif;
+}
+
+.cerrar{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:#e7ece8;
+  color:#222;
+  padding:0;
+}
+
+/* =========================================================
+   CARGANDO
+========================================================= */
+
+.cargando{
+  text-align:center;
+  padding:35px 15px;
+  color:var(--verde);
+  font-weight:bold;
+}
 
 /* =========================================================
    RESPONSIVE
@@ -591,40 +434,29 @@ button{
 
 @media(max-width:700px){
 
-  .admin{
-
-    padding:12px;
-
+  .contenedor{
+    width:94%;
+    padding-top:15px;
   }
 
   .encabezado h1{
-
-    font-size:25px;
-
+    font-size:24px;
   }
 
   .panel{
+    padding:18px;
+  }
 
-    padding:17px;
-
+  .lista{
+    grid-template-columns:1fr;
   }
 
   .botones{
-
     grid-template-columns:1fr;
-
   }
 
-  .platillo{
-
-    align-items:flex-start;
-
-  }
-
-  .platillo button{
-
-    padding:9px 10px;
-
+  .btn-completo{
+    grid-column:auto;
   }
 
 }
@@ -635,7 +467,7 @@ button{
 
 <body>
 
-<div class="admin">
+<div class="contenedor">
 
   <!-- =====================================================
        ENCABEZADO
@@ -643,585 +475,390 @@ button{
 
   <header class="encabezado">
 
-```
-<h1>
-  🦐 Mar y Chelas P.V.
-</h1>
+    <div class="marca">
 
-<p>
-  Administrador de menú
-</p>
-```
+      <div class="logo">
+        🦐
+      </div>
+
+      <div>
+        <h1>Mar y Chelas P.V.</h1>
+        <p>Administrador de menú</p>
+      </div>
+
+    </div>
 
   </header>
 
-  <div
-    class="mensaje"
-    id="mensaje"
-  ></div>
 
   <!-- =====================================================
-       SELECCIONAR SECCIÓN
+       PANEL PRINCIPAL
   ====================================================== -->
 
-  <section class="panel">
+  <main class="panel">
 
-```
-<h2>
-  1. Seleccionar sección
-</h2>
+    <div
+      id="mensaje"
+      class="mensaje">
+    </div>
 
-<div class="campo">
 
-  <label for="seccion">
+    <!-- ===================================================
+         SECCIÓN
+    ==================================================== -->
 
-    Sección del menú
+    <div class="grupo">
 
-  </label>
+      <label for="selectorSeccion">
+        SELECCIONAR SECCIÓN
+      </label>
 
-  <select
-    id="seccion"
-    onchange="mostrarSeccion()"
-  >
+      <select
+        id="selectorSeccion"
+        onchange="mostrarSeccion()">
 
-    <option value="">
-      Seleccionar sección
-    </option>
+        <option value="entradas">
+          Entradas
+        </option>
 
-    <option value="entradas">
-      Entradas
-    </option>
+        <option value="ceviches">
+          Ceviches
+        </option>
 
-    <option value="ceviches">
-      Ceviches
-    </option>
+        <option value="calientes">
+          Platillos calientes
+        </option>
 
-    <option value="calientes">
-      Platillos calientes
-    </option>
+        <option value="aguachiles">
+          Aguachiles
+        </option>
 
-    <option value="aguachiles">
-      Aguachiles
-    </option>
+        <option value="tostadas">
+          Tostadas
+        </option>
 
-    <option value="tostadas">
-      Tostadas
-    </option>
+        <option value="charolas">
+          Charolas
+        </option>
 
-    <option value="charolas">
-      Charolas
-    </option>
+        <option value="extras">
+          Extras
+        </option>
 
-    <option value="extras">
-      Extras
-    </option>
+        <option value="bebidas">
+          Bebidas
+        </option>
 
-    <option value="bebidas">
-      Bebidas
-    </option>
+      </select>
 
-  </select>
+    </div>
+
+
+    <!-- ===================================================
+         PRODUCTOS
+    ==================================================== -->
+
+    <div class="grupo">
+
+      <label>
+        PLATILLOS DE LA SECCIÓN
+      </label>
+
+      <div
+        id="listaProductos"
+        class="lista">
+
+        <div class="cargando">
+          Cargando menú...
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         DATOS DEL PRODUCTO
+    ==================================================== -->
+
+    <div
+      id="editor"
+      style="display:none;">
+
+      <div class="grupo">
+
+        <label>
+          NOMBRE DEL PLATILLO
+        </label>
+
+        <input
+          type="text"
+          id="nombre"
+          maxlength="80"
+          placeholder="Nombre del platillo">
+
+      </div>
+
+
+      <div class="grupo">
+
+        <label>
+          PRECIO
+        </label>
+
+        <input
+          type="number"
+          id="precio"
+          min="0"
+          step="1"
+          placeholder="Precio">
+
+      </div>
+
+
+      <div class="grupo">
+
+        <label>
+          DESCRIPCIÓN / PROMOCIÓN
+        </label>
+
+        <textarea
+          id="descripcion"
+          maxlength="50"
+          placeholder="Máximo 50 caracteres"></textarea>
+
+        <span
+          id="contador"
+          class="contador">
+          0 / 50
+        </span>
+
+      </div>
+
+
+      <div class="grupo">
+
+        <label>
+          FOTO DEL PLATILLO
+        </label>
+
+        <div
+          id="fotoPreview"
+          class="foto-preview">
+
+          <span>
+            Sin fotografía
+          </span>
+
+        </div>
+
+        <input
+          type="file"
+          id="foto"
+          accept="image/*"
+          onchange="cargarFoto(event)">
+
+      </div>
+
+
+      <!-- =================================================
+           BOTONES
+      ================================================== -->
+
+      <div class="botones">
+
+        <button
+          class="btn-principal"
+          onclick="guardarCambios()">
+          GUARDAR CAMBIOS
+        </button>
+
+        <button
+          class="btn-secundario"
+          onclick="mostrarPreview()">
+          VISTA PREVIA
+        </button>
+
+        <button
+          class="btn-peligro"
+          onclick="eliminarPlatillo()">
+          ELIMINAR PLATILLO
+        </button>
+
+        <button
+          class="btn-gris"
+          onclick="cancelarEdicion()">
+          CANCELAR
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         NUEVO PLATILLO
+    ==================================================== -->
+
+    <div class="botones">
+
+      <button
+        class="btn-secundario btn-completo"
+        onclick="nuevoPlatillo()">
+        + AGREGAR NUEVO PLATILLO
+      </button>
+
+    </div>
+
+
+    <!-- ===================================================
+         REVISAR SECCIÓN
+    ==================================================== -->
+
+    <div class="botones">
+
+      <button
+        class="btn-principal btn-completo"
+        onclick="mostrarSeccionPreview()">
+        REVISAR SECCIÓN
+      </button>
+
+    </div>
+
+  </main>
 
 </div>
-```
 
-  </section>
 
-  <!-- =====================================================
-       LISTA
-  ====================================================== -->
-
-  <section
-    class="panel"
-    id="panelLista"
-    style="display:none;"
-  >
-
-```
-<h2>
-  2. Platillos de la sección
-</h2>
+<!-- =======================================================
+     MODAL VISTA PREVIA
+======================================================== -->
 
 <div
-  class="lista"
-  id="listaPlatillos"
-></div>
+  id="modalPreview"
+  class="modal">
 
-<div class="botones">
+  <div class="modal-contenido">
 
-  <button
-    class="btn-secundario"
-    onclick="nuevoPlatillo()"
-  >
-    ＋ AGREGAR PLATILLO
-  </button>
+    <div class="modal-encabezado">
 
-  <button
-    class="btn-gris"
-    onclick="limpiarSeleccion()"
-  >
-    CAMBIAR SECCIÓN
-  </button>
+      <h2>
+        Vista previa
+      </h2>
 
-</div>
-```
+      <button
+        class="cerrar"
+        onclick="cerrarModal('modalPreview')">
+        ✕
+      </button>
 
-  </section>
+    </div>
 
-  <!-- =====================================================
-       EDITAR / AGREGAR
-  ====================================================== -->
+    <div id="previewContenido"></div>
 
-  <section
-    class="panel"
-    id="panelEdicion"
-    style="display:none;"
-  >
+    <div class="botones">
 
-```
-<h2 id="tituloEdicion">
-  3. Editar platillo
-</h2>
+      <button
+        class="btn-principal"
+        onclick="cerrarModal('modalPreview')">
+        ACEPTAR Y CERRAR
+      </button>
 
-
-<div class="campo">
-
-  <label for="nombre">
-    Nombre del platillo
-  </label>
-
-  <input
-    id="nombre"
-    type="text"
-    maxlength="80"
-    placeholder="Nombre del platillo"
-  >
-
-</div>
-
-
-<div class="campo">
-
-  <label for="precio">
-    Precio
-  </label>
-
-  <input
-    id="precio"
-    type="number"
-    min="0"
-    step="1"
-    placeholder="Ej. 250"
-  >
-
-</div>
-
-
-<div class="campo">
-
-  <label for="descripcion">
-    Descripción / promoción
-  </label>
-
-  <textarea
-    id="descripcion"
-    maxlength="50"
-    placeholder="Máximo 50 caracteres"
-    oninput="actualizarContador()"
-  ></textarea>
-
-  <span
-    class="contador"
-    id="contador"
-  >
-    0 / 50
-  </span>
-
-</div>
-
-
-<div class="campo">
-
-  <label for="foto">
-    Nueva fotografía
-  </label>
-
-  <input
-    id="foto"
-    type="file"
-    accept="image/*"
-    onchange="cargarFoto(event)"
-  >
-
-</div>
-
-
-<div>
-
-  <label style="
-    display:block;
-    color:var(--verde);
-    font-weight:bold;
-    margin-bottom:7px;
-  ">
-    Fotografía actual
-  </label>
-
-  <div
-    class="foto-actual"
-    id="fotoActual"
-  >
-
-    <span class="sin-foto">
-      Sin fotografía
-    </span>
+    </div>
 
   </div>
 
 </div>
 
 
-<div class="botones">
-
-  <button
-    class="btn-secundario"
-    onclick="guardarCambios()"
-  >
-    GUARDAR CAMBIOS
-  </button>
-
-  <button
-    class="btn-principal"
-    onclick="mostrarPreview()"
-  >
-    VISTA PREVIA
-  </button>
-
-</div>
-
+<!-- =======================================================
+     MODAL SECCIÓN
+======================================================== -->
 
 <div
-  class="botones"
-  style="margin-top:10px;"
->
+  id="modalSeccion"
+  class="modal">
 
-  <button
-    class="btn-peligro"
-    onclick="eliminarPlatillo()"
-  >
-    ELIMINAR PLATILLO
-  </button>
+  <div class="modal-contenido">
 
-  <button
-    class="btn-gris"
-    onclick="cancelarEdicion()"
-  >
-    CANCELAR
-  </button>
+    <div class="modal-encabezado">
 
-</div>
+      <h2 id="tituloSeccionPreview">
+        Sección
+      </h2>
 
+      <button
+        class="cerrar"
+        onclick="cerrarModal('modalSeccion')">
+        ✕
+      </button>
 
-<!-- ===================================================
-     PREVIEW
-==================================================== -->
+    </div>
 
-<div
-  class="preview"
-  id="preview"
-  style="display:none;"
->
+    <div
+      id="contenidoSeccionPreview">
+    </div>
 
-  <h3>
-    REVISAR SECCIÓN
-  </h3>
+    <div class="botones">
 
-  <div
-    id="previewProducto"
-  ></div>
+      <button
+        class="btn-principal"
+        onclick="cerrarModal('modalSeccion')">
+        ACEPTAR Y CERRAR
+      </button>
 
-  <div class="botones">
-
-    <button
-      class="btn-principal"
-      onclick="aceptarCambios()"
-    >
-      ACEPTAR Y GUARDAR
-    </button>
+    </div>
 
   </div>
 
 </div>
-```
 
-  </section>
-
-</div>
 
 <script>
 
 /* =========================================================
-   DATOS INICIALES
-   PROVISIONALES — SE CONECTARÁN AL MENÚ REAL
+   CONFIGURACIÓN
 ========================================================= */
 
-let platillos = [
+const ARCHIVO_MENU = "data/menu.json";
 
-  {
-    id:1,
-    seccion:"entradas",
-    nombre:"Láminas de atún",
-    precio:280,
-    descripcion:
-      "Atún fresco preparado para comenzar.",
-    foto:"images/01-laminas-de-atun.jpg"
-  },
+const nombresSecciones = {
 
-  {
-    id:2,
-    seccion:"ceviches",
-    nombre:"Atún tropical",
-    precio:250,
-    descripcion:"",
-    foto:"images/02-atun-tropical.jpg"
-  },
+  entradas:
+    "Entradas",
 
-  {
-    id:3,
-    seccion:"ceviches",
-    nombre:"Bota estilo acapulqueño",
-    precio:250,
-    descripcion:"",
-    foto:"images/03-bota-estilo-acapulqueno.jpg"
-  },
+  ceviches:
+    "Ceviches",
 
-  {
-    id:4,
-    seccion:"ceviches",
-    nombre:"Camarón",
-    precio:250,
-    descripcion:"",
-    foto:"images/04-ceviche-camaron.jpg"
-  },
+  calientes:
+    "Platillos calientes",
 
-  {
-    id:5,
-    seccion:"ceviches",
-    nombre:"Vallarta",
-    precio:180,
-    descripcion:"",
-    foto:"images/05-ceviche-vallarta.jpg"
-  },
+  aguachiles:
+    "Aguachiles",
 
-  {
-    id:6,
-    seccion:"ceviches",
-    nombre:"Ensalada de mariscos",
-    precio:280,
-    descripcion:"",
-    foto:"images/06-ensalada-de-mariscos.jpg"
-  },
+  tostadas:
+    "Tostadas",
 
-  {
-    id:7,
-    seccion:"calientes",
-    nombre:"Cóctel de camarón",
-    precio:250,
-    descripcion:"",
-    foto:"images/07-coctel-de-camaron.jpg"
-  },
+  charolas:
+    "Charolas",
 
-  {
-    id:8,
-    seccion:"calientes",
-    nombre:"Cóctel mixto camarón y pulpo",
-    precio:280,
-    descripcion:"",
-    foto:"images/08-coctel-mixto-camaron-pulpo.jpg"
-  },
+  extras:
+    "Extras",
 
-  {
-    id:9,
-    seccion:"aguachiles",
-    nombre:"Aguachile Verde",
-    precio:250,
-    descripcion:"",
-    foto:"images/10-aguachile-verde.jpg"
-  },
+  bebidas:
+    "Bebidas"
 
-  {
-    id:10,
-    seccion:"aguachiles",
-    nombre:"Aguachile Rojo",
-    precio:250,
-    descripcion:"",
-    foto:"images/11-aguachile-rojo.jpg"
-  },
+};
 
-  {
-    id:11,
-    seccion:"aguachiles",
-    nombre:"Aguachile Negro",
-    precio:250,
-    descripcion:"",
-    foto:"images/12-aguachile-negro.jpg"
-  },
 
-  {
-    id:12,
-    seccion:"tostadas",
-    nombre:"Tostada de ceviche camarón",
-    precio:75,
-    descripcion:"",
-    foto:"images/13-tostada-ceviche-camaron.jpg"
-  },
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-  {
-    id:13,
-    seccion:"tostadas",
-    nombre:"Atún",
-    precio:85,
-    descripcion:"",
-    foto:"images/14-tostada-atun.jpg"
-  },
+let menu = {};
 
-  {
-    id:14,
-    seccion:"tostadas",
-    nombre:"Aguachiles",
-    precio:85,
-    descripcion:"",
-    foto:"images/15-tostada-aguachiles.jpg"
-  },
-
-  {
-    id:15,
-    seccion:"tostadas",
-    nombre:"Ceviche Vallarta",
-    precio:55,
-    descripcion:"",
-    foto:"images/16-tostada-ceviche-vallarta.jpg"
-  },
-
-  {
-    id:16,
-    seccion:"tostadas",
-    nombre:"Ceviche cuadro tipo acapulqueño",
-    precio:75,
-    descripcion:"",
-    foto:"images/17-tostada-ceviche-cuadro-acapulqueno.jpg"
-  },
-
-  {
-    id:17,
-    seccion:"extras",
-    nombre:"Arroz",
-    precio:50,
-    descripcion:"",
-    foto:""
-  },
-
-  {
-    id:18,
-    seccion:"extras",
-    nombre:"Salsa aguachile",
-    precio:20,
-    descripcion:"",
-    foto:""
-  },
-
-  {
-    id:19,
-    seccion:"extras",
-    nombre:"Salsa ajillo, diabla",
-    precio:50,
-    descripcion:"",
-    foto:""
-  },
-
-  {
-    id:20,
-    seccion:"extras",
-    nombre:"Aderezo",
-    precio:30,
-    descripcion:"",
-    foto:""
-  },
-
-  {
-    id:21,
-    seccion:"extras",
-    nombre:"Guacamole",
-    precio:125,
-    descripcion:"",
-    foto:""
-  },
-
-  {
-    id:22,
-    seccion:"bebidas",
-    nombre:"Agua del día — Chica",
-    precio:35,
-    descripcion:"",
-    foto:""
-  },
-
-  {
-    id:23,
-    seccion:"bebidas",
-    nombre:"Agua del día — Grande",
-    precio:65,
-    descripcion:"",
-    foto:""
-  },
-
-  {
-    id:24,
-    seccion:"bebidas",
-    nombre:"Refresco Coca-Cola",
-    precio:40,
-    descripcion:"",
-    foto:""
-  },
-
-  {
-    id:25,
-    seccion:"bebidas",
-    nombre:"Naranjada",
-    precio:60,
-    descripcion:"",
-    foto:""
-  },
-
-  {
-    id:26,
-    seccion:"bebidas",
-    nombre:"Limonada",
-    precio:60,
-    descripcion:"",
-    foto:""
-  },
-
-  {
-    id:27,
-    seccion:"bebidas",
-    nombre:"Rusa",
-    precio:60,
-    descripcion:"",
-    foto:""
-  },
-
-  {
-    id:28,
-    seccion:"bebidas",
-    nombre:"Agua embotellada",
-    precio:25,
-    descripcion:"",
-    foto:""
-  }
-
-];
-
+let seccionActual =
+  "entradas";
 
 let productoActual = null;
 
@@ -1231,162 +868,196 @@ let fotoTemporal = "";
 
 
 /* =========================================================
-   MOSTRAR SECCIÓN
+   CARGAR MENU.JSON
 ========================================================= */
 
-function mostrarSeccion(){
+async function cargarMenu(){
 
-  const seccion =
-    document.getElementById("seccion").value;
+  try{
 
-  const panelLista =
-    document.getElementById("panelLista");
+    const respuesta =
+      await fetch(
+        ARCHIVO_MENU +
+        "?v=" +
+        Date.now()
+      );
 
-  const lista =
-    document.getElementById("listaPlatillos");
+    if(!respuesta.ok){
 
+      throw new Error(
+        "No se pudo cargar menu.json"
+      );
 
-  if(!seccion){
+    }
 
-    panelLista.style.display = "none";
+    menu =
+      await respuesta.json();
 
-    document.getElementById("panelEdicion")
-      .style.display = "none";
+    mostrarSeccion();
 
-    return;
+  }catch(error){
 
-  }
+    console.error(error);
 
+    document.getElementById(
+      "listaProductos"
+    ).innerHTML = `
 
-  const productos =
-    platillos.filter(
-      producto =>
-        producto.seccion === seccion
-    );
+      <div class="mensaje activo error">
 
+        No se pudo cargar
+        <strong>data/menu.json</strong>.
 
-  lista.innerHTML = "";
+        <br><br>
 
+        Revisa que el archivo exista
+        exactamente en esa carpeta.
 
-  if(productos.length === 0){
-
-    lista.innerHTML = `
-      <div class="platillo">
-        <div class="platillo-info">
-          <strong>
-            No hay platillos registrados
-          </strong>
-          <span>
-            Puedes agregar uno nuevo.
-          </span>
-        </div>
       </div>
+
     `;
 
-  }else{
-
-    productos.forEach(producto => {
-
-      lista.innerHTML += `
-
-        <div class="platillo">
-
-          <div class="platillo-info">
-
-            <strong>
-              ${producto.nombre}
-            </strong>
-
-            <span>
-              $${Number(producto.precio)
-                .toLocaleString("es-MX")}
-            </span>
-
-          </div>
-
-          <button
-            onclick="editarPlatillo(${producto.id})"
-          >
-            EDITAR
-          </button>
-
-        </div>
-
-      `;
-
-    });
-
   }
-
-
-  panelLista.style.display = "block";
-
-  document.getElementById("panelEdicion")
-    .style.display = "none";
 
 }
 
 
 /* =========================================================
-   EDITAR
+   MOSTRAR SECCIÓN
+========================================================= */
+
+function mostrarSeccion(){
+
+  seccionActual =
+    document.getElementById(
+      "selectorSeccion"
+    ).value;
+
+  const lista =
+    document.getElementById(
+      "listaProductos"
+    );
+
+  limpiarSeleccion();
+
+  const productos =
+    menu[seccionActual] || [];
+
+  if(!productos.length){
+
+    lista.innerHTML = `
+
+      <div class="cargando">
+
+        No hay platillos registrados
+        en esta sección.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  lista.innerHTML =
+    productos.map(producto => `
+
+      <div
+        class="item-lista"
+        id="item-${producto.id}"
+        onclick="editarPlatillo('${producto.id}')">
+
+        <strong>
+          ${escapeHTML(producto.nombre)}
+        </strong>
+
+        <span>
+          $${Number(producto.precio).toLocaleString(
+            "es-MX"
+          )}
+        </span>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   EDITAR PLATILLO
 ========================================================= */
 
 function editarPlatillo(id){
 
+  const productos =
+    menu[seccionActual] || [];
+
   const producto =
-    platillos.find(
+    productos.find(
       item => item.id === id
     );
 
-
   if(!producto) return;
 
+  productoActual =
+    producto;
 
-  productoActual = producto;
-
-  productoNuevo = false;
+  productoNuevo =
+    false;
 
   fotoTemporal =
     producto.foto || "";
 
+  document.getElementById(
+    "nombre"
+  ).value =
+    producto.nombre || "";
 
-  document.getElementById("tituloEdicion")
-    .textContent =
-      "3. Editar platillo";
+  document.getElementById(
+    "precio"
+  ).value =
+    producto.precio ?? "";
 
-
-  document.getElementById("nombre")
-    .value =
-      producto.nombre;
-
-
-  document.getElementById("precio")
-    .value =
-      producto.precio;
-
-
-  document.getElementById("descripcion")
-    .value =
-      producto.descripcion || "";
-
-
-  actualizarContador();
+  document.getElementById(
+    "descripcion"
+  ).value =
+    producto.descripcion || "";
 
   mostrarFotoActual();
 
+  actualizarContador();
 
-  document.getElementById("panelEdicion")
-    .style.display = "block";
+  document.getElementById(
+    "editor"
+  ).style.display = "block";
 
+  document.querySelectorAll(
+    ".item-lista"
+  ).forEach(item => {
 
-  document.getElementById("preview")
-    .style.display = "none";
+    item.classList.remove(
+      "activo"
+    );
 
+  });
+
+  const seleccionado =
+    document.getElementById(
+      "item-" + id
+    );
+
+  if(seleccionado){
+
+    seleccionado.classList.add(
+      "activo"
+    );
+
+  }
 
   window.scrollTo({
-    top:
-      document.getElementById("panelEdicion")
-        .offsetTop - 10,
+    top:document.body.scrollHeight,
     behavior:"smooth"
   });
 
@@ -1399,66 +1070,48 @@ function editarPlatillo(id){
 
 function nuevoPlatillo(){
 
-  const seccion =
-    document.getElementById("seccion").value;
-
-
-  if(!seccion){
-
-    alert(
-      "Primero selecciona una sección."
-    );
-
-    return;
-
-  }
-
-
   productoActual = null;
 
   productoNuevo = true;
 
   fotoTemporal = "";
 
+  document.getElementById(
+    "nombre"
+  ).value = "";
 
-  document.getElementById("tituloEdicion")
-    .textContent =
-      "3. Agregar nuevo platillo";
+  document.getElementById(
+    "precio"
+  ).value = "";
 
+  document.getElementById(
+    "descripcion"
+  ).value = "";
 
-  document.getElementById("nombre")
-    .value = "";
-
-
-  document.getElementById("precio")
-    .value = "";
-
-
-  document.getElementById("descripcion")
-    .value = "";
-
-
-  document.getElementById("foto")
-    .value = "";
-
-
-  actualizarContador();
+  document.getElementById(
+    "foto"
+  ).value = "";
 
   mostrarFotoActual();
 
+  actualizarContador();
 
-  document.getElementById("panelEdicion")
-    .style.display = "block";
+  document.getElementById(
+    "editor"
+  ).style.display = "block";
 
+  document.querySelectorAll(
+    ".item-lista"
+  ).forEach(item => {
 
-  document.getElementById("preview")
-    .style.display = "none";
+    item.classList.remove(
+      "activo"
+    );
 
+  });
 
   window.scrollTo({
-    top:
-      document.getElementById("panelEdicion")
-        .offsetTop - 10,
+    top:document.body.scrollHeight,
     behavior:"smooth"
   });
 
@@ -1466,7 +1119,7 @@ function nuevoPlatillo(){
 
 
 /* =========================================================
-   FOTO
+   CARGAR FOTO
 ========================================================= */
 
 function cargarFoto(event){
@@ -1474,28 +1127,24 @@ function cargarFoto(event){
   const archivo =
     event.target.files[0];
 
-
   if(!archivo) return;
-
 
   const lector =
     new FileReader();
 
+  lector.onload =
+    function(e){
 
-  lector.onload = function(e){
+      fotoTemporal =
+        e.target.result;
 
-    fotoTemporal =
-      e.target.result;
+      mostrarFotoActual();
 
+    };
 
-    mostrarFotoActual();
-
-    mostrarPreview();
-
-  };
-
-
-  lector.readAsDataURL(archivo);
+  lector.readAsDataURL(
+    archivo
+  );
 
 }
 
@@ -1507,30 +1156,31 @@ function cargarFoto(event){
 function mostrarFotoActual(){
 
   const contenedor =
-    document.getElementById("fotoActual");
+    document.getElementById(
+      "fotoPreview"
+    );
 
-
-  if(!fotoTemporal){
+  if(fotoTemporal){
 
     contenedor.innerHTML = `
-      <span class="sin-foto">
-        Sin fotografía
-      </span>
+
+      <img
+        src="${fotoTemporal}"
+        alt="Vista previa">
+
     `;
 
-    return;
+  }else{
+
+    contenedor.innerHTML = `
+
+      <span>
+        Sin fotografía
+      </span>
+
+    `;
 
   }
-
-
-  contenedor.innerHTML = `
-
-    <img
-      src="${fotoTemporal}"
-      alt="Fotografía del platillo"
-    >
-
-  `;
 
 }
 
@@ -1541,63 +1191,69 @@ function mostrarFotoActual(){
 
 function actualizarContador(){
 
-  const campo =
-    document.getElementById("descripcion");
+  const texto =
+    document.getElementById(
+      "descripcion"
+    ).value || "";
 
-  const contador =
-    document.getElementById("contador");
-
-
-  contador.textContent =
-    campo.value.length +
-    " / 50";
+  document.getElementById(
+    "contador"
+  ).textContent =
+    texto.length + " / 50";
 
 }
 
 
 /* =========================================================
-   GUARDAR CAMBIOS
+   GUARDAR CAMBIOS EN MEMORIA DEL ADMIN
 ========================================================= */
 
 function guardarCambios(){
 
   const nombre =
-    document.getElementById("nombre")
-      .value.trim();
-
+    document.getElementById(
+      "nombre"
+    ).value.trim();
 
   const precio =
     Number(
-      document.getElementById("precio")
-        .value
+      document.getElementById(
+        "precio"
+      ).value
     );
-
 
   const descripcion =
-    document.getElementById("descripcion")
-      .value.trim();
-
-
-  const seccion =
-    document.getElementById("seccion")
-      .value;
-
-
-  if(!seccion){
-
-    alert(
-      "Selecciona una sección."
-    );
-
-    return;
-
-  }
-
+    document.getElementById(
+      "descripcion"
+    ).value.trim();
 
   if(!nombre){
 
-    alert(
-      "Escribe el nombre del platillo."
+    mostrarMensaje(
+      "Escribe el nombre del platillo.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(Number.isNaN(precio) || precio < 0){
+
+    mostrarMensaje(
+      "Escribe un precio válido.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(descripcion.length > 50){
+
+    mostrarMensaje(
+      "La descripción no puede superar 50 caracteres.",
+      "error"
     );
 
     return;
@@ -1605,61 +1261,71 @@ function guardarCambios(){
   }
 
 
-  if(!precio || precio < 0){
-
-    alert(
-      "Escribe un precio válido."
-    );
-
-    return;
-
-  }
-
+  /* ================================================
+     NUEVO PRODUCTO
+  ================================================= */
 
   if(productoNuevo){
 
     const nuevo = {
 
       id:
-        Date.now(),
+        crearId(),
 
-      seccion,
+      nombre:
+        nombre,
 
-      nombre,
+      precio:
+        precio,
 
-      precio,
-
-      descripcion,
+      descripcion:
+        descripcion,
 
       foto:
-        fotoTemporal
+        fotoTemporal || ""
 
     };
 
+    if(!menu[seccionActual]){
 
-    platillos.push(nuevo);
+      menu[seccionActual] = [];
 
-    productoActual = nuevo;
+    }
 
-    productoNuevo = false;
-
-
-    mostrarMensaje(
-      "Platillo agregado correctamente."
+    menu[seccionActual].push(
+      nuevo
     );
 
-  }else{
+    productoActual =
+      nuevo;
+
+    productoNuevo =
+      false;
+
+    mostrarMensaje(
+      "Platillo agregado correctamente en la vista del administrador.",
+      "ok"
+    );
+
+  }
+
+
+  /* ================================================
+     PRODUCTO EXISTENTE
+  ================================================= */
+
+  else{
 
     if(!productoActual){
 
-      alert(
-        "Selecciona un platillo."
+      mostrarMensaje(
+        "Primero selecciona un platillo.",
+        "error"
       );
 
       return;
 
     }
-
 
     productoActual.nombre =
       nombre;
@@ -1670,16 +1336,19 @@ function guardarCambios(){
     productoActual.descripcion =
       descripcion;
 
-    productoActual.foto =
-      fotoTemporal;
+    if(fotoTemporal){
 
+      productoActual.foto =
+        fotoTemporal;
+
+    }
 
     mostrarMensaje(
-      "Cambios guardados correctamente."
+      "Cambios aplicados correctamente en la vista del administrador.",
+      "ok"
     );
 
   }
-
 
   mostrarSeccion();
 
@@ -1691,106 +1360,92 @@ function guardarCambios(){
 
 
 /* =========================================================
-   PREVIEW
+   VISTA PREVIA
 ========================================================= */
 
 function mostrarPreview(){
 
   const nombre =
-    document.getElementById("nombre")
-      .value.trim();
-
+    document.getElementById(
+      "nombre"
+    ).value.trim();
 
   const precio =
-    Number(
-      document.getElementById("precio")
-        .value
-    );
-
+    document.getElementById(
+      "precio"
+    ).value;
 
   const descripcion =
-    document.getElementById("descripcion")
-      .value.trim();
-
+    document.getElementById(
+      "descripcion"
+    ).value.trim();
 
   if(!nombre){
 
-    alert(
-      "Escribe el nombre del platillo."
+    mostrarMensaje(
+      "Primero escribe el nombre del platillo.",
+      "error"
     );
 
     return;
 
   }
-
-
-  if(!precio || precio < 0){
-
-    alert(
-      "Escribe un precio válido."
-    );
-
-    return;
-
-  }
-
 
   const foto =
     fotoTemporal;
 
+  const imagen =
+    foto
+      ? `
+        <img
+          src="${foto}"
+          alt="${escapeHTML(nombre)}">
+        `
+      : `
+        <span>
+          Sin fotografía
+        </span>
+        `;
 
-  const preview =
-    document.getElementById("previewProducto");
+  document.getElementById(
+    "previewContenido"
+  ).innerHTML = `
 
+    <div class="preview-producto">
 
-  preview.innerHTML = `
+      <div class="preview-foto">
 
-    <div class="producto-preview">
-
-      <div class="producto-preview-foto">
-
-        ${
-          foto
-          ?
-          `<img
-             src="${foto}"
-             alt="${nombre}"
-           >`
-          :
-          `<span style="
-             color:white;
-             font-weight:bold;
-           ">
-             SIN FOTOGRAFÍA
-           </span>`
-        }
+        ${imagen}
 
       </div>
 
-      <div class="producto-preview-contenido">
+      <div class="preview-contenido">
 
-        <h4>
-          ${nombre}
-        </h4>
+        <h3>
+          ${escapeHTML(nombre)}
+        </h3>
 
-        ${
-          descripcion
-          ?
-          `<p class="producto-preview-descripcion">
-             ${descripcion}
-           </p>`
-          :
-          ""
-        }
+        <div class="preview-descripcion">
 
-        <div class="producto-preview-precio">
-          $${precio.toLocaleString("es-MX")}
+          ${escapeHTML(
+            descripcion ||
+            "Sin descripción"
+          )}
+
         </div>
 
-        <button
-          class="preview-boton"
-        >
-          🛒 Agregar al pedido
+        <div class="preview-precio">
+
+          $${Number(precio || 0).toLocaleString(
+            "es-MX"
+          )}
+
+        </div>
+
+        <button class="preview-boton">
+
+          AGREGAR AL PEDIDO
+
         </button>
 
       </div>
@@ -1799,30 +1454,145 @@ function mostrarPreview(){
 
   `;
 
-
-  document.getElementById("preview")
-    .style.display = "block";
-
-
-  document.getElementById("preview")
-    .scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
+  document.getElementById(
+    "modalPreview"
+  ).classList.add(
+    "activo"
+  );
 
 }
 
 
 /* =========================================================
-   ACEPTAR
+   REVISAR SECCIÓN
 ========================================================= */
 
-function aceptarCambios(){
+function mostrarSeccionPreview(){
 
-  guardarCambios();
+  const productos =
+    menu[seccionActual] || [];
 
-  document.getElementById("preview")
-    .style.display = "none";
+  const titulo =
+    nombresSecciones[
+      seccionActual
+    ] || seccionActual;
+
+  document.getElementById(
+    "tituloSeccionPreview"
+  ).textContent =
+    titulo;
+
+  if(!productos.length){
+
+    document.getElementById(
+      "contenidoSeccionPreview"
+    ).innerHTML = `
+
+      <div class="cargando">
+
+        No hay productos
+        en esta sección.
+
+      </div>
+
+    `;
+
+  }else{
+
+    document.getElementById(
+      "contenidoSeccionPreview"
+    ).innerHTML = `
+
+      <div style="
+        display:grid;
+        grid-template-columns:
+        repeat(auto-fit,minmax(230px,1fr));
+        gap:16px;
+      ">
+
+        ${productos.map(producto => {
+
+          const imagen =
+            producto.foto
+              ? `
+                <img
+                  src="${producto.foto}"
+                  alt="${escapeHTML(producto.nombre)}"
+                  style="
+                    width:100%;
+                    height:100%;
+                    object-fit:cover;
+                  ">
+                `
+              : `
+                <span>
+                  Sin fotografía
+                </span>
+                `;
+
+          return `
+
+            <div class="preview-producto">
+
+              <div class="preview-foto">
+
+                ${imagen}
+
+              </div>
+
+              <div class="preview-contenido">
+
+                <h3>
+                  ${escapeHTML(producto.nombre)}
+                </h3>
+
+                ${
+                  producto.descripcion
+                    ? `
+                      <div class="preview-descripcion">
+                        ${escapeHTML(
+                          producto.descripcion
+                        )}
+                      </div>
+                    `
+                    : ""
+                }
+
+                <div class="preview-precio">
+
+                  $${Number(
+                    producto.precio
+                  ).toLocaleString(
+                    "es-MX"
+                  )}
+
+                </div>
+
+                <button class="preview-boton">
+
+                  AGREGAR AL PEDIDO
+
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }).join("")}
+
+      </div>
+
+    `;
+
+  }
+
+  document.getElementById(
+    "modalSeccion"
+  ).classList.add(
+    "activo"
+  );
 
 }
 
@@ -1833,53 +1603,70 @@ function aceptarCambios(){
 
 function eliminarPlatillo(){
 
-  if(!productoActual){
+  if(
+    !productoActual ||
+    productoNuevo
+  ){
 
-    alert(
-      "Primero selecciona un platillo."
+    mostrarMensaje(
+      "Primero selecciona un platillo existente.",
+      "error"
     );
 
     return;
 
   }
 
-
   const confirmar =
     confirm(
-      "¿Seguro que deseas eliminar este platillo?"
+      "¿Seguro que deseas eliminar este platillo de la vista del administrador?"
     );
-
 
   if(!confirmar) return;
 
+  const productos =
+    menu[seccionActual] || [];
 
-  platillos =
-    platillos.filter(
-      producto =>
-        producto.id !==
+  const posicion =
+    productos.findIndex(
+      item =>
+        item.id ===
         productoActual.id
     );
 
+  if(posicion === -1){
+
+    return;
+
+  }
+
+  productos.splice(
+    posicion,
+    1
+  );
 
   productoActual = null;
 
+  productoNuevo = false;
 
-  document.getElementById("panelEdicion")
-    .style.display = "none";
+  fotoTemporal = "";
 
+  document.getElementById(
+    "editor"
+  ).style.display = "none";
 
   mostrarSeccion();
 
-
   mostrarMensaje(
-    "Platillo eliminado correctamente."
+    "Platillo eliminado de la vista del administrador.",
+    "ok"
   );
 
 }
 
 
 /* =========================================================
-   CANCELAR
+   CANCELAR EDICIÓN
 ========================================================= */
 
 function cancelarEdicion(){
@@ -1890,60 +1677,162 @@ function cancelarEdicion(){
 
   fotoTemporal = "";
 
+  document.getElementById(
+    "editor"
+  ).style.display = "none";
 
-  document.getElementById("panelEdicion")
-    .style.display = "none";
+  document.getElementById(
+    "foto"
+  ).value = "";
+
+  document.querySelectorAll(
+    ".item-lista"
+  ).forEach(item => {
+
+    item.classList.remove(
+      "activo"
+    );
+
+  });
 
 }
 
 
 /* =========================================================
-   CAMBIAR SECCIÓN
+   LIMPIAR SELECCIÓN
 ========================================================= */
 
 function limpiarSeleccion(){
 
-  document.getElementById("seccion")
-    .value = "";
+  productoActual = null;
 
-  document.getElementById("panelLista")
-    .style.display = "none";
+  productoNuevo = false;
 
-  document.getElementById("panelEdicion")
-    .style.display = "none";
+  fotoTemporal = "";
+
+  document.getElementById(
+    "editor"
+  ).style.display = "none";
+
+  const foto =
+    document.getElementById(
+      "foto"
+    );
+
+  if(foto){
+
+    foto.value = "";
+
+  }
 
 }
 
 
 /* =========================================================
-   MENSAJE
+   MENSAJES
 ========================================================= */
 
-function mostrarMensaje(texto){
+function mostrarMensaje(
+  texto,
+  tipo
+){
 
   const mensaje =
-    document.getElementById("mensaje");
-
+    document.getElementById(
+      "mensaje"
+    );
 
   mensaje.textContent =
     texto;
 
+  mensaje.className =
+    "mensaje activo " +
+    tipo;
 
-  mensaje.style.display =
-    "block";
+  setTimeout(
+    () => {
 
+      mensaje.classList.remove(
+        "activo"
+      );
 
-  setTimeout(() => {
-
-    mensaje.style.display =
-      "none";
-
-  },3000);
+    },
+    3500
+  );
 
 }
+
+
+/* =========================================================
+   CERRAR MODAL
+========================================================= */
+
+function cerrarModal(id){
+
+  document.getElementById(
+    id
+  ).classList.remove(
+    "activo"
+  );
+
+}
+
+
+/* =========================================================
+   CREAR ID
+========================================================= */
+
+function crearId(){
+
+  return (
+    seccionActual +
+    "-" +
+    Date.now() +
+    "-" +
+    Math.random()
+      .toString(36)
+      .substring(2,7)
+  );
+
+}
+
+
+/* =========================================================
+   SEGURIDAD BÁSICA PARA TEXTO
+========================================================= */
+
+function escapeHTML(texto){
+
+  return String(texto)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   CONTADOR EN TIEMPO REAL
+========================================================= */
+
+document.getElementById(
+  "descripcion"
+).addEventListener(
+  "input",
+  actualizarContador
+);
+
+
+/* =========================================================
+   INICIAR
+========================================================= */
+
+cargarMenu();
 
 </script>
 
 </body>
-
 </html>
+```
