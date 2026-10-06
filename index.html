@@ -3633,6 +3633,21 @@ function ordenarCamaron(preparacion){
    CHAROLAS
 ========================================================= */
 
+function abrirCharolas(){
+  document.getElementById("modalCharolas").classList.add("activo");
+  document.body.style.overflow = "hidden";
+}
+
+function cerrarCharolas(){
+  document.getElementById("modalCharolas").classList.remove("activo");
+  document.body.style.overflow = "";
+}
+
+function ordenarCharola(nombre,precio){
+  agregar(nombre,precio);
+  cerrarCharolas();
+}   
+
 function ordenarCharolaCaliente(){
 
   const charola = document
