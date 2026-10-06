@@ -915,115 +915,83 @@ body{
    CHAROLAS
 ========================================================= */
 
-.charolas{
-
+.charolas-portada{
   display:grid;
-
-  grid-template-columns:
-    repeat(3,minmax(0,1fr));
-
-  gap:15px;
-
+  grid-template-columns:1fr;
+  gap:18px;
 }
 
-.charola{
+.charola-principal{
+  background:
+    linear-gradient(
+      rgba(255,250,237,.96),
+      rgba(239,225,194,.96)
+    );
+  border:1px solid rgba(6,69,47,.22);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 12px 35px rgba(0,0,0,.18);
+}
 
+.charola-principal-foto{
+  height:280px;
   background:
     linear-gradient(
       135deg,
-      #fff8e7,
-      #eadab5
+      rgba(6,69,47,.95),
+      rgba(18,63,48,.90)
     );
-
-  border:2px solid rgba(6,69,47,.18);
-
-  border-radius:18px;
-
-  padding:20px;
-
-  box-shadow:var(--sombra);
-
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
 }
 
-.charola h3{
-
-  color:var(--verde);
-
-  font-family:Georgia,serif;
-
-  font-size:21px;
-
-  margin-bottom:8px;
-
-}
-
-.charola p{
-
-  font-size:13px;
-
-  color:#45554c;
-
-  line-height:1.5;
-
-  min-height:55px;
-
-}
-
-.charola-precios{
-
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:10px;
-
-  margin-top:15px;
-
-}
-
-.precio-charola{
-
-  background:var(--verde);
-
-  color:white;
-
-  padding:12px;
-
-  text-align:center;
-
-  border-radius:12px;
-
-  cursor:pointer;
-
-}
-
- .precio-charola strong{
-
-  display:block;
-
-  color:var(--amarillo2);
-
-  font-size:20px;
-
-}
-
-.btn-ver-charola-preparaciones{
+.charola-principal-foto img{
   width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.charola-principal-contenido{
+  padding:20px;
+  text-align:center;
+}
+
+.charola-principal-contenido h3{
+  color:var(--verde);
+  font-family:Georgia,serif;
+  font-size:27px;
+  margin-bottom:8px;
+}
+
+.charola-principal-contenido p{
+  color:#45554c;
+  font-size:14px;
+  line-height:1.6;
+  max-width:700px;
+  margin:0 auto 14px;
+}
+
+.btn-ver-charolas{
+  width:100%;
+  max-width:420px;
   border:none;
   background:var(--verde);
   color:white;
-  border-radius:12px;
-  padding:12px;
-  font-size:14px;
+  border-radius:14px;
+  padding:14px 16px;
+  font-size:15px;
   font-weight:bold;
   cursor:pointer;
-  margin-top:14px;
   transition:.25s;
+  box-shadow:0 4px 10px rgba(6,69,47,.15);
 }
 
-.btn-ver-charola-preparaciones:hover{
+.btn-ver-charolas:hover{
   background:var(--amarillo);
   color:#111;
+  transform:translateY(-1px);
 }
 
 .modal-charolas{
@@ -1042,7 +1010,7 @@ body{
 }
 
 .modal-charolas-contenido{
-  width:min(900px,96vw);
+  width:min(980px,96vw);
   max-height:92vh;
   overflow-y:auto;
   background:var(--crema);
@@ -1101,9 +1069,38 @@ body{
 .charola-modal-card{
   background:white;
   border-radius:18px;
-  padding:18px;
+  overflow:hidden;
   border:1px solid rgba(6,69,47,.14);
   box-shadow:var(--sombra);
+  display:flex;
+  flex-direction:column;
+}
+
+.charola-modal-foto{
+  height:210px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(6,69,47,.95),
+      rgba(18,63,48,.90)
+    );
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.charola-modal-foto img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.charola-modal-card-contenido{
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
 }
 
 .charola-modal-card h3{
@@ -1114,17 +1111,36 @@ body{
 }
 
 .charola-modal-card p{
-  margin:0;
+  margin:0 0 12px;
   color:#59645e;
   font-size:14px;
   line-height:1.6;
 }
 
 .charola-modal-precio{
-  margin-top:13px;
+  margin-top:auto;
+  margin-bottom:12px;
   color:var(--verde);
-  font-size:23px;
+  font-size:25px;
   font-weight:bold;
+}
+
+.btn-ordenar-charola{
+  width:100%;
+  border:none;
+  background:var(--verde);
+  color:white;
+  border-radius:12px;
+  padding:13px;
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.btn-ordenar-charola:hover{
+  background:var(--amarillo);
+  color:#111;
 }
 
 .charola-caliente{
@@ -1673,8 +1689,12 @@ footer p{
     height:230px;
   }
 
-  .charolas{
+  .charolas-portada{
     grid-template-columns:1fr;
+  }
+
+  .charola-principal-foto{
+    height:230px;
   }
 
   .bebidas-grid{
@@ -2209,17 +2229,13 @@ footer p{
           VER PREPARACIONES
         </button>
 
-        <div class="precio">
-          $285
-        </div>
-
         <small style="
           display:block;
           color:#59645e;
           text-align:center;
           margin-bottom:8px;
         ">
-          Selecciona una preparación
+          5 preparaciones · $285 c/u
         </small>
 
       </div>
@@ -2506,87 +2522,42 @@ footer p{
     Charolas para compartir
   </h2>
 
-  <div class="charolas">
+  <div class="charolas-portada">
 
-    <article class="charola">
-      <h3>Charola Mixta de Ceviches</h3>
-      <p>
-        Bota tipo acapulqueño, camarón cocido y atún.
-        Charola para mínimo 5 personas.
-      </p>
-      <div class="charola-precios">
-        <div class="precio-charola" onclick="agregar('Charola Mixta de Ceviches',700)">
-          <small>Mínimo 5 personas</small>
-          <strong>$700</strong>
-        </div>
-      </div>
-    </article>
+    <article class="charola-principal">
 
-    <article class="charola">
-      <h3>Charola Mixta de Camarones</h3>
-      <p>
-        Camarón molido, camarón crudo y ensalada de camarón.
-        Charola para mínimo 5 personas.
-      </p>
-      <div class="charola-precios">
-        <div class="precio-charola" onclick="agregar('Charola Mixta de Camarones',700)">
-          <small>Mínimo 5 personas</small>
-          <strong>$700</strong>
-        </div>
+      <div class="charola-principal-foto">
+        <img
+          src="images/charolas.jpg"
+          alt="Charolas para compartir"
+          onerror="this.src='images/menu-mar-y-chelas.jpg';"
+        >
       </div>
-    </article>
 
-    <article class="charola">
-      <h3>Charola Mixta de Ensaladas</h3>
-      <p>
-        Ensalada de camarón, ensalada de pulpo y ensalada de atún.
-        Charola para mínimo 5 personas.
-      </p>
-      <div class="charola-precios">
-        <div class="precio-charola" onclick="agregar('Charola Mixta de Ensaladas',800)">
-          <small>Mínimo 5 personas</small>
-          <strong>$800</strong>
-        </div>
-      </div>
-    </article>
+      <div class="charola-principal-contenido">
 
-    <article class="charola">
-      <h3>Charola Mixta de Aguachiles</h3>
-      <p>
-        Aguachile negro, aguachile rojo y aguachile verde.
-        Charola para mínimo 5 personas.
-      </p>
-      <div class="charola-precios">
-        <div class="precio-charola" onclick="agregar('Charola Mixta de Aguachiles',700)">
-          <small>Mínimo 5 personas</small>
-          <strong>$700</strong>
-        </div>
-      </div>
-    </article>
+        <h3>Charolas para compartir</h3>
 
-    <article class="charola">
-      <h3>Charola Caliente</h3>
-      <p>
-        Desde $800. Incluye dos preparaciones a escoger dentro de la charola.
-        Porciones especiales para mínimo 5 personas.
-      </p>
-      <button
-        class="btn-ver-charola-preparaciones"
-        onclick="abrirCharolas()"
-      >
-        VER CHAROLA CALIENTE
-      </button>
-      <div class="charola-precios">
-        <div class="precio-charola">
-          <small>2 preparaciones</small>
-          <strong>Desde $800</strong>
-        </div>
+        <p>
+          Elige tu charola favorita. Todas están preparadas
+          para compartir y son para mínimo 5 personas.
+        </p>
+
+        <button
+          class="btn-ver-charolas"
+          onclick="abrirCharolas()"
+        >
+          VER CHAROLAS
+        </button>
+
       </div>
+
     </article>
 
   </div>
 
 </section>
+
 
 <!-- =====================================================
      EXTRAS
@@ -2903,69 +2874,436 @@ footer p{
 ===================================================== -->
 
 <div class="modal-camarones" id="modalCamarones">
+
   <div class="modal-camarones-contenido">
+
     <div class="modal-camarones-encabezado">
+
       <div>
         <h2>🍤 Camarones al gusto</h2>
-        <p>Elige una preparación · $285</p>
+        <p>
+          Elige una preparación · $285
+        </p>
       </div>
-      <button class="cerrar-camarones" onclick="cerrarCamarones()">×</button>
+
+      <button
+        class="cerrar-camarones"
+        onclick="cerrarCamarones()"
+      >
+        ×
+      </button>
+
     </div>
 
+
     <div class="camarones-grid">
-      <div class="camaron-card"><div class="camaron-card-contenido"><h3>Camarones al Ajo</h3><div class="camaron-card-precio">$285</div><button class="btn-ordenar-camaron" onclick="ordenarCamaron('Ajo')">ORDENAR</button></div></div>
-      <div class="camaron-card"><div class="camaron-card-contenido"><h3>Camarones al Ajillo</h3><div class="camaron-card-precio">$285</div><button class="btn-ordenar-camaron" onclick="ordenarCamaron('Ajillo')">ORDENAR</button></div></div>
-      <div class="camaron-card"><div class="camaron-card-contenido"><h3>Camarones a la Diabla</h3><div class="camaron-card-precio">$285</div><button class="btn-ordenar-camaron" onclick="ordenarCamaron('Diabla')">ORDENAR</button></div></div>
-      <div class="camaron-card"><div class="camaron-card-contenido"><h3>Camarones Empanizados</h3><div class="camaron-card-precio">$285</div><button class="btn-ordenar-camaron" onclick="ordenarCamaron('Empanizados')">ORDENAR</button></div></div>
-      <div class="camaron-card"><div class="camaron-card-contenido"><h3>Camarones Cucaracha</h3><div class="camaron-card-precio">$285</div><button class="btn-ordenar-camaron" onclick="ordenarCamaron('Cucaracha')">ORDENAR</button></div></div>
+
+
+      <!-- AJO -->
+
+      <article class="camaron-card">
+
+        <div class="producto-foto">
+          <img
+            src="images/camarones-ajo.jpg"
+            alt="Camarones al Ajo"
+            onerror="this.src='images/09-camarones-al-gusto.jpg';"
+          >
+        </div>
+
+        <div class="camaron-card-contenido">
+
+          <h3>
+            Camarones al Ajo
+          </h3>
+
+          <p class="producto-descripcion">
+            Camarones preparados al ajo, con todo el sabor
+            de una preparación clásica.
+          </p>
+
+          <div class="camaron-card-precio">
+            $285
+          </div>
+
+          <button
+            class="btn-ordenar-camaron"
+            onclick="ordenarCamaron('Ajo')"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- AJILLO -->
+
+      <article class="camaron-card">
+
+        <div class="producto-foto">
+          <img
+            src="images/camarones-ajillo.jpg"
+            alt="Camarones al Ajillo"
+            onerror="this.src='images/09-camarones-al-gusto.jpg';"
+          >
+        </div>
+
+        <div class="camaron-card-contenido">
+
+          <h3>
+            Camarones al Ajillo
+          </h3>
+
+          <p class="producto-descripcion">
+            Camarones preparados al ajillo, llenos de sabor
+            y perfectos para disfrutar.
+          </p>
+
+          <div class="camaron-card-precio">
+            $285
+          </div>
+
+          <button
+            class="btn-ordenar-camaron"
+            onclick="ordenarCamaron('Ajillo')"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- DIABLA -->
+
+      <article class="camaron-card">
+
+        <div class="producto-foto">
+          <img
+            src="images/camarones-diabla.jpg"
+            alt="Camarones a la Diabla"
+            onerror="this.src='images/09-camarones-al-gusto.jpg';"
+          >
+        </div>
+
+        <div class="camaron-card-contenido">
+
+          <h3>
+            Camarones a la Diabla
+          </h3>
+
+          <p class="producto-descripcion">
+            Camarones con una preparación de sabor intenso
+            y un toque picante.
+          </p>
+
+          <div class="camaron-card-precio">
+            $285
+          </div>
+
+          <button
+            class="btn-ordenar-camaron"
+            onclick="ordenarCamaron('Diabla')"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- EMPANIZADOS -->
+
+      <article class="camaron-card">
+
+        <div class="producto-foto">
+          <img
+            src="images/camarones-empanizados.jpg"
+            alt="Camarones Empanizados"
+            onerror="this.src='images/09-camarones-al-gusto.jpg';"
+          >
+        </div>
+
+        <div class="camaron-card-contenido">
+
+          <h3>
+            Camarones Empanizados
+          </h3>
+
+          <p class="producto-descripcion">
+            Camarones empanizados, dorados y crujientes,
+            ideales para disfrutar.
+          </p>
+
+          <div class="camaron-card-precio">
+            $285
+          </div>
+
+          <button
+            class="btn-ordenar-camaron"
+            onclick="ordenarCamaron('Empanizados')"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- CUCARACHA -->
+
+      <article class="camaron-card">
+
+        <div class="producto-foto">
+          <img
+            src="images/camarones-cucaracha.jpg"
+            alt="Camarones Cucaracha"
+            onerror="this.src='images/09-camarones-al-gusto.jpg';"
+          >
+        </div>
+
+        <div class="camaron-card-contenido">
+
+          <h3>
+            Camarones Cucaracha
+          </h3>
+
+          <p class="producto-descripcion">
+            Camarones preparados al estilo cucaracha,
+            con sabor intenso y tradicional.
+          </p>
+
+          <div class="camaron-card-precio">
+            $285
+          </div>
+
+          <button
+            class="btn-ordenar-camaron"
+            onclick="ordenarCamaron('Cucaracha')"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
+
     </div>
+
   </div>
+
 </div>
+
 
 <!-- =====================================================
      MODAL CHAROLAS
 ===================================================== -->
 
 <div class="modal-charolas" id="modalCharolas">
+
   <div class="modal-charolas-contenido">
+
     <div class="modal-charolas-encabezado">
+
       <div>
         <h2>🍤 Charolas para compartir</h2>
-        <p>Mínimo 5 personas · Cada charola tiene sus propias preparaciones</p>
+        <p>
+          Mínimo 5 personas · Elige una charola y agrégala a tu pedido
+        </p>
       </div>
-      <button class="cerrar-charolas" onclick="cerrarCharolas()">×</button>
+
+      <button
+        class="cerrar-charolas"
+        onclick="cerrarCharolas()"
+      >
+        ×
+      </button>
+
     </div>
+
 
     <div class="charolas-modal-grid">
-      <div class="charola-modal-card">
-        <h3>Charola Mixta de Ceviches</h3>
-        <p>Bota tipo acapulqueño, camarón cocido y atún.</p>
-        <div class="charola-modal-precio">$700</div>
-      </div>
 
-      <div class="charola-modal-card">
-        <h3>Charola Mixta de Camarones</h3>
-        <p>Camarón molido, camarón crudo y ensalada de camarón.</p>
-        <div class="charola-modal-precio">$700</div>
-      </div>
 
-      <div class="charola-modal-card">
-        <h3>Charola Mixta de Ensaladas</h3>
-        <p>Ensalada de camarón, ensalada de pulpo y ensalada de atún.</p>
-        <div class="charola-modal-precio">$800</div>
-      </div>
+      <!-- CHAROLA CEVICHES -->
 
-      <div class="charola-modal-card">
-        <h3>Charola Mixta de Aguachiles</h3>
-        <p>Aguachile negro, aguachile rojo y aguachile verde.</p>
-        <div class="charola-modal-precio">$700</div>
-      </div>
+      <article class="charola-modal-card">
+
+        <div class="charola-modal-foto">
+          <img
+            src="images/charola-ceviches.jpg"
+            alt="Charola Mixta de Ceviches"
+            onerror="this.src='images/charolas.jpg';"
+          >
+        </div>
+
+        <div class="charola-modal-card-contenido">
+
+          <h3>
+            Charola Mixta de Ceviches
+          </h3>
+
+          <p>
+            Bota tipo acapulqueño, camarón cocido y atún.
+            Charola para mínimo 5 personas.
+          </p>
+
+          <div class="charola-modal-precio">
+            $700
+          </div>
+
+          <button
+            class="btn-ordenar-charola"
+            onclick="ordenarCharola('Charola Mixta de Ceviches',700)"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- CHAROLA CAMARONES -->
+
+      <article class="charola-modal-card">
+
+        <div class="charola-modal-foto">
+          <img
+            src="images/charola-camarones.jpg"
+            alt="Charola Mixta de Camarones"
+            onerror="this.src='images/charolas.jpg';"
+          >
+        </div>
+
+        <div class="charola-modal-card-contenido">
+
+          <h3>
+            Charola Mixta de Camarones
+          </h3>
+
+          <p>
+            Camarón molido, camarón crudo y ensalada de camarón.
+            Charola para mínimo 5 personas.
+          </p>
+
+          <div class="charola-modal-precio">
+            $700
+          </div>
+
+          <button
+            class="btn-ordenar-charola"
+            onclick="ordenarCharola('Charola Mixta de Camarones',700)"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- CHAROLA ENSALADAS -->
+
+      <article class="charola-modal-card">
+
+        <div class="charola-modal-foto">
+          <img
+            src="images/charola-ensaladas.jpg"
+            alt="Charola Mixta de Ensaladas"
+            onerror="this.src='images/charolas.jpg';"
+          >
+        </div>
+
+        <div class="charola-modal-card-contenido">
+
+          <h3>
+            Charola Mixta de Ensaladas
+          </h3>
+
+          <p>
+            Ensalada de camarón, ensalada de pulpo y ensalada de atún.
+            Charola para mínimo 5 personas.
+          </p>
+
+          <div class="charola-modal-precio">
+            $800
+          </div>
+
+          <button
+            class="btn-ordenar-charola"
+            onclick="ordenarCharola('Charola Mixta de Ensaladas',800)"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- CHAROLA AGUACHILES -->
+
+      <article class="charola-modal-card">
+
+        <div class="charola-modal-foto">
+          <img
+            src="images/charola-aguachiles.jpg"
+            alt="Charola Mixta de Aguachiles"
+            onerror="this.src='images/charolas.jpg';"
+          >
+        </div>
+
+        <div class="charola-modal-card-contenido">
+
+          <h3>
+            Charola Mixta de Aguachiles
+          </h3>
+
+          <p>
+            Aguachile negro, aguachile rojo y aguachile verde.
+            Charola para mínimo 5 personas.
+          </p>
+
+          <div class="charola-modal-precio">
+            $700
+          </div>
+
+          <button
+            class="btn-ordenar-charola"
+            onclick="ordenarCharola('Charola Mixta de Aguachiles',700)"
+          >
+            🛒 ORDENAR
+          </button>
+
+        </div>
+
+      </article>
+
     </div>
 
+
+    <!-- CHAROLA CALIENTE -->
+
     <div class="charola-caliente">
-      <h3>🔥 Charola Caliente — desde $800</h3>
-      <p>Incluye dos preparaciones a escoger dentro de la charola. Las porciones son especiales para compartir. Si la combinación requiere un precio mayor, se confirma.</p>
+
+      <h3>
+        🔥 Charola Caliente — desde $800
+      </h3>
+
+      <p>
+        Incluye dos preparaciones a escoger dentro de la charola.
+        Porciones especiales para compartir. Mínimo 5 personas.
+      </p>
+
       <div class="charola-caliente-selectores">
+
         <select id="calienteUno">
           <option value="">Primera preparación</option>
           <option value="Ajo">Camarones al Ajo</option>
@@ -2974,6 +3312,7 @@ footer p{
           <option value="Empanizados">Camarones Empanizados</option>
           <option value="Cucaracha">Camarones Cucaracha</option>
         </select>
+
         <select id="calienteDos">
           <option value="">Segunda preparación</option>
           <option value="Ajo">Camarones al Ajo</option>
@@ -2982,10 +3321,20 @@ footer p{
           <option value="Empanizados">Camarones Empanizados</option>
           <option value="Cucaracha">Camarones Cucaracha</option>
         </select>
+
       </div>
-      <button class="btn-ordenar-caliente" onclick="ordenarCharolaCaliente()">ORDENAR CHAROLA CALIENTE · DESDE $800</button>
+
+      <button
+        class="btn-ordenar-caliente"
+        onclick="ordenarCharolaCaliente()"
+      >
+        ORDENAR CHAROLA CALIENTE · DESDE $800
+      </button>
+
     </div>
+
   </div>
+
 </div>
 
 
@@ -3298,6 +3647,11 @@ function abrirCharolas(){
 function cerrarCharolas(){
   document.getElementById("modalCharolas").classList.remove("activo");
   document.body.style.overflow = "";
+}
+
+function ordenarCharola(nombre,precio){
+  agregar(nombre,precio);
+  cerrarCharolas();
 }
 
 function ordenarCharolaCaliente(){
