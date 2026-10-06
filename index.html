@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -14,6 +12,8 @@
 <meta name="description" content="Mar y Chelas P.V. — Mariscos, ceviches, aguachiles, tostadas y charolas para compartir.">
 
 <link rel="manifest" href="manifest.webmanifest">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <link rel="apple-touch-icon" href="images/icon-192.png">
 
@@ -1331,6 +1331,100 @@ footer p{
   text-decoration:none;
 
 }
+
+/* =========================================================
+   SUPABASE — MENÚ DINÁMICO
+========================================================= */
+
+const SUPABASE_URL = "https://drpdwccyjtetakcgbulf.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_mf390v5SbXC_xI9h95Q_hg_ElR7ngvZ";
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+function crearProductoMenu(item){
+  const article = document.createElement("article");
+  article.className = "producto";
+
+  const descripcion = item.descripcion ? `
+    <p class="producto-descripcion">${item.descripcion}</p>
+  ` : "";
+
+  const imagen = item.imagen || "";
+  const precio = Number(item.precio) || 0;
+
+  article.innerHTML = `
+    <div class="producto-foto">
+      <img src="${imagen}" alt="${item.nombre}" onerror="this.style.display='none';">
+    </div>
+    <div class="producto-contenido">
+      <h3>${item.nombre}</h3>
+      ${descripcion}
+      <div class="precio">$${precio.toLocaleString("es-MX")}</div>
+      <button class="btn-agregar" onclick='agregar(${JSON.stringify(item.nombre)},${precio})'>
+        🛒 Agregar al pedido
+      </button>
+    </div>
+  `;
+
+  return article;
+}
+
+async function cargarMenuSupabase(){
+  try {
+    const { data, error } = await supabaseClient
+      .from("menu_items")
+      .select("*")
+      .eq("activo", true)
+      .order("id", { ascending: true });
+
+    if(error) throw error;
+    if(!Array.isArray(data)) return;
+
+    const secciones = [
+      "entradas", "ceviches", "aguachiles", "tostadas", "extras", "bebidas"
+    ];
+
+    secciones.forEach(id => {
+      const contenedor = document.querySelector(`#${id} .productos`);
+      if(!contenedor) return;
+
+      const items = data.filter(item =>
+        String(item.seccion || "").toLowerCase().trim() === id
+      );
+
+      if(items.length){
+        contenedor.innerHTML = "";
+        items.forEach(item => contenedor.appendChild(crearProductoMenu(item)));
+      }
+    });
+
+    /* Calientes: actualizamos únicamente los platillos administrables
+       y conservamos intacto Camarones al gusto. */
+    const calientes = data.filter(item =>
+      String(item.seccion || "").toLowerCase().trim() === "calientes"
+    );
+    const contCalientes = document.querySelector("#calientes .productos");
+    if(contCalientes && calientes.length){
+      const camaronesEspecial = Array.from(contCalientes.children).find(article =>
+        article.querySelector("h3")?.textContent.trim().toLowerCase() === "camarones al gusto"
+      );
+      contCalientes.innerHTML = "";
+      calientes.forEach(item => contCalientes.appendChild(crearProductoMenu(item)));
+      if(camaronesEspecial) contCalientes.appendChild(camaronesEspecial);
+    }
+
+    console.log("Menú cargado desde Supabase:", data.length, "productos");
+
+  } catch(error) {
+    console.error("No se pudo cargar el menú desde Supabase:", error);
+    /* Si Supabase falla, el menú original permanece visible. */
+  }
+}
+
+window.addEventListener("DOMContentLoaded", cargarMenuSupabase);
+
 
 /* =========================================================
    CARRITO
@@ -2868,6 +2962,14 @@ footer p{
     💬 WhatsApp
   </a>
 
+  <a
+    href="admin.html"
+    target="_self"
+    style="display:inline-block;margin-top:14px;padding:10px 18px;border:1px solid rgba(255,255,255,.35);border-radius:12px;color:#f1e5ca;text-decoration:none;font-weight:bold;font-size:13px;"
+  >
+    ⚙️ ADMIN
+  </a>
+
 </footer>
 
 
@@ -3139,7 +3241,7 @@ footer p{
 
         <div class="charola-modal-foto">
           <img
-            src="images/charola-mixta-ceviches.jpg"
+            src="images/charola-ceviches.jpg"
             alt="Charola Mixta de Ceviches"
             onerror="this.src='images/charolas.jpg';"
           >
@@ -3178,7 +3280,7 @@ footer p{
 
         <div class="charola-modal-foto">
           <img
-            src="images/charola-mixta-camarones.jpg"
+            src="images/charola-camarones.jpg"
             alt="Charola Mixta de Camarones"
             onerror="this.src='images/charolas.jpg';"
           >
@@ -3217,7 +3319,7 @@ footer p{
 
         <div class="charola-modal-foto">
           <img
-            src="images/charola-mixta-ensaladas.jpg"
+            src="images/charola-ensaladas.jpg"
             alt="Charola Mixta de Ensaladas"
             onerror="this.src='images/charolas.jpg';"
           >
@@ -3256,7 +3358,7 @@ footer p{
 
         <div class="charola-modal-foto">
           <img
-            src="images/charola-mixta-aguachiles.jpg"
+            src="images/charola-aguachiles.jpg"
             alt="Charola Mixta de Aguachiles"
             onerror="this.src='images/charolas.jpg';"
           >
@@ -3299,25 +3401,33 @@ footer p{
         🔥 Charola Caliente — desde $800
       </h3>
 
-     <p>
-  Arma tu charola a tu gusto. Puedes combinar 4, 5 o más
-  platillos, incluyendo preparaciones frías y calientes.
-  Charola Chica para 5 personas.
-</p>
+      <p>
+        Incluye dos preparaciones a escoger dentro de la charola.
+        Porciones especiales para compartir. Mínimo 5 personas.
+      </p>
 
-     <div class="charola-caliente-personalizada">
+      <div class="charola-caliente-selectores">
 
-  <label for="calientePersonalizada">
-    ¿CÓMO QUIERES TU CHAROLA?
-  </label>
+        <select id="calienteUno">
+          <option value="">Primera preparación</option>
+          <option value="Ajo">Camarones al Ajo</option>
+          <option value="Ajillo">Camarones al Ajillo</option>
+          <option value="Diabla">Camarones a la Diabla</option>
+          <option value="Empanizados">Camarones Empanizados</option>
+          <option value="Cucaracha">Camarones Cucaracha</option>
+        </select>
 
-  <textarea
-    id="calientePersonalizada"
-    rows="5"
-    placeholder="Escribe aquí cómo quieres combinar tu charola. Puedes elegir 4, 5 o más platillos y combinar preparaciones frías y calientes."
-  ></textarea>
+        <select id="calienteDos">
+          <option value="">Segunda preparación</option>
+          <option value="Ajo">Camarones al Ajo</option>
+          <option value="Ajillo">Camarones al Ajillo</option>
+          <option value="Diabla">Camarones a la Diabla</option>
+          <option value="Empanizados">Camarones Empanizados</option>
+          <option value="Cucaracha">Camarones Cucaracha</option>
+        </select>
 
-</div>
+      </div>
+
       <button
         class="btn-ordenar-caliente"
         onclick="ordenarCharolaCaliente()"
@@ -3646,28 +3756,31 @@ function cerrarCharolas(){
 function ordenarCharola(nombre,precio){
   agregar(nombre,precio);
   cerrarCharolas();
-}   
+}
 
 function ordenarCharolaCaliente(){
+  const uno = document.getElementById("calienteUno").value;
+  const dos = document.getElementById("calienteDos").value;
 
-  const charola = document
-    .getElementById("calientePersonalizada")
-    .value
-    .trim();
-
-  if(!charola){
-
-    alert("Escribe cómo quieres tu charola antes de ordenar.");
-
+  if(!uno || !dos){
+    alert("Selecciona las dos preparaciones de la charola caliente.");
     return;
   }
 
-  const detalle = charola;
+  const nombres = {
+    Ajo:"Camarones al Ajo",
+    Ajillo:"Camarones al Ajillo",
+    Diabla:"Camarones a la Diabla",
+    Empanizados:"Camarones Empanizados",
+    Cucaracha:"Camarones Cucaracha"
+  };
+
+  const detalle = nombres[uno] + " + " + nombres[dos];
 
   agregar("Charola Caliente",800,detalle);
   cerrarCharolas();
-
 }
+
 
 /* =========================================================
    AGREGAR PRODUCTO
