@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -220,7 +219,7 @@ textarea{
 }
 
 /* =========================================================
-   PREVISUALIZACIÓN DEL PRODUCTO
+   PREVISUALIZACIÓN
 ========================================================= */
 
 .preview-producto{
@@ -469,10 +468,6 @@ button:hover{
 
 <div class="contenedor">
 
-  <!-- =====================================================
-       ENCABEZADO
-  ====================================================== -->
-
   <header class="encabezado">
 
     <div class="marca">
@@ -482,18 +477,21 @@ button:hover{
       </div>
 
       <div>
-        <h1>Mar y Chelas P.V.</h1>
-        <p>Administrador de menú</p>
+
+        <h1>
+          Mar y Chelas P.V.
+        </h1>
+
+        <p>
+          Administrador de menú
+        </p>
+
       </div>
 
     </div>
 
   </header>
 
-
-  <!-- =====================================================
-       PANEL PRINCIPAL
-  ====================================================== -->
 
   <main class="panel">
 
@@ -502,10 +500,6 @@ button:hover{
       class="mensaje">
     </div>
 
-
-    <!-- ===================================================
-         SECCIÓN
-    ==================================================== -->
 
     <div class="grupo">
 
@@ -554,10 +548,6 @@ button:hover{
     </div>
 
 
-    <!-- ===================================================
-         PRODUCTOS
-    ==================================================== -->
-
     <div class="grupo">
 
       <label>
@@ -569,17 +559,13 @@ button:hover{
         class="lista">
 
         <div class="cargando">
-          Cargando menú...
+          Conectando con Supabase...
         </div>
 
       </div>
 
     </div>
 
-
-    <!-- ===================================================
-         DATOS DEL PRODUCTO
-    ==================================================== -->
 
     <div
       id="editor"
@@ -661,10 +647,6 @@ button:hover{
       </div>
 
 
-      <!-- =================================================
-           BOTONES
-      ================================================== -->
-
       <div class="botones">
 
         <button
@@ -696,31 +678,27 @@ button:hover{
     </div>
 
 
-    <!-- ===================================================
-         NUEVO PLATILLO
-    ==================================================== -->
-
     <div class="botones">
 
       <button
         class="btn-secundario btn-completo"
         onclick="nuevoPlatillo()">
+
         + AGREGAR NUEVO PLATILLO
+
       </button>
 
     </div>
 
-
-    <!-- ===================================================
-         REVISAR SECCIÓN
-    ==================================================== -->
 
     <div class="botones">
 
       <button
         class="btn-principal btn-completo"
         onclick="mostrarSeccionPreview()">
+
         REVISAR SECCIÓN
+
       </button>
 
     </div>
@@ -729,10 +707,6 @@ button:hover{
 
 </div>
 
-
-<!-- =======================================================
-     MODAL VISTA PREVIA
-======================================================== -->
 
 <div
   id="modalPreview"
@@ -761,7 +735,9 @@ button:hover{
       <button
         class="btn-principal"
         onclick="cerrarModal('modalPreview')">
+
         ACEPTAR Y CERRAR
+
       </button>
 
     </div>
@@ -770,10 +746,6 @@ button:hover{
 
 </div>
 
-
-<!-- =======================================================
-     MODAL SECCIÓN
-======================================================== -->
 
 <div
   id="modalSeccion"
@@ -804,7 +776,9 @@ button:hover{
       <button
         class="btn-principal"
         onclick="cerrarModal('modalSeccion')">
+
         ACEPTAR Y CERRAR
+
       </button>
 
     </div>
@@ -814,13 +788,42 @@ button:hover{
 </div>
 
 
+<!-- =======================================================
+     SUPABASE
+======================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+  "https://drpdwccyjtetakcgbulf.supabase.co";
+
+/*
+   PEGA AQUÍ TU PUBLISHABLE KEY.
+
+   NO USES service_role.
+   NO USES secret key.
+*/
+
+const SUPABASE_ANON_KEY =
+  "sb_publishable_mf390v5SbXC_xI9h95Q_hg_ElR7ngvZ";
+
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
+
 
 /* =========================================================
    CONFIGURACIÓN
 ========================================================= */
-
-const ARCHIVO_MENU = "data/menu.json";
 
 const nombresSecciones = {
 
@@ -868,32 +871,92 @@ let fotoTemporal = "";
 
 
 /* =========================================================
-   CARGAR MENU.JSON
+   CARGAR MENU DESDE SUPABASE
 ========================================================= */
 
 async function cargarMenu(){
 
   try{
 
-    const respuesta =
-      await fetch(
-        ARCHIVO_MENU +
-        "?v=" +
-        Date.now()
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("menu_items")
+        .select("*")
+        .eq("activo", true)
+        .order("id", {
+          ascending:true
+        });
+
+
+    if(error){
+
+      console.error(
+        "Error Supabase:",
+        error
       );
 
-    if(!respuesta.ok){
-
-      throw new Error(
-        "No se pudo cargar menu.json"
-      );
+      throw error;
 
     }
 
-    menu =
-      await respuesta.json();
+
+    menu = {
+
+      entradas:[],
+      ceviches:[],
+      calientes:[],
+      aguachiles:[],
+      tostadas:[],
+      charolas:[],
+      extras:[],
+      bebidas:[]
+
+    };
+
+
+    (data || []).forEach(
+      producto => {
+
+        const seccion =
+          producto.seccion;
+
+        if(!menu[seccion]){
+
+          menu[seccion] = [];
+
+        }
+
+        menu[seccion].push({
+
+          id:
+            producto.id,
+
+          nombre:
+            producto.nombre || "",
+
+          precio:
+            producto.precio ?? 0,
+
+          descripcion:
+            producto.descripcion || "",
+
+          foto:
+            producto.imagen || "",
+
+          activo:
+            producto.activo
+
+        });
+
+      }
+    );
+
 
     mostrarSeccion();
+
 
   }catch(error){
 
@@ -905,13 +968,13 @@ async function cargarMenu(){
 
       <div class="mensaje activo error">
 
-        No se pudo cargar
-        <strong>data/menu.json</strong>.
+        No se pudo conectar con
+        <strong>Supabase</strong>.
 
         <br><br>
 
-        Revisa que el archivo exista
-        exactamente en esa carpeta.
+        Revisa que la Publishable Key
+        esté colocada correctamente.
 
       </div>
 
@@ -943,6 +1006,7 @@ function mostrarSeccion(){
   const productos =
     menu[seccionActual] || [];
 
+
   if(!productos.length){
 
     lista.innerHTML = `
@@ -960,22 +1024,23 @@ function mostrarSeccion(){
 
   }
 
+
   lista.innerHTML =
     productos.map(producto => `
 
       <div
         class="item-lista"
         id="item-${producto.id}"
-        onclick="editarPlatillo('${producto.id}')">
+        onclick="editarPlatillo(${producto.id})">
 
         <strong>
           ${escapeHTML(producto.nombre)}
         </strong>
 
         <span>
-          $${Number(producto.precio).toLocaleString(
-            "es-MX"
-          )}
+          $${Number(
+            producto.precio
+          ).toLocaleString("es-MX")}
         </span>
 
       </div>
@@ -994,12 +1059,17 @@ function editarPlatillo(id){
   const productos =
     menu[seccionActual] || [];
 
+
   const producto =
     productos.find(
-      item => item.id === id
+      item =>
+        Number(item.id) ===
+        Number(id)
     );
 
+
   if(!producto) return;
+
 
   productoActual =
     producto;
@@ -1010,28 +1080,35 @@ function editarPlatillo(id){
   fotoTemporal =
     producto.foto || "";
 
+
   document.getElementById(
     "nombre"
   ).value =
     producto.nombre || "";
+
 
   document.getElementById(
     "precio"
   ).value =
     producto.precio ?? "";
 
+
   document.getElementById(
     "descripcion"
   ).value =
     producto.descripcion || "";
 
+
   mostrarFotoActual();
 
   actualizarContador();
 
+
   document.getElementById(
     "editor"
-  ).style.display = "block";
+  ).style.display =
+    "block";
+
 
   document.querySelectorAll(
     ".item-lista"
@@ -1043,10 +1120,12 @@ function editarPlatillo(id){
 
   });
 
+
   const seleccionado =
     document.getElementById(
       "item-" + id
     );
+
 
   if(seleccionado){
 
@@ -1056,9 +1135,15 @@ function editarPlatillo(id){
 
   }
 
+
   window.scrollTo({
-    top:document.body.scrollHeight,
-    behavior:"smooth"
+
+    top:
+      document.body.scrollHeight,
+
+    behavior:
+      "smooth"
+
   });
 
 }
@@ -1070,35 +1155,46 @@ function editarPlatillo(id){
 
 function nuevoPlatillo(){
 
-  productoActual = null;
+  productoActual =
+    null;
 
-  productoNuevo = true;
+  productoNuevo =
+    true;
 
-  fotoTemporal = "";
+  fotoTemporal =
+    "";
+
 
   document.getElementById(
     "nombre"
   ).value = "";
 
+
   document.getElementById(
     "precio"
   ).value = "";
+
 
   document.getElementById(
     "descripcion"
   ).value = "";
 
+
   document.getElementById(
     "foto"
   ).value = "";
+
 
   mostrarFotoActual();
 
   actualizarContador();
 
+
   document.getElementById(
     "editor"
-  ).style.display = "block";
+  ).style.display =
+    "block";
+
 
   document.querySelectorAll(
     ".item-lista"
@@ -1110,9 +1206,15 @@ function nuevoPlatillo(){
 
   });
 
+
   window.scrollTo({
-    top:document.body.scrollHeight,
-    behavior:"smooth"
+
+    top:
+      document.body.scrollHeight,
+
+    behavior:
+      "smooth"
+
   });
 
 }
@@ -1129,8 +1231,10 @@ function cargarFoto(event){
 
   if(!archivo) return;
 
+
   const lector =
     new FileReader();
+
 
   lector.onload =
     function(e){
@@ -1141,6 +1245,7 @@ function cargarFoto(event){
       mostrarFotoActual();
 
     };
+
 
   lector.readAsDataURL(
     archivo
@@ -1159,6 +1264,7 @@ function mostrarFotoActual(){
     document.getElementById(
       "fotoPreview"
     );
+
 
   if(fotoTemporal){
 
@@ -1196,24 +1302,27 @@ function actualizarContador(){
       "descripcion"
     ).value || "";
 
+
   document.getElementById(
     "contador"
   ).textContent =
-    texto.length + " / 50";
+    texto.length +
+    " / 50";
 
 }
 
 
 /* =========================================================
-   GUARDAR CAMBIOS EN MEMORIA DEL ADMIN
+   GUARDAR CAMBIOS
 ========================================================= */
 
-function guardarCambios(){
+async function guardarCambios(){
 
   const nombre =
     document.getElementById(
       "nombre"
     ).value.trim();
+
 
   const precio =
     Number(
@@ -1222,10 +1331,12 @@ function guardarCambios(){
       ).value
     );
 
+
   const descripcion =
     document.getElementById(
       "descripcion"
     ).value.trim();
+
 
   if(!nombre){
 
@@ -1238,7 +1349,11 @@ function guardarCambios(){
 
   }
 
-  if(Number.isNaN(precio) || precio < 0){
+
+  if(
+    Number.isNaN(precio) ||
+    precio < 0
+  ){
 
     mostrarMensaje(
       "Escribe un precio válido.",
@@ -1248,6 +1363,7 @@ function guardarCambios(){
     return;
 
   }
+
 
   if(descripcion.length > 50){
 
@@ -1261,16 +1377,16 @@ function guardarCambios(){
   }
 
 
-  /* ================================================
+  /* =====================================================
      NUEVO PRODUCTO
-  ================================================= */
+  ===================================================== */
 
   if(productoNuevo){
 
-    const nuevo = {
+    const nuevoProducto = {
 
-      id:
-        crearId(),
+      seccion:
+        seccionActual,
 
       nombre:
         nombre,
@@ -1281,38 +1397,89 @@ function guardarCambios(){
       descripcion:
         descripcion,
 
-      foto:
-        fotoTemporal || ""
+      imagen:
+        fotoTemporal || "",
+
+      activo:
+        true
 
     };
 
-    if(!menu[seccionActual]){
 
-      menu[seccionActual] = [];
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("menu_items")
+        .insert(
+          nuevoProducto
+        )
+        .select()
+        .single();
+
+
+    if(error){
+
+      console.error(error);
+
+      mostrarMensaje(
+        "No se pudo guardar el platillo. El administrador todavía necesita permiso de escritura.",
+        "error"
+      );
+
+      return;
 
     }
 
-    menu[seccionActual].push(
-      nuevo
-    );
+
+    menu[seccionActual].push({
+
+      id:
+        data.id,
+
+      nombre:
+        data.nombre,
+
+      precio:
+        data.precio,
+
+      descripcion:
+        data.descripcion,
+
+      foto:
+        data.imagen,
+
+      activo:
+        data.activo
+
+    });
+
 
     productoActual =
-      nuevo;
+      menu[seccionActual]
+        .find(
+          item =>
+            Number(item.id) ===
+            Number(data.id)
+        );
+
 
     productoNuevo =
       false;
 
+
     mostrarMensaje(
-      "Platillo agregado correctamente en la vista del administrador.",
+      "Platillo guardado correctamente en Supabase.",
       "ok"
     );
 
   }
 
 
-  /* ================================================
+  /* =====================================================
      PRODUCTO EXISTENTE
-  ================================================= */
+  ===================================================== */
 
   else{
 
@@ -1327,34 +1494,91 @@ function guardarCambios(){
 
     }
 
-    productoActual.nombre =
-      nombre;
 
-    productoActual.precio =
-      precio;
+    const cambios = {
 
-    productoActual.descripcion =
-      descripcion;
+      nombre:
+        nombre,
+
+      precio:
+        precio,
+
+      descripcion:
+        descripcion
+
+    };
+
 
     if(fotoTemporal){
 
-      productoActual.foto =
+      cambios.imagen =
         fotoTemporal;
 
     }
 
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("menu_items")
+        .update(
+          cambios
+        )
+        .eq(
+          "id",
+          productoActual.id
+        )
+        .select()
+        .single();
+
+
+    if(error){
+
+      console.error(error);
+
+      mostrarMensaje(
+        "No se pudieron guardar los cambios. El administrador todavía necesita permiso de escritura.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    productoActual.nombre =
+      data.nombre;
+
+    productoActual.precio =
+      data.precio;
+
+    productoActual.descripcion =
+      data.descripcion;
+
+    productoActual.foto =
+      data.imagen || "";
+
+
     mostrarMensaje(
-      "Cambios aplicados correctamente en la vista del administrador.",
+      "Cambios guardados correctamente en Supabase.",
       "ok"
     );
 
   }
 
+
   mostrarSeccion();
 
-  editarPlatillo(
-    productoActual.id
-  );
+
+  if(productoActual){
+
+    editarPlatillo(
+      productoActual.id
+    );
+
+  }
 
 }
 
@@ -1370,15 +1594,18 @@ function mostrarPreview(){
       "nombre"
     ).value.trim();
 
+
   const precio =
     document.getElementById(
       "precio"
     ).value;
 
+
   const descripcion =
     document.getElementById(
       "descripcion"
     ).value.trim();
+
 
   if(!nombre){
 
@@ -1391,8 +1618,10 @@ function mostrarPreview(){
 
   }
 
+
   const foto =
     fotoTemporal;
+
 
   const imagen =
     foto
@@ -1406,6 +1635,7 @@ function mostrarPreview(){
           Sin fotografía
         </span>
         `;
+
 
   document.getElementById(
     "previewContenido"
@@ -1436,9 +1666,9 @@ function mostrarPreview(){
 
         <div class="preview-precio">
 
-          $${Number(precio || 0).toLocaleString(
-            "es-MX"
-          )}
+          $${Number(
+            precio || 0
+          ).toLocaleString("es-MX")}
 
         </div>
 
@@ -1453,6 +1683,7 @@ function mostrarPreview(){
     </div>
 
   `;
+
 
   document.getElementById(
     "modalPreview"
@@ -1472,15 +1703,19 @@ function mostrarSeccionPreview(){
   const productos =
     menu[seccionActual] || [];
 
+
   const titulo =
     nombresSecciones[
       seccionActual
-    ] || seccionActual;
+    ] ||
+    seccionActual;
+
 
   document.getElementById(
     "tituloSeccionPreview"
   ).textContent =
     titulo;
+
 
   if(!productos.length){
 
@@ -1517,7 +1752,9 @@ function mostrarSeccionPreview(){
               ? `
                 <img
                   src="${producto.foto}"
-                  alt="${escapeHTML(producto.nombre)}"
+                  alt="${escapeHTML(
+                    producto.nombre
+                  )}"
                   style="
                     width:100%;
                     height:100%;
@@ -1529,6 +1766,7 @@ function mostrarSeccionPreview(){
                   Sin fotografía
                 </span>
                 `;
+
 
           return `
 
@@ -1543,16 +1781,20 @@ function mostrarSeccionPreview(){
               <div class="preview-contenido">
 
                 <h3>
-                  ${escapeHTML(producto.nombre)}
+                  ${escapeHTML(
+                    producto.nombre
+                  )}
                 </h3>
 
                 ${
                   producto.descripcion
                     ? `
                       <div class="preview-descripcion">
+
                         ${escapeHTML(
                           producto.descripcion
                         )}
+
                       </div>
                     `
                     : ""
@@ -1588,6 +1830,7 @@ function mostrarSeccionPreview(){
 
   }
 
+
   document.getElementById(
     "modalSeccion"
   ).classList.add(
@@ -1601,7 +1844,7 @@ function mostrarSeccionPreview(){
    ELIMINAR
 ========================================================= */
 
-function eliminarPlatillo(){
+async function eliminarPlatillo(){
 
   if(
     !productoActual ||
@@ -1617,48 +1860,85 @@ function eliminarPlatillo(){
 
   }
 
+
   const confirmar =
     confirm(
-      "¿Seguro que deseas eliminar este platillo de la vista del administrador?"
+      "¿Seguro que deseas eliminar este platillo?"
     );
+
 
   if(!confirmar) return;
 
-  const productos =
-    menu[seccionActual] || [];
 
-  const posicion =
-    productos.findIndex(
-      item =>
-        item.id ===
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("menu_items")
+      .delete()
+      .eq(
+        "id",
         productoActual.id
-    );
+      );
 
-  if(posicion === -1){
+
+  if(error){
+
+    console.error(error);
+
+    mostrarMensaje(
+      "No se pudo eliminar el platillo. El administrador todavía necesita permiso de escritura.",
+      "error"
+    );
 
     return;
 
   }
 
-  productos.splice(
-    posicion,
-    1
-  );
 
-  productoActual = null;
+  const productos =
+    menu[seccionActual] || [];
 
-  productoNuevo = false;
 
-  fotoTemporal = "";
+  const posicion =
+    productos.findIndex(
+      item =>
+        Number(item.id) ===
+        Number(productoActual.id)
+    );
+
+
+  if(posicion !== -1){
+
+    productos.splice(
+      posicion,
+      1
+    );
+
+  }
+
+
+  productoActual =
+    null;
+
+  productoNuevo =
+    false;
+
+  fotoTemporal =
+    "";
+
 
   document.getElementById(
     "editor"
-  ).style.display = "none";
+  ).style.display =
+    "none";
+
 
   mostrarSeccion();
 
+
   mostrarMensaje(
-    "Platillo eliminado de la vista del administrador.",
+    "Platillo eliminado correctamente de Supabase.",
     "ok"
   );
 
@@ -1666,24 +1946,32 @@ function eliminarPlatillo(){
 
 
 /* =========================================================
-   CANCELAR EDICIÓN
+   CANCELAR
 ========================================================= */
 
 function cancelarEdicion(){
 
-  productoActual = null;
+  productoActual =
+    null;
 
-  productoNuevo = false;
+  productoNuevo =
+    false;
 
-  fotoTemporal = "";
+  fotoTemporal =
+    "";
+
 
   document.getElementById(
     "editor"
-  ).style.display = "none";
+  ).style.display =
+    "none";
+
 
   document.getElementById(
     "foto"
-  ).value = "";
+  ).value =
+    "";
+
 
   document.querySelectorAll(
     ".item-lista"
@@ -1704,24 +1992,32 @@ function cancelarEdicion(){
 
 function limpiarSeleccion(){
 
-  productoActual = null;
+  productoActual =
+    null;
 
-  productoNuevo = false;
+  productoNuevo =
+    false;
 
-  fotoTemporal = "";
+  fotoTemporal =
+    "";
+
 
   document.getElementById(
     "editor"
-  ).style.display = "none";
+  ).style.display =
+    "none";
+
 
   const foto =
     document.getElementById(
       "foto"
     );
 
+
   if(foto){
 
-    foto.value = "";
+    foto.value =
+      "";
 
   }
 
@@ -1742,12 +2038,15 @@ function mostrarMensaje(
       "mensaje"
     );
 
+
   mensaje.textContent =
     texto;
+
 
   mensaje.className =
     "mensaje activo " +
     tipo;
+
 
   setTimeout(
     () => {
@@ -1764,7 +2063,7 @@ function mostrarMensaje(
 
 
 /* =========================================================
-   CERRAR MODAL
+   MODAL
 ========================================================= */
 
 function cerrarModal(id){
@@ -1779,42 +2078,43 @@ function cerrarModal(id){
 
 
 /* =========================================================
-   CREAR ID
-========================================================= */
-
-function crearId(){
-
-  return (
-    seccionActual +
-    "-" +
-    Date.now() +
-    "-" +
-    Math.random()
-      .toString(36)
-      .substring(2,7)
-  );
-
-}
-
-
-/* =========================================================
-   SEGURIDAD BÁSICA PARA TEXTO
+   SEGURIDAD
 ========================================================= */
 
 function escapeHTML(texto){
 
   return String(texto)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
 /* =========================================================
-   CONTADOR EN TIEMPO REAL
+   CONTADOR
 ========================================================= */
 
 document.getElementById(
@@ -1835,4 +2135,3 @@ cargarMenu();
 
 </body>
 </html>
-```
