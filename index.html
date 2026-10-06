@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -3631,21 +3633,6 @@ function ordenarCamaron(preparacion){
    CHAROLAS
 ========================================================= */
 
-function abrirCharolas(){
-  document.getElementById("modalCharolas").classList.add("activo");
-  document.body.style.overflow = "hidden";
-}
-
-function cerrarCharolas(){
-  document.getElementById("modalCharolas").classList.remove("activo");
-  document.body.style.overflow = "";
-}
-
-function ordenarCharola(nombre,precio){
-  agregar(nombre,precio);
-  cerrarCharolas();
-}
-
 function ordenarCharolaCaliente(){
 
   const charola = document
@@ -3660,19 +3647,12 @@ function ordenarCharolaCaliente(){
     return;
   }
 
-  const nombres = {
-    Ajo:"Camarones al Ajo",
-    Ajillo:"Camarones al Ajillo",
-    Diabla:"Camarones a la Diabla",
-    Empanizados:"Camarones Empanizados",
-    Cucaracha:"Camarones Cucaracha"
-  };
+  const detalle = charola;
 
-const detalle = charola;
+  agregar("Charola Caliente",800,detalle);
+  cerrarCharolas();
 
-agregar("Charola Caliente",800,detalle);
-cerrarCharolas();
-
+}
 
 /* =========================================================
    AGREGAR PRODUCTO
