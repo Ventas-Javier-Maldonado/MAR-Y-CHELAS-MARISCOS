@@ -3899,23 +3899,38 @@ function ordenarCamaron(preparacion){
 
 function abrirCharolas(){
 
-  document
-    .getElementById("modalCharolas")
-    .classList.add("activo");
+  const modal =
+    document.getElementById("modalCharolas");
 
-  document.body.style.overflow = "";
+  if(!modal){
+
+    alert("NO ENCUENTRO modalCharolas");
+
+    return;
+
+  }
+
+  alert("SI ENCUENTRO modalCharolas");
+
+  modal.classList.add("activo");
 
 }
 
 
 function cerrarCharolas(){
 
-  document
-    .getElementById("modalCharolas")
-    .classList.remove("activo");
+  const modal =
+    document.getElementById("modalCharolas");
 
-  document.body.style.overflow =
-    "";
+  if(!modal){
+
+    return;
+
+  }
+
+  modal.classList.remove("activo");
+
+  document.body.style.overflow = "";
 
 }
 
@@ -3930,7 +3945,7 @@ function ordenarCharola(nombre, precio){
 
   cerrarCharolas();
 
-}   
+}  
 
 
 /* =========================================================
