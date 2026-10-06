@@ -1,0 +1,218 @@
+{
+  "entradas": [
+    {
+      "id": "entrada-001",
+      "nombre": "Láminas de atún",
+      "precio": 280,
+      "descripcion": "Atún fresco preparado para comenzar la experiencia Mar y Chelas.",
+      "foto": "images/01-laminas-de-atun.jpg"
+    }
+  ],
+
+  "ceviches": [
+    {
+      "id": "ceviche-001",
+      "nombre": "Atún tropical",
+      "precio": 250,
+      "descripcion": "",
+      "foto": "images/02-atun-tropical.jpg"
+    },
+    {
+      "id": "ceviche-002",
+      "nombre": "Bota estilo acapulqueño",
+      "precio": 250,
+      "descripcion": "",
+      "foto": "images/03-bota-estilo-acapulqueno.jpg"
+    },
+    {
+      "id": "ceviche-003",
+      "nombre": "Camarón",
+      "precio": 250,
+      "descripcion": "",
+      "foto": "images/04-ceviche-camaron.jpg"
+    },
+    {
+      "id": "ceviche-004",
+      "nombre": "Vallarta",
+      "precio": 180,
+      "descripcion": "",
+      "foto": "images/05-ceviche-vallarta.jpg"
+    },
+    {
+      "id": "ceviche-005",
+      "nombre": "Ensalada de mariscos",
+      "precio": 280,
+      "descripcion": "",
+      "foto": "images/06-ensalada-de-mariscos.jpg"
+    }
+  ],
+
+  "calientes": [
+    {
+      "id": "caliente-001",
+      "nombre": "Cóctel de camarón",
+      "precio": 250,
+      "descripcion": "",
+      "foto": "images/07-coctel-de-camaron.jpg"
+    },
+    {
+      "id": "caliente-002",
+      "nombre": "Cóctel mixto camarón y pulpo",
+      "precio": 280,
+      "descripcion": "",
+      "foto": "images/08-coctel-mixto-camaron-pulpo.jpg"
+    }
+  ],
+
+  "aguachiles": [
+    {
+      "id": "aguachile-001",
+      "nombre": "Aguachile Verde",
+      "precio": 250,
+      "descripcion": "",
+      "foto": "images/10-aguachile-verde.jpg"
+    },
+    {
+      "id": "aguachile-002",
+      "nombre": "Aguachile Rojo",
+      "precio": 250,
+      "descripcion": "",
+      "foto": "images/11-aguachile-rojo.jpg"
+    },
+    {
+      "id": "aguachile-003",
+      "nombre": "Aguachile Negro",
+      "precio": 250,
+      "descripcion": "",
+      "foto": "images/12-aguachile-negro.jpg"
+    }
+  ],
+
+  "tostadas": [
+    {
+      "id": "tostada-001",
+      "nombre": "Tostada de ceviche camarón",
+      "precio": 75,
+      "descripcion": "",
+      "foto": "images/13-tostada-ceviche-camaron.jpg"
+    },
+    {
+      "id": "tostada-002",
+      "nombre": "Atún",
+      "precio": 85,
+      "descripcion": "",
+      "foto": "images/14-tostada-atun.jpg"
+    },
+    {
+      "id": "tostada-003",
+      "nombre": "Aguachiles",
+      "precio": 85,
+      "descripcion": "",
+      "foto": "images/15-tostada-aguachiles.jpg"
+    },
+    {
+      "id": "tostada-004",
+      "nombre": "Ceviche Vallarta",
+      "precio": 55,
+      "descripcion": "",
+      "foto": "images/16-tostada-ceviche-vallarta.jpg"
+    },
+    {
+      "id": "tostada-005",
+      "nombre": "Ceviche cuadro tipo acapulqueño",
+      "precio": 75,
+      "descripcion": "",
+      "foto": "images/17-tostada-ceviche-cuadro-acapulqueno.jpg"
+    }
+  ],
+
+  "extras": [
+    {
+      "id": "extra-001",
+      "nombre": "Arroz",
+      "precio": 50,
+      "descripcion": "",
+      "foto": ""
+    },
+    {
+      "id": "extra-002",
+      "nombre": "Salsa aguachile",
+      "precio": 20,
+      "descripcion": "",
+      "foto": ""
+    },
+    {
+      "id": "extra-003",
+      "nombre": "Salsa ajillo, diabla",
+      "precio": 50,
+      "descripcion": "",
+      "foto": ""
+    },
+    {
+      "id": "extra-004",
+      "nombre": "Aderezo",
+      "precio": 30,
+      "descripcion": "",
+      "foto": ""
+    },
+    {
+      "id": "extra-005",
+      "nombre": "Guacamole",
+      "precio": 125,
+      "descripcion": "",
+      "foto": ""
+    }
+  ],
+
+  "bebidas": [
+    {
+      "id": "bebida-001",
+      "nombre": "Agua del día — Chica",
+      "precio": 35,
+      "descripcion": "",
+      "foto": ""
+    },
+    {
+      "id": "bebida-002",
+      "nombre": "Agua del día — Grande",
+      "precio": 65,
+      "descripcion": "",
+      "foto": ""
+    },
+    {
+      "id": "bebida-003",
+      "nombre": "Refresco Coca-Cola",
+      "precio": 40,
+      "descripcion": "",
+      "foto": ""
+    },
+    {
+      "id": "bebida-004",
+      "nombre": "Naranjada",
+      "precio": 60,
+      "descripcion": "",
+      "foto": ""
+    },
+    {
+      "id": "bebida-005",
+      "nombre": "Limonada",
+      "precio": 60,
+      "descripcion": "",
+      "foto": ""
+    },
+    {
+      "id": "bebida-006",
+      "nombre": "Rusa",
+      "precio": 60,
+      "descripcion": "",
+      "foto": ""
+    },
+    {
+      "id": "bebida-007",
+      "nombre": "Agua embotellada",
+      "precio": 25,
+      "descripcion": "",
+      "foto": ""
+    }
+  ]
+}
