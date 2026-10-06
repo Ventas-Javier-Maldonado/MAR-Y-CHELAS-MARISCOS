@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -6,71 +5,115 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-<meta name="theme-color" content="#063d2b">
+<meta
+  name="theme-color"
+  content="#06452f"
+>
 
-<meta name="description" content="Mar y Chelas P.V. — Mariscos, ceviches, aguachiles, tostadas y charolas para compartir.">
+<meta
+  name="description"
+  content="Mar y Chelas P.V. - Mariscos buenos, chelas mejores."
+>
 
-<link rel="manifest" href="manifest.webmanifest">
+<title>Mar y Chelas P.V.</title>
 
-<link rel="apple-touch-icon" href="images/icon-192.png">
+<link
+  rel="manifest"
+  href="manifest.webmanifest"
+>
 
-<meta name="apple-mobile-web-app-capable" content="yes">
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
 
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
 
-<meta name="apple-mobile-web-app-title" content="Mar y Chelas">
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+>
 
-<title>Mar y Chelas P.V. | Mariscos Buenos, Chelas Mejores</title>
 
 <style>
 
 /* =========================================================
-   MAR Y CHELAS
-   ESTILO ORIGINAL
+   VARIABLES
 ========================================================= */
 
 :root{
+
   --verde:#06452f;
   --verde2:#0b6847;
   --verde3:#123f30;
+
   --crema:#f1e5ca;
   --crema2:#fff7e6;
+
   --amarillo:#d8c52b;
   --amarillo2:#f1df55;
+
   --negro:#101714;
   --blanco:#ffffff;
-  --sombra:0 18px 50px rgba(0,0,0,.35);
+
+  --sombra:
+    0 18px 50px rgba(0,0,0,.35);
+
 }
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
-  margin:0;
-  padding:0;
+
   box-sizing:border-box;
+
+  margin:0;
+
+  padding:0;
+
 }
+
 
 html{
+
   scroll-behavior:smooth;
+
 }
 
+
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  color:var(--negro);
+
+  margin:0;
 
   background:
     linear-gradient(
-      rgba(241,229,202,.91),
-      rgba(241,229,202,.96)
+      rgba(6,69,47,.94),
+      rgba(6,69,47,.94)
     ),
-    url("images/menu-mar-y-chelas.jpg");
+    url("images/menu-mar-y-chelas.jpg")
+    center/cover fixed;
 
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
+  color:var(--negro);
 
-  overflow-x:hidden;
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+
 }
+
 
 /* =========================================================
    PORTADA
@@ -81,180 +124,159 @@ body{
   min-height:100vh;
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 
-  position:relative;
+  text-align:center;
 
   padding:30px 20px;
 
   background:
     linear-gradient(
-      rgba(0,48,34,.38),
-      rgba(0,35,25,.70)
+      rgba(0,0,0,.48),
+      rgba(0,0,0,.62)
     ),
-    url("images/menu-mar-y-chelas.jpg");
-
-  background-size:cover;
-  background-position:center;
+    url("images/menu-mar-y-chelas.jpg")
+    center/cover;
 
 }
 
-.portada::after{
-
-  content:"";
-
-  position:absolute;
-
-  inset:0;
-
-  background:
-    radial-gradient(
-      circle at center,
-      transparent 20%,
-      rgba(0,0,0,.55) 100%
-    );
-
-  pointer-events:none;
-}
 
 .portada-contenido{
 
-  position:relative;
+  width:min(700px,100%);
 
-  z-index:2;
+  background:
+    rgba(6,69,47,.90);
 
-  width:100%;
-  max-width:620px;
+  border:
+    1px solid
+    rgba(255,255,255,.16);
 
-  text-align:center;
+  border-radius:28px;
 
-  color:white;
+  padding:40px 25px;
 
-  padding:35px 25px;
+  box-shadow:
+    0 25px 80px
+    rgba(0,0,0,.45);
+
+  backdrop-filter:
+    blur(5px);
+
 }
+
 
 .logo-portada{
 
-  width:min(660px,99%);
+  width:min(230px,75vw);
 
-  max-height:230px;
+  max-height:190px;
 
   object-fit:contain;
-
-  margin:0 auto 25px;
-
-  filter:
-    drop-shadow(0 12px 20px rgba(0,0,0,.65));
-
-}
-
-.logo-fallback{
-
-  display:none;
-
-  font-family:Georgia,serif;
-
-  font-size:58px;
-
-  line-height:.9;
-
-  font-weight:bold;
-
-  font-style:italic;
-
-  text-shadow:
-    3px 4px 0 #000,
-    0 10px 25px rgba(0,0,0,.6);
-}
-
-.portada h1{
-
-  font-family:Georgia,serif;
-
-  font-size:clamp(40px,10vw,76px);
-
-  line-height:.95;
-
-  text-shadow:3px 4px 0 #000;
 
   margin-bottom:15px;
 
 }
 
-.portada-frase{
 
-  font-size:20px;
+.logo-fallback{
 
-  font-weight:bold;
-
-  letter-spacing:2px;
-
-  text-transform:uppercase;
-
-  text-shadow:0 3px 8px #000;
-
-  margin-bottom:12px;
-
-}
-
-.portada-datos{
-
-  font-size:16px;
-
-  line-height:1.8;
-
-  margin-bottom:30px;
-
-  text-shadow:0 2px 7px #000;
-
-}
-
-.btn-menu{
-
-  display:inline-flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:10px;
-
-  padding:18px 42px;
-
-  border-radius:50px;
-
-  border:2px solid var(--amarillo2);
-
-  background:var(--verde);
+  display:none;
 
   color:white;
 
-  font-size:18px;
+  font-family:Georgia,serif;
+
+  font-size:38px;
 
   font-weight:bold;
 
-  text-decoration:none;
-
-  box-shadow:
-    0 15px 40px rgba(0,0,0,.5);
-
-  transition:.3s;
+  margin-bottom:15px;
 
 }
 
-.btn-menu:hover{
 
-  transform:translateY(-4px);
+.portada h1{
+
+  color:white;
+
+  font-family:Georgia,serif;
+
+  font-size:
+    clamp(34px,7vw,58px);
+
+  line-height:1.05;
+
+  margin-bottom:14px;
+
+}
+
+
+.portada-frase{
+
+  color:var(--amarillo2);
+
+  font-size:18px;
+
+  font-weight:700;
+
+  margin-bottom:22px;
+
+}
+
+
+.portada-datos{
+
+  color:#f7f2e7;
+
+  font-size:14px;
+
+  line-height:1.8;
+
+  margin-bottom:25px;
+
+}
+
+
+.btn-menu{
+
+  display:inline-block;
+
+  text-decoration:none;
 
   background:var(--amarillo);
 
   color:#111;
 
+  padding:15px 28px;
+
+  border-radius:14px;
+
+  font-weight:800;
+
+  transition:.25s;
+
+  box-shadow:
+    0 8px 22px
+    rgba(0,0,0,.25);
+
 }
 
+
+.btn-menu:hover{
+
+  background:var(--amarillo2);
+
+  transform:translateY(-2px);
+
+}
+
+
 /* =========================================================
-   ENCABEZADO DEL MENÚ
+   HEADER
 ========================================================= */
 
 .menu-header{
@@ -265,28 +287,27 @@ body{
 
   z-index:1000;
 
-  padding:12px 18px;
-
   background:
-    linear-gradient(
-      135deg,
-      rgba(4,69,47,.97),
-      rgba(7,57,40,.97)
-    );
+    rgba(6,69,47,.97);
 
-  color:white;
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.10);
 
-  border-bottom:3px solid var(--amarillo);
-
-  box-shadow:0 8px 30px rgba(0,0,0,.35);
+  box-shadow:
+    0 5px 20px
+    rgba(0,0,0,.20);
 
 }
 
+
 .menu-header-inner{
 
-  max-width:1150px;
+  width:min(1200px,94%);
 
   margin:auto;
+
+  min-height:68px;
 
   display:flex;
 
@@ -298,37 +319,39 @@ body{
 
 }
 
+
 .mini-logo{
 
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
+  color:white;
 
   font-family:Georgia,serif;
 
-  font-size:23px;
+  font-size:21px;
 
   font-weight:bold;
 
-  font-style:italic;
-
 }
+
 
 .mini-logo span{
 
-  font-family:Arial,sans-serif;
+  display:block;
 
-  font-size:11px;
+  color:var(--amarillo2);
 
-  font-style:normal;
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
 
-  letter-spacing:1px;
+  font-size:9px;
 
-  opacity:.8;
+  letter-spacing:2px;
+
+  margin-top:3px;
 
 }
+
 
 .btn-carrito-header{
 
@@ -338,17 +361,18 @@ body{
 
   color:#111;
 
-  padding:11px 18px;
+  border-radius:12px;
 
-  border-radius:30px;
+  padding:11px 15px;
 
-  font-weight:bold;
+  font-weight:800;
 
   cursor:pointer;
 
-  font-size:14px;
+  white-space:nowrap;
 
 }
+
 
 #contadorCarrito{
 
@@ -362,17 +386,20 @@ body{
 
   height:22px;
 
-  padding:0 6px;
+  margin-left:4px;
 
-  margin-left:5px;
+  padding:0 5px;
 
-  border-radius:50%;
+  border-radius:50px;
 
-  background:#111;
+  background:var(--verde);
 
   color:white;
 
+  font-size:12px;
+
 }
+
 
 /* =========================================================
    CONTENEDOR
@@ -380,11 +407,14 @@ body{
 
 .contenedor{
 
-  width:min(1180px,94%);
+  width:min(1200px,94%);
 
   margin:auto;
 
+  padding-bottom:50px;
+
 }
+
 
 /* =========================================================
    PRESENTACIÓN
@@ -392,37 +422,41 @@ body{
 
 .presentacion{
 
-  padding:45px 15px 20px;
-
   text-align:center;
 
+  padding:55px 15px 25px;
+
 }
+
 
 .presentacion h2{
 
-  font-family:Georgia,serif;
-
   color:var(--verde);
 
-  font-size:clamp(34px,6vw,54px);
+  font-family:Georgia,serif;
 
-  margin-bottom:10px;
+  font-size:
+    clamp(28px,5vw,42px);
+
+  margin-bottom:12px;
 
 }
+
 
 .presentacion p{
 
-  max-width:750px;
+  max-width:720px;
 
   margin:auto;
 
-  font-size:17px;
+  color:#59645e;
+
+  font-size:15px;
 
   line-height:1.7;
 
-  color:#30463c;
-
 }
+
 
 /* =========================================================
    CATEGORÍAS
@@ -430,49 +464,37 @@ body{
 
 .categorias{
 
-  display:flex;
+  display:grid;
 
-  gap:10px;
+  grid-template-columns:
+    repeat(4,1fr);
 
-  overflow-x:auto;
+  gap:8px;
 
-  padding:15px 5px 25px;
-
-  scrollbar-width:none;
-
-  position:sticky;
-
-  top:61px;
-
-  z-index:900;
-
-  background:rgba(241,229,202,.94);
-
-  backdrop-filter:blur(10px);
+  margin:15px 0 20px;
 
 }
 
-.categorias::-webkit-scrollbar{
-  display:none;
-}
 
 .categoria-btn{
 
-  flex:0 0 auto;
+  border:none;
 
-  border:1px solid var(--verde);
+  background:var(--crema2);
 
-  background:var(--verde);
+  color:var(--verde);
 
-  color:white;
+  border:
+    1px solid
+    rgba(6,69,47,.18);
 
-  padding:11px 18px;
+  border-radius:12px;
 
-  border-radius:30px;
+  padding:11px 8px;
 
-  font-size:14px;
+  font-size:12px;
 
-  font-weight:bold;
+  font-weight:800;
 
   cursor:pointer;
 
@@ -480,16 +502,24 @@ body{
 
 }
 
-.categoria-btn:hover,
-.categoria-btn.activo{
+
+.categoria-btn:hover{
 
   background:var(--amarillo);
 
   color:#111;
 
-  border-color:var(--amarillo);
+}
+
+
+.categoria-btn.activo{
+
+  background:var(--verde);
+
+  color:white;
 
 }
+
 
 /* =========================================================
    SECCIONES
@@ -497,64 +527,46 @@ body{
 
 .seccion-menu{
 
-  padding:25px 0 20px;
+  scroll-margin-top:90px;
 
-  scroll-margin-top:120px;
+  margin-top:35px;
 
 }
+
 
 .titulo-seccion{
 
-  position:relative;
+  text-align:center;
 
-  display:flex;
+  color:var(--verde);
 
-  align-items:center;
+  font-family:Georgia,serif;
 
-  gap:15px;
+  font-size:30px;
 
-  margin-bottom:20px;
-
-  color:white;
-
-  background:
-
-    linear-gradient(
-      90deg,
-      var(--verde),
-      var(--verde2),
-      var(--verde)
-    );
-
-  padding:13px 20px;
-
-  border-radius:5px;
-
-  font-family:Arial,sans-serif;
-
-  font-size:25px;
-
-  font-weight:900;
-
-  text-transform:uppercase;
-
-  letter-spacing:.5px;
-
-  box-shadow:var(--sombra);
+  margin-bottom:18px;
 
 }
+
 
 .titulo-seccion::after{
 
   content:"";
 
-  height:4px;
+  display:block;
 
-  flex:1;
+  width:70px;
+
+  height:3px;
 
   background:var(--amarillo);
 
+  border-radius:10px;
+
+  margin:9px auto 0;
+
 }
+
 
 /* =========================================================
    PRODUCTOS
@@ -565,66 +577,45 @@ body{
   display:grid;
 
   grid-template-columns:
-    repeat(2,minmax(0,1fr));
+    repeat(3,minmax(0,1fr));
 
   gap:18px;
 
 }
 
+
 .producto{
 
   background:
     linear-gradient(
-      rgba(255,250,237,.96),
-      rgba(239,225,194,.96)
+      135deg,
+      #fff8e7,
+      #eadab5
     );
 
-  border:1px solid rgba(6,69,47,.22);
+  border:
+    1px solid
+    rgba(6,69,47,.16);
 
   border-radius:18px;
 
   overflow:hidden;
 
-  box-shadow:
-    0 12px 35px rgba(0,0,0,.18);
-
-  transition:.3s;
-
-  display:flex;
-
-  flex-direction:column;
+  box-shadow:var(--sombra);
 
 }
 
-.producto:hover{
-
-  transform:translateY(-4px);
-
-  box-shadow:
-    0 20px 45px rgba(0,0,0,.28);
-
-}
 
 .producto-foto{
 
-  height:190px;
+  width:100%;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(6,69,47,.95),
-      rgba(18,63,48,.90)
-    );
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
+  height:220px;
 
   overflow:hidden;
 
 }
+
 
 .producto-foto img{
 
@@ -634,87 +625,74 @@ body{
 
   object-fit:cover;
 
-}
+  display:block;
 
-.producto-foto .sin-foto{
-
-  color:white;
-
-  text-align:center;
-
-  padding:20px;
-
-  font-size:13px;
-
-  opacity:.8;
+  transition:.35s;
 
 }
+
+
+.producto:hover
+.producto-foto img{
+
+  transform:scale(1.04);
+
+}
+
 
 .producto-contenido{
 
-  padding:18px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  flex:1;
+  padding:17px;
 
 }
 
-.producto h3{
 
-  font-family:Georgia,serif;
-
-  font-size:23px;
+.producto-contenido h3{
 
   color:var(--verde);
 
-  line-height:1.1;
+  font-family:Georgia,serif;
+
+  font-size:21px;
+
+  line-height:1.2;
 
   margin-bottom:8px;
 
 }
 
-.producto-descripcion{
 
-  color:#3d4b44;
+.producto-contenido p{
 
-  font-size:14px;
-
-  line-height:1.5;
-
-  margin-bottom:10px;
-
-}
-
-.subopciones{
-
-  margin:5px 0 12px;
-
-  padding-left:20px;
-
-  color:#3d4b44;
+  color:#59645e;
 
   font-size:13px;
 
-  line-height:1.7;
+  line-height:1.5;
+
+  margin-bottom:12px;
 
 }
+
 
 .precio{
 
-  color:#111;
+  color:var(--verde);
 
-  font-size:25px;
+  font-size:21px;
 
-  font-weight:900;
+  font-weight:800;
 
-  margin-top:auto;
+  text-align:center;
 
-  margin-bottom:13px;
+  margin-top:10px;
 
 }
+
+
+/* =========================================================
+   BOTONES
+========================================================= */
 
 .btn-agregar{
 
@@ -722,23 +700,24 @@ body{
 
   border:none;
 
-  border-radius:35px;
-
-  padding:13px;
-
   background:var(--verde);
 
   color:white;
 
-  font-size:15px;
+  border-radius:12px;
 
-  font-weight:bold;
+  padding:13px;
+
+  font-size:14px;
+
+  font-weight:800;
 
   cursor:pointer;
 
   transition:.25s;
 
 }
+
 
 .btn-agregar:hover{
 
@@ -747,6 +726,604 @@ body{
   color:#111;
 
 }
+
+
+/* =========================================================
+   BEBIDAS
+========================================================= */
+
+.bebidas-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:14px;
+
+}
+
+
+.bebida{
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff8e7,
+      #eadab5
+    );
+
+  border-radius:16px;
+
+  padding:17px;
+
+  border:
+    1px solid
+    rgba(6,69,47,.15);
+
+  box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.12);
+
+}
+
+
+.bebida h3{
+
+  color:var(--verde);
+
+  font-family:Georgia,serif;
+
+  font-size:18px;
+
+  margin-bottom:7px;
+
+}
+
+
+.bebida p{
+
+  color:#59645e;
+
+  font-size:13px;
+
+  margin-bottom:12px;
+
+}
+
+
+.bebida .precio{
+
+  font-size:19px;
+
+  margin-bottom:10px;
+
+}
+
+
+/* =========================================================
+   AVISO
+========================================================= */
+
+.aviso{
+
+  margin:40px auto 10px;
+
+  max-width:760px;
+
+  text-align:center;
+
+  background:
+    rgba(255,247,230,.94);
+
+  border:
+    1px solid
+    rgba(6,69,47,.18);
+
+  color:var(--verde);
+
+  border-radius:18px;
+
+  padding:18px;
+
+  line-height:1.7;
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,.12);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+  background:var(--verde3);
+
+  color:white;
+
+  text-align:center;
+
+  padding:40px 20px;
+
+}
+
+
+footer h2{
+
+  font-family:Georgia,serif;
+
+  font-size:30px;
+
+  margin-bottom:8px;
+
+}
+
+
+footer p{
+
+  color:#e8e4d9;
+
+  font-size:13px;
+
+  line-height:1.7;
+
+}
+
+
+.whatsapp-footer{
+
+  display:inline-block;
+
+  margin-top:16px;
+
+  padding:13px 22px;
+
+  border-radius:12px;
+
+  background:#25d366;
+
+  color:white;
+
+  text-decoration:none;
+
+  font-weight:800;
+
+}
+
+
+/* =========================================================
+   MODAL CARRITO
+========================================================= */
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:9998;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+    rgba(0,0,0,.72);
+
+}
+
+
+.modal.activo{
+
+  display:flex;
+
+}
+
+
+.modal-contenido{
+
+  width:min(650px,96vw);
+
+  max-height:92vh;
+
+  overflow-y:auto;
+
+  background:var(--crema);
+
+  border-radius:24px;
+
+  padding:24px;
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.40);
+
+}
+
+
+.modal-titulo{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  margin-bottom:20px;
+
+  padding-bottom:15px;
+
+  border-bottom:
+    1px solid
+    rgba(6,69,47,.15);
+
+}
+
+
+.modal-titulo h2{
+
+  color:var(--verde);
+
+  font-family:Georgia,serif;
+
+  font-size:27px;
+
+}
+
+
+.cerrar{
+
+  width:42px;
+
+  height:42px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:var(--verde);
+
+  color:white;
+
+  font-size:28px;
+
+  line-height:1;
+
+  cursor:pointer;
+
+  flex-shrink:0;
+
+}
+
+
+.cerrar:hover{
+
+  background:var(--amarillo);
+
+  color:#111;
+
+}
+
+
+/* =========================================================
+   CARRITO
+========================================================= */
+
+.item-carrito{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  background:white;
+
+  border-radius:14px;
+
+  padding:14px;
+
+  margin-bottom:10px;
+
+  border:
+    1px solid
+    rgba(6,69,47,.12);
+
+}
+
+
+.item-carrito h3{
+
+  color:var(--verde);
+
+  font-size:15px;
+
+  margin-bottom:4px;
+
+}
+
+
+.item-carrito p{
+
+  color:#59645e;
+
+  font-size:12px;
+
+  line-height:1.5;
+
+}
+
+
+.controles{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+
+}
+
+
+.controles button{
+
+  width:32px;
+
+  height:32px;
+
+  border:none;
+
+  border-radius:9px;
+
+  background:var(--verde);
+
+  color:white;
+
+  font-size:20px;
+
+  cursor:pointer;
+
+}
+
+
+.controles span{
+
+  min-width:20px;
+
+  text-align:center;
+
+  font-weight:800;
+
+}
+
+
+.total{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin:18px 0;
+
+  padding:15px;
+
+  border-radius:14px;
+
+  background:var(--verde);
+
+  color:white;
+
+  font-size:18px;
+
+  font-weight:800;
+
+}
+
+
+.total span:last-child{
+
+  color:var(--amarillo2);
+
+}
+
+
+/* =========================================================
+   FORMULARIO
+========================================================= */
+
+.formulario-pedido{
+
+  display:none;
+
+  margin-top:20px;
+
+  padding-top:20px;
+
+  border-top:
+    1px solid
+    rgba(6,69,47,.15);
+
+}
+
+
+.formulario-pedido.activo{
+
+  display:block;
+
+}
+
+
+.tipo-pedido{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:8px;
+
+  margin:15px 0 20px;
+
+}
+
+
+.tipo-pedido button{
+
+  border:
+    1px solid
+    rgba(6,69,47,.20);
+
+  background:white;
+
+  color:var(--verde);
+
+  border-radius:12px;
+
+  padding:12px 8px;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  cursor:pointer;
+
+}
+
+
+.tipo-pedido button.activo{
+
+  background:var(--verde);
+
+  color:white;
+
+}
+
+
+.campo{
+
+  margin-bottom:14px;
+
+}
+
+
+.campo label{
+
+  display:block;
+
+  color:var(--verde);
+
+  font-size:13px;
+
+  font-weight:800;
+
+  margin-bottom:6px;
+
+}
+
+
+.campo input,
+.campo textarea,
+.campo select{
+
+  width:100%;
+
+  border:
+    1px solid
+    rgba(6,69,47,.20);
+
+  border-radius:11px;
+
+  padding:12px;
+
+  background:white;
+
+  color:#222;
+
+  font-family:inherit;
+
+  font-size:14px;
+
+  outline:none;
+
+}
+
+
+.campo input:focus,
+.campo textarea:focus,
+.campo select:focus{
+
+  border-color:var(--verde);
+
+}
+
+
+.campo textarea{
+
+  min-height:90px;
+
+  resize:vertical;
+
+}
+
+
+.oculto{
+
+  display:none;
+
+}
+
+
+.btn-whatsapp{
+
+  width:100%;
+
+  border:none;
+
+  background:#25d366;
+
+  color:white;
+
+  border-radius:13px;
+
+  padding:15px;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  cursor:pointer;
+
+}
+
+
+.vacio{
+
+  text-align:center;
+
+  color:#59645e;
+
+  background:white;
+
+  border-radius:14px;
+
+  padding:25px;
+
+}
+
 
 /* =========================================================
    CAMARONES AL GUSTO
@@ -776,9 +1353,12 @@ body{
 
   transition:.25s;
 
-  box-shadow:0 4px 10px rgba(6,69,47,.15);
+  box-shadow:
+    0 4px 10px
+    rgba(6,69,47,.15);
 
 }
+
 
 .btn-ver-camarones:hover{
 
@@ -791,10 +1371,6 @@ body{
 }
 
 
-/* =========================================================
-   MODAL CAMARONES
-========================================================= */
-
 .modal-camarones{
 
   position:fixed;
@@ -803,7 +1379,8 @@ body{
 
   z-index:9999;
 
-  background:rgba(0,0,0,.72);
+  background:
+    rgba(0,0,0,.72);
 
   display:none;
 
@@ -815,11 +1392,13 @@ body{
 
 }
 
+
 .modal-camarones.activo{
 
   display:flex;
 
 }
+
 
 .modal-camarones-contenido{
 
@@ -835,9 +1414,12 @@ body{
 
   padding:24px;
 
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.35);
 
 }
+
 
 .modal-camarones-encabezado{
 
@@ -851,11 +1433,14 @@ body{
 
   margin-bottom:20px;
 
-  border-bottom:1px solid rgba(6,69,47,.15);
+  border-bottom:
+    1px solid
+    rgba(6,69,47,.15);
 
   padding-bottom:15px;
 
 }
+
 
 .modal-camarones-encabezado h2{
 
@@ -869,6 +1454,7 @@ body{
 
 }
 
+
 .modal-camarones-encabezado p{
 
   margin:5px 0 0;
@@ -878,6 +1464,7 @@ body{
   font-size:14px;
 
 }
+
 
 .cerrar-camarones{
 
@@ -903,6 +1490,7 @@ body{
 
 }
 
+
 .cerrar-camarones:hover{
 
   background:var(--amarillo);
@@ -911,10 +1499,6 @@ body{
 
 }
 
-
-/* =========================================================
-   TARJETAS DE PREPARACIONES
-========================================================= */
 
 .camarones-grid{
 
@@ -927,6 +1511,7 @@ body{
 
 }
 
+
 .camaron-card{
 
   background:white;
@@ -935,11 +1520,14 @@ body{
 
   overflow:hidden;
 
-  border:1px solid rgba(6,69,47,.14);
+  border:
+    1px solid
+    rgba(6,69,47,.14);
 
   box-shadow:var(--sombra);
 
 }
+
 
 .camaron-card-foto{
 
@@ -950,6 +1538,7 @@ body{
   overflow:hidden;
 
 }
+
 
 .camaron-card-foto img{
 
@@ -965,17 +1554,21 @@ body{
 
 }
 
-.camaron-card:hover .camaron-card-foto img{
+
+.camaron-card:hover
+.camaron-card-foto img{
 
   transform:scale(1.04);
 
 }
+
 
 .camaron-card-contenido{
 
   padding:17px;
 
 }
+
 
 .camaron-card-contenido h3{
 
@@ -989,6 +1582,7 @@ body{
 
 }
 
+
 .camaron-card-contenido p{
 
   margin:0 0 12px;
@@ -999,9 +1593,8 @@ body{
 
   line-height:1.5;
 
-  min-height:42px;
-
 }
+
 
 .camaron-card-precio{
 
@@ -1014,6 +1607,7 @@ body{
   margin-bottom:12px;
 
 }
+
 
 .btn-ordenar-camaron{
 
@@ -1039,6 +1633,7 @@ body{
 
 }
 
+
 .btn-ordenar-camaron:hover{
 
   background:var(--amarillo);
@@ -1049,10 +1644,485 @@ body{
 
 
 /* =========================================================
-   RESPONSIVE CAMARONES
+   CHAROLAS
 ========================================================= */
 
+.btn-ver-charolas{
+
+  width:100%;
+
+  border:none;
+
+  background:var(--verde);
+
+  color:white;
+
+  border-radius:14px;
+
+  padding:14px 16px;
+
+  font-size:14px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  margin:8px 0 13px;
+
+  transition:.25s;
+
+  box-shadow:
+    0 4px 10px
+    rgba(6,69,47,.15);
+
+}
+
+
+.btn-ver-charolas:hover{
+
+  background:var(--amarillo);
+
+  color:#111;
+
+  transform:translateY(-1px);
+
+}
+
+
+.modal-charolas{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:9999;
+
+  background:
+    rgba(0,0,0,.72);
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+}
+
+
+.modal-charolas.activo{
+
+  display:flex;
+
+}
+
+
+.modal-charolas-contenido{
+
+  width:min(1000px,96vw);
+
+  max-height:92vh;
+
+  overflow-y:auto;
+
+  background:var(--crema);
+
+  border-radius:24px;
+
+  padding:24px;
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.35);
+
+}
+
+
+.modal-charolas-encabezado{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:15px;
+
+  margin-bottom:20px;
+
+  border-bottom:
+    1px solid
+    rgba(6,69,47,.15);
+
+  padding-bottom:15px;
+
+}
+
+
+.modal-charolas-encabezado h2{
+
+  margin:0;
+
+  color:var(--verde);
+
+  font-family:Georgia,serif;
+
+  font-size:27px;
+
+}
+
+
+.modal-charolas-encabezado p{
+
+  margin:5px 0 0;
+
+  color:#59645e;
+
+  font-size:14px;
+
+}
+
+
+.cerrar-charolas{
+
+  width:42px;
+
+  height:42px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:var(--verde);
+
+  color:white;
+
+  font-size:28px;
+
+  line-height:1;
+
+  cursor:pointer;
+
+  flex-shrink:0;
+
+}
+
+
+.cerrar-charolas:hover{
+
+  background:var(--amarillo);
+
+  color:#111;
+
+}
+
+
+.charolas-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:18px;
+
+}
+
+
+.charola-card{
+
+  background:white;
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(6,69,47,.14);
+
+  box-shadow:var(--sombra);
+
+}
+
+
+.charola-card-foto{
+
+  width:100%;
+
+  height:220px;
+
+  overflow:hidden;
+
+}
+
+
+.charola-card-foto img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+
+  transition:.35s;
+
+}
+
+
+.charola-card:hover
+.charola-card-foto img{
+
+  transform:scale(1.04);
+
+}
+
+
+.charola-card-contenido{
+
+  padding:17px;
+
+}
+
+
+.charola-card-contenido h3{
+
+  margin:0 0 7px;
+
+  color:var(--verde);
+
+  font-family:Georgia,serif;
+
+  font-size:21px;
+
+}
+
+
+.charola-card-contenido p{
+
+  margin:0 0 12px;
+
+  color:#59645e;
+
+  font-size:14px;
+
+  line-height:1.5;
+
+}
+
+
+.charola-card-precio{
+
+  color:var(--verde);
+
+  font-size:23px;
+
+  font-weight:bold;
+
+  margin-bottom:12px;
+
+}
+
+
+.btn-ordenar-charola{
+
+  width:100%;
+
+  border:none;
+
+  background:var(--verde);
+
+  color:white;
+
+  border-radius:12px;
+
+  padding:13px;
+
+  font-size:14px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+}
+
+
+.btn-ordenar-charola:hover{
+
+  background:var(--amarillo);
+
+  color:#111;
+
+}
+
+
+.charola-personalizada{
+
+  margin-top:18px;
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:20px;
+
+  border:
+    2px solid
+    rgba(6,69,47,.16);
+
+  box-shadow:var(--sombra);
+
+}
+
+
+.charola-personalizada h3{
+
+  margin:0 0 8px;
+
+  color:var(--verde);
+
+  font-family:Georgia,serif;
+
+  font-size:22px;
+
+}
+
+
+.charola-personalizada p{
+
+  margin:0 0 15px;
+
+  color:#59645e;
+
+  font-size:14px;
+
+  line-height:1.5;
+
+}
+
+
+.btn-armar-charola{
+
+  width:100%;
+
+  border:none;
+
+  background:var(--amarillo);
+
+  color:#111;
+
+  border-radius:12px;
+
+  padding:14px;
+
+  font-size:14px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+}
+
+
+.btn-armar-charola:hover{
+
+  background:var(--verde);
+
+  color:white;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+  .productos{
+
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+  }
+
+}
+
+
 @media(max-width:700px){
+
+  .productos{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .producto-foto{
+
+    height:230px;
+
+  }
+
+  .bebidas-grid{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .menu-header{
+
+    padding:10px 12px;
+
+  }
+
+  .mini-logo{
+
+    font-size:19px;
+
+  }
+
+  .presentacion{
+
+    padding-top:30px;
+
+  }
+
+  .titulo-seccion{
+
+    font-size:21px;
+
+  }
+
+  .tipo-pedido{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .modal-contenido{
+
+    padding:20px 16px;
+
+  }
+
+  .camarones-grid{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .charolas-grid{
+
+    grid-template-columns:1fr;
+
+  }
 
   .modal-camarones{
 
@@ -1068,947 +2138,91 @@ body{
 
     max-height:94vh;
 
-    border-radius:22px 22px 0 0;
+    border-radius:
+      22px 22px 0 0;
 
     padding:17px;
 
   }
 
-  .modal-camarones-encabezado h2{
-
-    font-size:22px;
-
-  }
-
-  .camarones-grid{
-
-    grid-template-columns:1fr;
-
-    gap:15px;
-
-  }
-
-  .camaron-card-foto{
-
-    height:210px;
-
-  }
-
-}
-
-/* =========================================================
-   CHAROLAS
-========================================================= */
-
-.charolas{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,minmax(0,1fr));
-
-  gap:15px;
-
-}
-
-.charola{
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff8e7,
-      #eadab5
-    );
-
-  border:2px solid rgba(6,69,47,.18);
-
-  border-radius:18px;
-
-  padding:20px;
-
-  box-shadow:var(--sombra);
-
-}
-
-.charola h3{
-
-  color:var(--verde);
-
-  font-family:Georgia,serif;
-
-  font-size:21px;
-
-  margin-bottom:8px;
-
-}
-
-.charola p{
-
-  font-size:13px;
-
-  color:#45554c;
-
-  line-height:1.5;
-
-  min-height:55px;
-
-}
-
-.charola-precios{
-
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:10px;
-
-  margin-top:15px;
-
-}
-
-.precio-charola{
-
-  background:var(--verde);
-
-  color:white;
-
-  padding:12px;
-
-  text-align:center;
-
-  border-radius:12px;
-
-  cursor:pointer;
-
-}
-
-.precio-charola strong{
-
-  display:block;
-
-  color:var(--amarillo2);
-
-  font-size:20px;
-
-}
-
-/* =========================================================
-   MODAL CHAROLAS - PRUEBA
-========================================================= */
-
-.modal-charolas{
-  position:fixed;
-  inset:0;
-  z-index:99999;
-  background:rgba(0,0,0,.75);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.modal-charolas.activo{
-  display:flex !important;
-  visibility:visible !important;
-  opacity:1 !important;
-}
-
-.modal-charolas-contenido{
-  width:min(1000px,96vw);
-  max-height:90vh;
-  overflow-y:auto;
-  background:var(--crema);
-  border-radius:24px;
-  padding:24px;
-}   
-
-/* =========================================================
-   BEBIDAS
-========================================================= */
-
-.bebidas-grid{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
-  gap:12px;
-
-}
-
-.bebida{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  gap:10px;
-
-  background:rgba(255,255,255,.58);
-
-  padding:15px 17px;
-
-  border-radius:14px;
-
-  border:1px solid rgba(6,69,47,.15);
-
-}
-
-.bebida strong{
-
-  color:var(--verde);
-
-  font-size:17px;
-
-}
-
-/* =========================================================
-   AVISO
-========================================================= */
-
-.aviso{
-
-  margin:35px 0;
-
-  padding:22px;
-
-  border-radius:18px;
-
-  background:var(--verde);
-
-  color:white;
-
-  text-align:center;
-
-  box-shadow:var(--sombra);
-
-}
-
-.aviso strong{
-
-  color:var(--amarillo2);
-
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-
-  margin-top:45px;
-
-  padding:40px 20px;
-
-  background:var(--verde);
-
-  color:white;
-
-  text-align:center;
-
-  border-top:5px solid var(--amarillo);
-
-}
-
-footer h2{
-
-  font-family:Georgia,serif;
-
-  font-size:31px;
-
-  margin-bottom:12px;
-
-}
-
-footer p{
-
-  line-height:1.8;
-
-  opacity:.9;
-
-}
-
-.whatsapp-footer{
-
-  display:inline-block;
-
-  margin-top:20px;
-
-  padding:14px 28px;
-
-  border-radius:40px;
-
-  background:#25D366;
-
-  color:white;
-
-  font-weight:bold;
-
-  text-decoration:none;
-
-}
-
-/* =========================================================
-   CARRITO
-========================================================= */
-
-.modal{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:5000;
-
-  background:rgba(0,0,0,.72);
-
-  backdrop-filter:blur(7px);
-
-  display:none;
-
-  align-items:flex-end;
-
-  justify-content:center;
-
-}
-
-.modal.activo{
-
-  display:flex;
-
-}
-
-.modal-contenido{
-
-  width:min(720px,100%);
-
-  max-height:92vh;
-
-  overflow-y:auto;
-
-  background:
-    linear-gradient(
-      rgba(250,241,218,.98),
-      rgba(235,220,185,.98)
-    );
-
-  border-radius:25px 25px 0 0;
-
-  padding:25px;
-
-  box-shadow:0 -20px 70px rgba(0,0,0,.5);
-
-  animation:subir .3s ease;
-
-}
-
-@keyframes subir{
-
-  from{
-    transform:translateY(100%);
-  }
-
-  to{
-    transform:translateY(0);
-  }
-
-}
-
-.modal-titulo{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  gap:15px;
-
-  color:var(--verde);
-
-  margin-bottom:20px;
-
-}
-
-.modal-titulo h2{
-
-  font-family:Georgia,serif;
-
-  font-size:30px;
-
-}
-
-.cerrar{
-
-  width:40px;
-
-  height:40px;
-
-  border:none;
-
-  border-radius:50%;
-
-  background:var(--verde);
-
-  color:white;
-
-  font-size:22px;
-
-  cursor:pointer;
-
-}
-
-.item-carrito{
-
-  display:grid;
-
-  grid-template-columns:1fr auto;
-
-  gap:15px;
-
-  padding:15px 0;
-
-  border-bottom:1px solid rgba(0,0,0,.15);
-
-}
-
-.item-carrito h3{
-
-  color:var(--verde);
-
-  font-size:18px;
-
-}
-
-.item-carrito p{
-
-  font-size:13px;
-
-  color:#555;
-
-  margin-top:5px;
-
-}
-
-.controles{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:8px;
-
-}
-
-.controles button{
-
-  width:30px;
-
-  height:30px;
-
-  border:none;
-
-  border-radius:50%;
-
-  background:var(--verde);
-
-  color:white;
-
-  cursor:pointer;
-
-  font-weight:bold;
-
-}
-
-.controles span{
-
-  font-weight:bold;
-
-  min-width:22px;
-
-  text-align:center;
-
-}
-
-.total{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  padding:20px 0;
-
-  font-size:23px;
-
-  font-weight:bold;
-
-  color:var(--verde);
-
-}
-
-/* =========================================================
-   FORMULARIO PEDIDO
-========================================================= */
-
-.formulario-pedido{
-
-  display:none;
-
-  margin-top:15px;
-
-}
-
-.formulario-pedido.activo{
-
-  display:block;
-
-}
-
-.tipo-pedido{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:8px;
-
-  margin:15px 0 20px;
-
-}
-
-.tipo-pedido button{
-
-  padding:13px 8px;
-
-  border-radius:13px;
-
-  border:2px solid var(--verde);
-
-  background:transparent;
-
-  color:var(--verde);
-
-  font-weight:bold;
-
-  cursor:pointer;
-
-}
-
-.tipo-pedido button.activo{
-
-  background:var(--verde);
-
-  color:white;
-
-}
-
-.campo{
-
-  margin-bottom:13px;
-
-}
-
-.campo label{
-
-  display:block;
-
-  color:var(--verde);
-
-  font-size:13px;
-
-  font-weight:bold;
-
-  margin-bottom:5px;
-
-}
-
-.campo input,
-.campo textarea,
-.campo select{
-
-  width:100%;
-
-  border:1px solid rgba(6,69,47,.3);
-
-  background:white;
-
-  color:#111;
-
-  padding:13px;
-
-  border-radius:11px;
-
-  outline:none;
-
-  font-size:15px;
-
-}
-
-.campo textarea{
-
-  min-height:80px;
-
-  resize:vertical;
-
-}
-
-.oculto{
-  display:none;
-}
-
-.btn-whatsapp{
-
-  width:100%;
-
-  border:none;
-
-  border-radius:45px;
-
-  padding:17px;
-
-  background:#25D366;
-
-  color:white;
-
-  font-size:17px;
-
-  font-weight:bold;
-
-  cursor:pointer;
-
-  margin-top:8px;
-
-}
-
-.vacio{
-
-  text-align:center;
-
-  padding:30px;
-
-  color:#59645e;
-
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:700px){
-
-  .productos{
-    grid-template-columns:1fr;
-  }
-
-  .producto-foto{
-    height:230px;
-  }
-
-  .charolas{
-    grid-template-columns:1fr;
-  }
-
-  .bebidas-grid{
-    grid-template-columns:1fr;
-  }
-
-  .menu-header{
-    padding:10px 12px;
-  }
-
-  .mini-logo{
-    font-size:19px;
-  }
-
-  .presentacion{
-    padding-top:30px;
-  }
-
-  .titulo-seccion{
-    font-size:21px;
-  }
-
-  .tipo-pedido{
-    grid-template-columns:1fr;
-  }
-
-  .modal-contenido{
-    padding:20px 16px;
-  }
-
-  .opciones-camarones{
-    grid-template-columns:1fr;
-  }
-
-}
-
-/* =========================================================
-   CHAROLAS
-========================================================= */
-
-.btn-ver-charolas{
-  width:100%;
-  border:none;
-  background:var(--verde);
-  color:white;
-  border-radius:14px;
-  padding:14px 16px;
-  font-size:14px;
-  font-weight:bold;
-  cursor:pointer;
-  margin:8px 0 13px;
-  transition:.25s;
-  box-shadow:0 4px 10px rgba(6,69,47,.15);
-}
-
-.btn-ver-charolas:hover{
-  background:var(--amarillo);
-  color:#111;
-  transform:translateY(-1px);
-}
-
-
-/* MODAL */
-
-.modal-charolas{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  background:rgba(0,0,0,.72);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.modal-charolas.activo{
-  display:flex;
-}
-
-.modal-charolas-contenido{
-  width:min(1000px,96vw);
-  max-height:92vh;
-  overflow-y:auto;
-  background:var(--crema);
-  border-radius:24px;
-  padding:24px;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.modal-charolas-encabezado{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  margin-bottom:20px;
-  border-bottom:1px solid rgba(6,69,47,.15);
-  padding-bottom:15px;
-}
-
-.modal-charolas-encabezado h2{
-  margin:0;
-  color:var(--verde);
-  font-family:Georgia,serif;
-  font-size:27px;
-}
-
-.modal-charolas-encabezado p{
-  margin:5px 0 0;
-  color:#59645e;
-  font-size:14px;
-}
-
-.cerrar-charolas{
-  width:42px;
-  height:42px;
-  border:none;
-  border-radius:50%;
-  background:var(--verde);
-  color:white;
-  font-size:28px;
-  line-height:1;
-  cursor:pointer;
-  flex-shrink:0;
-}
-
-.cerrar-charolas:hover{
-  background:var(--amarillo);
-  color:#111;
-}
-
-
-/* GRID */
-
-.charolas-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:18px;
-}
-
-.charola-card{
-  background:white;
-  border-radius:18px;
-  overflow:hidden;
-  border:1px solid rgba(6,69,47,.14);
-  box-shadow:var(--sombra);
-}
-
-.charola-card-foto{
-  width:100%;
-  height:220px;
-  overflow:hidden;
-}
-
-.charola-card-foto img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transition:.35s;
-}
-
-.charola-card:hover .charola-card-foto img{
-  transform:scale(1.04);
-}
-
-.charola-card-contenido{
-  padding:17px;
-}
-
-.charola-card-contenido h3{
-  margin:0 0 7px;
-  color:var(--verde);
-  font-family:Georgia,serif;
-  font-size:21px;
-}
-
-.charola-card-contenido p{
-  margin:0 0 12px;
-  color:#59645e;
-  font-size:14px;
-  line-height:1.5;
-}
-
-.charola-card-precio{
-  color:var(--verde);
-  font-size:23px;
-  font-weight:bold;
-  margin-bottom:12px;
-}
-
-.btn-ordenar-charola{
-  width:100%;
-  border:none;
-  background:var(--verde);
-  color:white;
-  border-radius:12px;
-  padding:13px;
-  font-size:14px;
-  font-weight:bold;
-  cursor:pointer;
-  transition:.25s;
-}
-
-.btn-ordenar-charola:hover{
-  background:var(--amarillo);
-  color:#111;
-}
-
-
-/* ARMA TU CHAROLA */
-
-.charola-personalizada{
-  margin-top:18px;
-  background:white;
-  border-radius:18px;
-  padding:20px;
-  border:2px solid rgba(6,69,47,.16);
-  box-shadow:var(--sombra);
-}
-
-.charola-personalizada h3{
-  margin:0 0 8px;
-  color:var(--verde);
-  font-family:Georgia,serif;
-  font-size:22px;
-}
-
-.charola-personalizada p{
-  margin:0 0 15px;
-  color:#59645e;
-  font-size:14px;
-  line-height:1.5;
-}
-
-.btn-armar-charola{
-  width:100%;
-  border:none;
-  background:var(--amarillo);
-  color:#111;
-  border-radius:12px;
-  padding:14px;
-  font-size:14px;
-  font-weight:bold;
-  cursor:pointer;
-  transition:.25s;
-}
-
-.btn-armar-charola:hover{
-  background:var(--verde);
-  color:white;
-}
-
-
-/* MOVIL */
-
-@media(max-width:700px){
-
   .modal-charolas{
+
     padding:10px;
+
     align-items:flex-end;
+
   }
 
   .modal-charolas-contenido{
+
     width:100%;
+
     max-height:94vh;
-    border-radius:22px 22px 0 0;
+
+    border-radius:
+      22px 22px 0 0;
+
     padding:17px;
+
   }
 
+  .modal-camarones-encabezado h2,
   .modal-charolas-encabezado h2{
+
     font-size:22px;
+
   }
 
-  .charolas-grid{
-    grid-template-columns:1fr;
-    gap:15px;
-  }
-
+  .camaron-card-foto,
   .charola-card-foto{
+
     height:210px;
+
   }
 
-}   
+}
+
+
+/* =========================================================
+   MUSICA
+========================================================= */
+
+#botonMusica{
+
+  -webkit-tap-highlight-color:transparent;
+
+}
+
+
+/* =========================================================
+   FIN CSS
+========================================================= */
 
 </style>
 
 </head>
 
+
 <body>
 
+
 <!-- =====================================================
-     MÚSICA
+     MUSICA
 ===================================================== -->
 
-<audio id="musicaMarYChelas" loop preload="auto">
-  <source src="music/musica-mar-y-chelas.mp3" type="audio/mpeg">
+<audio
+  id="musicaMarYChelas"
+  loop
+  preload="auto"
+>
+
+  <source
+    src="music/musica-mar-y-chelas.mp3"
+    type="audio/mpeg"
+  >
+
 </audio>
+
 
 <button
   id="botonMusica"
@@ -2038,7 +2252,10 @@ footer p{
      PORTADA
 ===================================================== -->
 
-<section class="portada" id="inicio">
+<section
+  class="portada"
+  id="inicio"
+>
 
   <div class="portada-contenido">
 
@@ -2046,14 +2263,19 @@ footer p{
       src="images/logo-mar-y-chelas.png"
       class="logo-portada"
       alt="Mar y Chelas P.V."
-      onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='block';"
+      onerror="
+        this.style.display='none';
+        document.querySelector('.logo-fallback').style.display='block';
+      "
     >
 
     <div class="logo-fallback">
       Mar y Chelas P.V.
     </div>
 
-    <h1>Mar y Chelas P.V.</h1>
+    <h1>
+      Mar y Chelas P.V.
+    </h1>
 
     <div class="portada-frase">
       Mariscos buenos · Chelas mejores
@@ -2063,13 +2285,17 @@ footer p{
 
       📍 Chihuahua #205, Col. Bobadilla<br>
 
-      📞 Pedidos: <strong>331 740 8195</strong><br>
+      📞 Pedidos:
+      <strong>331 740 8195</strong><br>
 
       🕚 Miércoles – Lunes · 12 AM – 7 PM
 
     </div>
 
-    <a href="#menu" class="btn-menu">
+    <a
+      href="#menu"
+      class="btn-menu"
+    >
       🍤 VER MENÚ
     </a>
 
@@ -2082,27 +2308,45 @@ footer p{
      HEADER
 ===================================================== -->
 
-<header class="menu-header" id="menu">
+<header
+  class="menu-header"
+  id="menu"
+>
 
   <div class="menu-header-inner">
 
     <div class="mini-logo">
+
       🦐 Mar y Chelas P.V.
-      <span>SABOR · MAR · BUENA COMPAÑÍA</span>
+
+      <span>
+        SABOR · MAR · BUENA COMPAÑÍA
+      </span>
+
     </div>
+
 
     <button
       class="btn-carrito-header"
       onclick="abrirCarrito()"
     >
+
       🛒 Pedido
-      <span id="contadorCarrito">0</span>
+
+      <span id="contadorCarrito">
+        0
+      </span>
+
     </button>
 
   </div>
 
 </header>
 
+
+<!-- =====================================================
+     CONTENIDO
+===================================================== -->
 
 <main class="contenedor">
 
@@ -2113,7 +2357,9 @@ footer p{
 
 <section class="presentacion">
 
-  <h2>¡Aquí el mar sabe mejor!</h2>
+  <h2>
+    ¡Aquí el mar sabe mejor!
+  </h2>
 
   <p>
     Frescura en cada bocado. Elige tus favoritos,
@@ -2129,35 +2375,59 @@ footer p{
 
 <nav class="categorias">
 
-  <button class="categoria-btn activo" onclick="irA('entradas')">
+  <button
+    class="categoria-btn activo"
+    onclick="irA('entradas')"
+  >
     Entradas
   </button>
 
-  <button class="categoria-btn" onclick="irA('ceviches')">
+  <button
+    class="categoria-btn"
+    onclick="irA('ceviches')"
+  >
     Ceviches
   </button>
 
-  <button class="categoria-btn" onclick="irA('calientes')">
+  <button
+    class="categoria-btn"
+    onclick="irA('calientes')"
+  >
     Calientes
   </button>
 
-  <button class="categoria-btn" onclick="irA('aguachiles')">
+  <button
+    class="categoria-btn"
+    onclick="irA('aguachiles')"
+  >
     Aguachiles
   </button>
 
-  <button class="categoria-btn" onclick="irA('tostadas')">
+  <button
+    class="categoria-btn"
+    onclick="irA('tostadas')"
+  >
     Tostadas
   </button>
 
-  <button class="categoria-btn" onclick="irA('charolas')">
+  <button
+    class="categoria-btn"
+    onclick="irA('charolas')"
+  >
     Charolas
   </button>
 
-  <button class="categoria-btn" onclick="irA('extras')">
+  <button
+    class="categoria-btn"
+    onclick="irA('extras')"
+  >
     Extras
   </button>
 
-  <button class="categoria-btn" onclick="irA('bebidas')">
+  <button
+    class="categoria-btn"
+    onclick="irA('bebidas')"
+  >
     Bebidas
   </button>
 
@@ -2168,7 +2438,10 @@ footer p{
      ENTRADAS
 ===================================================== -->
 
-<section class="seccion-menu" id="entradas">
+<section
+  class="seccion-menu"
+  id="entradas"
+>
 
   <h2 class="titulo-seccion">
     Entradas
@@ -2176,21 +2449,27 @@ footer p{
 
   <div class="productos">
 
+
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/01-laminas-de-atun.jpg"
           alt="Láminas de atún"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Láminas de atún</h3>
+        <h3>
+          Láminas de atún
+        </h3>
 
-        <p class="producto-descripcion">
-          Atún fresco preparado para comenzar la experiencia Mar y Chelas.
+        <p>
+          Delicadas láminas de atún
+          preparadas para comenzar.
         </p>
 
         <div class="precio">
@@ -2201,12 +2480,13 @@ footer p{
           class="btn-agregar"
           onclick="agregar('Láminas de atún',280)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
 
     </article>
+
 
   </div>
 
@@ -2217,7 +2497,10 @@ footer p{
      CEVICHES
 ===================================================== -->
 
-<section class="seccion-menu" id="ceviches">
+<section
+  class="seccion-menu"
+  id="ceviches"
+>
 
   <h2 class="titulo-seccion">
     Ceviches
@@ -2229,15 +2512,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/02-atun-tropical.jpg"
           alt="Atún tropical"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Atún tropical</h3>
+        <h3>
+          Atún tropical
+        </h3>
 
         <div class="precio">
           $250
@@ -2247,7 +2534,7 @@ footer p{
           class="btn-agregar"
           onclick="agregar('Atún tropical',250)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
@@ -2258,15 +2545,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/03-bota-estilo-acapulqueno.jpg"
           alt="Bota estilo acapulqueño"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Bota estilo acapulqueño</h3>
+        <h3>
+          Bota estilo acapulqueño
+        </h3>
 
         <div class="precio">
           $250
@@ -2276,7 +2567,7 @@ footer p{
           class="btn-agregar"
           onclick="agregar('Bota estilo acapulqueño',250)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
@@ -2287,15 +2578,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/04-ceviche-camaron.jpg"
           alt="Ceviche de camarón"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Camarón</h3>
+        <h3>
+          Camarón
+        </h3>
 
         <div class="precio">
           $250
@@ -2303,9 +2598,9 @@ footer p{
 
         <button
           class="btn-agregar"
-          onclick="agregar('Camarón',250)"
+          onclick="agregar('Ceviche de camarón',250)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
@@ -2316,15 +2611,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/05-ceviche-vallarta.jpg"
           alt="Ceviche Vallarta"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Vallarta</h3>
+        <h3>
+          Vallarta
+        </h3>
 
         <div class="precio">
           $180
@@ -2332,9 +2631,9 @@ footer p{
 
         <button
           class="btn-agregar"
-          onclick="agregar('Vallarta',180)"
+          onclick="agregar('Ceviche Vallarta',180)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
@@ -2345,15 +2644,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/06-ensalada-de-mariscos.jpg"
           alt="Ensalada de mariscos"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Ensalada de mariscos</h3>
+        <h3>
+          Ensalada de mariscos
+        </h3>
 
         <div class="precio">
           $280
@@ -2363,12 +2666,13 @@ footer p{
           class="btn-agregar"
           onclick="agregar('Ensalada de mariscos',280)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
 
     </article>
+
 
   </div>
 
@@ -2376,10 +2680,13 @@ footer p{
 
 
 <!-- =====================================================
-     PLATILLOS CALIENTES
+     CALIENTES
 ===================================================== -->
 
-<section class="seccion-menu" id="calientes">
+<section
+  class="seccion-menu"
+  id="calientes"
+>
 
   <h2 class="titulo-seccion">
     Platillos calientes
@@ -2391,15 +2698,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/07-coctel-de-camaron.jpg"
           alt="Cóctel de camarón"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Cóctel de camarón</h3>
+        <h3>
+          Cóctel de camarón
+        </h3>
 
         <div class="precio">
           $250
@@ -2409,7 +2720,7 @@ footer p{
           class="btn-agregar"
           onclick="agregar('Cóctel de camarón',250)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
@@ -2420,15 +2731,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/08-coctel-mixto-camaron-pulpo.jpg"
           alt="Cóctel mixto de camarón y pulpo"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Cóctel mixto camarón y pulpo</h3>
+        <h3>
+          Cóctel mixto camarón y pulpo
+        </h3>
 
         <div class="precio">
           $280
@@ -2438,7 +2753,7 @@ footer p{
           class="btn-agregar"
           onclick="agregar('Cóctel mixto camarón y pulpo',280)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
@@ -2446,68 +2761,31 @@ footer p{
     </article>
 
 
-    <!-- =================================================
-         CAMARONES AL GUSTO
-    ================================================= -->
+    <!-- CAMARONES AL GUSTO -->
 
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/09-camarones-al-gusto.jpg"
           alt="Camarones al gusto"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Camarones al gusto</h3>
+        <h3>
+          Camarones al gusto
+        </h3>
 
-       <button
-  class="btn-ver-camarones"
-  onclick="abrirCamarones()"
->
-  🍤 VER PREPARACIONES
-</button>
-
-        <div class="opciones-camarones">
-
-          <button
-            class="opcion-camaron"
-            onclick="agregar('Camarones al gusto',285,'Empanizados')"
-          >
-            Empanizados
-          </button>
-
-          <button
-            class="opcion-camaron"
-            onclick="agregar('Camarones al gusto',285,'Diabla')"
-          >
-            Diabla
-          </button>
-
-          <button
-            class="opcion-camaron"
-            onclick="agregar('Camarones al gusto',285,'Cucaracha')"
-          >
-            Cucaracha
-          </button>
-
-          <button
-            class="opcion-camaron"
-            onclick="agregar('Camarones al gusto',285,'Ajillo')"
-          >
-            Ajillo
-          </button>
-
-          <button
-            class="opcion-camaron"
-            onclick="agregar('Camarones al gusto',285,'Ajo')"
-          >
-            Ajo
-          </button>
-
-        </div>
+        <button
+          class="btn-ver-camarones"
+          onclick="abrirCamarones()"
+        >
+          🍤 VER PREPARACIONES
+        </button>
 
         <div class="precio">
           $285
@@ -2517,7 +2795,7 @@ footer p{
           display:block;
           color:#59645e;
           text-align:center;
-          margin-bottom:8px;
+          margin-top:7px;
         ">
           Selecciona una preparación
         </small>
@@ -2526,59 +2804,88 @@ footer p{
 
     </article>
 
+
   </div>
 
 </section>
 
-<!-- =================================================
+
+<!-- =====================================================
      CHAROLAS
-================================================= -->
+===================================================== -->
 
-<article class="producto">
+<section
+  class="seccion-menu"
+  id="charolas"
+>
 
-  <div class="producto-foto">
+  <h2 class="titulo-seccion">
+    Charolas
+  </h2>
 
-    <img
-      src="images/charola-mixta-camarones.jpg"
-      alt="Charolas Mixtas"
-    >
+
+  <div class="productos">
+
+
+    <article class="producto">
+
+      <div class="producto-foto">
+
+        <img
+          src="images/charola-mixta-camarones.jpg"
+          alt="Charolas Mixtas"
+        >
+
+      </div>
+
+
+      <div class="producto-contenido">
+
+        <h3>
+          Charolas Mixtas
+        </h3>
+
+
+        <button
+          class="btn-ver-charolas"
+          onclick="abrirCharolas()"
+        >
+          🍤 VER CHAROLAS
+        </button>
+
+
+        <div class="precio">
+          Frías desde $700 · Calientes desde $800
+        </div>
+
+
+        <small style="
+          display:block;
+          color:#59645e;
+          text-align:center;
+          margin-top:8px;
+        ">
+          Elige tu charola o arma una caliente
+        </small>
+
+      </div>
+
+    </article>
+
 
   </div>
 
-  <div class="producto-contenido">
-
-    <h3>Charolas Mixtas</h3>
-
-    <button
-      class="btn-ver-charolas"
-      onclick="abrirCharolas()"
-    >
-      🍤 VER CHAROLAS
-    </button>
-
-    <div class="precio">
-      Frías desde $700 · Calientes desde $800
-    </div>
-
-    <small style="
-      display:block;
-      color:#59645e;
-      text-align:center;
-      margin-bottom:8px;
-    ">
-      Elige tu charola o arma una caliente
-    </small>
-
-  </div>
-
-</article>   
+</section>
 
 
 <!-- =====================================================
      AGUACHILES
 ===================================================== -->
 
-<section class="seccion-menu" id="aguachiles">
+<section
+  class="seccion-menu"
+  id="aguachiles"
+>
 
   <h2 class="titulo-seccion">
     Aguachiles
@@ -2590,15 +2897,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/10-aguachile-verde.jpg"
-          alt="Aguachile verde"
+          alt="Aguachile Verde"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Aguachile Verde</h3>
+        <h3>
+          Aguachile Verde
+        </h3>
 
         <div class="precio">
           $250
@@ -2608,7 +2919,7 @@ footer p{
           class="btn-agregar"
           onclick="agregar('Aguachile Verde',250)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
@@ -2619,15 +2930,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/11-aguachile-rojo.jpg"
-          alt="Aguachile rojo"
+          alt="Aguachile Rojo"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Aguachile Rojo</h3>
+        <h3>
+          Aguachile Rojo
+        </h3>
 
         <div class="precio">
           $250
@@ -2637,7 +2952,7 @@ footer p{
           class="btn-agregar"
           onclick="agregar('Aguachile Rojo',250)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
@@ -2648,15 +2963,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/12-aguachile-negro.jpg"
-          alt="Aguachile negro"
+          alt="Aguachile Negro"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Aguachile Negro</h3>
+        <h3>
+          Aguachile Negro
+        </h3>
 
         <div class="precio">
           $250
@@ -2666,12 +2985,13 @@ footer p{
           class="btn-agregar"
           onclick="agregar('Aguachile Negro',250)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
 
     </article>
+
 
   </div>
 
@@ -2682,7 +3002,10 @@ footer p{
      TOSTADAS
 ===================================================== -->
 
-<section class="seccion-menu" id="tostadas">
+<section
+  class="seccion-menu"
+  id="tostadas"
+>
 
   <h2 class="titulo-seccion">
     Tostadas
@@ -2694,15 +3017,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/13-tostada-ceviche-camaron.jpg"
           alt="Tostada de ceviche de camarón"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Tostada De Ceviche camarón</h3>
+        <h3>
+          Tostada de Ceviche camarón
+        </h3>
 
         <div class="precio">
           $75
@@ -2710,9 +3037,9 @@ footer p{
 
         <button
           class="btn-agregar"
-          onclick="agregar('Tostada de ceviche camarón',75)"
+          onclick="agregar('Tostada de Ceviche camarón',75)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
@@ -2723,15 +3050,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/14-tostada-atun.jpg"
           alt="Tostada de atún"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Atún</h3>
+        <h3>
+          Atún
+        </h3>
 
         <div class="precio">
           $85
@@ -2739,9 +3070,9 @@ footer p{
 
         <button
           class="btn-agregar"
-          onclick="agregar('Tostada de atún',85)"
+          onclick="agregar('Tostada de Atún',85)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
@@ -2752,15 +3083,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/15-tostada-aguachiles.jpg"
           alt="Tostada de aguachiles"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Aguachiles</h3>
+        <h3>
+          Aguachiles
+        </h3>
 
         <div class="precio">
           $85
@@ -2768,9 +3103,9 @@ footer p{
 
         <button
           class="btn-agregar"
-          onclick="agregar('Tostada de aguachiles',85)"
+          onclick="agregar('Tostada de Aguachiles',85)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
@@ -2781,15 +3116,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/16-tostada-ceviche-vallarta.jpg"
           alt="Tostada de ceviche Vallarta"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Ceviche Vallarta</h3>
+        <h3>
+          Ceviche Vallarta
+        </h3>
 
         <div class="precio">
           $55
@@ -2797,9 +3136,9 @@ footer p{
 
         <button
           class="btn-agregar"
-          onclick="agregar('Tostada de ceviche Vallarta',55)"
+          onclick="agregar('Tostada de Ceviche Vallarta',55)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
@@ -2810,15 +3149,19 @@ footer p{
     <article class="producto">
 
       <div class="producto-foto">
+
         <img
           src="images/17-tostada-ceviche-cuadro-acapulqueno.jpg"
           alt="Tostada de ceviche cuadro tipo acapulqueño"
         >
+
       </div>
 
       <div class="producto-contenido">
 
-        <h3>Ceviche cuadro tipo acapulqueño</h3>
+        <h3>
+          Ceviche cuadro tipo acapulqueño
+        </h3>
 
         <div class="precio">
           $75
@@ -2826,14 +3169,15 @@ footer p{
 
         <button
           class="btn-agregar"
-          onclick="agregar('Tostada de ceviche cuadro tipo acapulqueño',75)"
+          onclick="agregar('Tostada de Ceviche cuadro tipo acapulqueño',75)"
         >
-          🛒 Agregar al pedido
+          🛒 AGREGAR
         </button>
 
       </div>
 
     </article>
+
 
   </div>
 
@@ -2844,93 +3188,118 @@ footer p{
      EXTRAS
 ===================================================== -->
 
-<section class="seccion-menu" id="extras">
+<section
+  class="seccion-menu"
+  id="extras"
+>
 
   <h2 class="titulo-seccion">
     Extras
   </h2>
 
+
   <div class="bebidas-grid">
 
 
-    <div class="bebida">
+    <article class="bebida">
 
-      <span>Arroz</span>
+      <h3>
+        Arroz
+      </h3>
 
-      <strong>$50</strong>
+      <div class="precio">
+        $50
+      </div>
 
       <button
-        class="categoria-btn"
+        class="btn-agregar"
         onclick="agregar('Arroz',50)"
       >
-        +
+        🛒 AGREGAR
       </button>
 
-    </div>
+    </article>
 
 
-    <div class="bebida">
+    <article class="bebida">
 
-      <span>Salsa aguachile</span>
+      <h3>
+        Salsa aguachile
+      </h3>
 
-      <strong>$20</strong>
+      <div class="precio">
+        $20
+      </div>
 
       <button
-        class="categoria-btn"
+        class="btn-agregar"
         onclick="agregar('Salsa aguachile',20)"
       >
-        +
+        🛒 AGREGAR
       </button>
 
-    </div>
+    </article>
 
 
-    <div class="bebida">
+    <article class="bebida">
 
-      <span>Salsa ajillo, diabla</span>
+      <h3>
+        Salsa ajillo, diabla
+      </h3>
 
-      <strong>$50</strong>
+      <div class="precio">
+        $50
+      </div>
 
       <button
-        class="categoria-btn"
+        class="btn-agregar"
         onclick="agregar('Salsa ajillo, diabla',50)"
       >
-        +
+        🛒 AGREGAR
       </button>
 
-    </div>
+    </article>
 
 
-    <div class="bebida">
+    <article class="bebida">
 
-      <span>Aderezo</span>
+      <h3>
+        Aderezo
+      </h3>
 
-      <strong>$30</strong>
+      <div class="precio">
+        $30
+      </div>
 
       <button
-        class="categoria-btn"
+        class="btn-agregar"
         onclick="agregar('Aderezo',30)"
       >
-        +
+        🛒 AGREGAR
       </button>
 
-    </div>
+    </article>
 
 
-    <div class="bebida">
+    <article class="bebida">
 
-      <span>Guacamole</span>
+      <h3>
+        Guacamole
+      </h3>
 
-      <strong>$125</strong>
+      <div class="precio">
+        $125
+      </div>
 
       <button
-        class="categoria-btn"
+        class="btn-agregar"
         onclick="agregar('Guacamole',125)"
       >
-        +
+        🛒 AGREGAR
       </button>
 
-    </div>
+    </article>
+
 
   </div>
 
@@ -2941,157 +3310,158 @@ footer p{
      BEBIDAS
 ===================================================== -->
 
-<section class="seccion-menu" id="bebidas">
+<section
+  class="seccion-menu"
+  id="bebidas"
+>
 
   <h2 class="titulo-seccion">
     Bebidas
   </h2>
 
+
   <div class="bebidas-grid">
 
 
-    <!-- AGUA CHICA -->
+    <article class="bebida">
 
-    <div class="bebida">
-
-      <span>
+      <h3>
         Agua del día — Chica
-      </span>
+      </h3>
 
-      <strong>
+      <div class="precio">
         $35
-      </strong>
+      </div>
 
       <button
-        class="categoria-btn"
+        class="btn-agregar"
         onclick="agregar('Agua del día — Chica',35)"
       >
-        +
+        🛒 AGREGAR
       </button>
 
-    </div>
+    </article>
 
 
-    <!-- AGUA GRANDE -->
+    <article class="bebida">
 
-    <div class="bebida">
-
-      <span>
+      <h3>
         Agua del día — Grande
-      </span>
+      </h3>
 
-      <strong>
+      <div class="precio">
         $65
-      </strong>
+      </div>
 
       <button
-        class="categoria-btn"
+        class="btn-agregar"
         onclick="agregar('Agua del día — Grande',65)"
       >
-        +
+        🛒 AGREGAR
       </button>
 
-    </div>
+    </article>
 
 
-    <div class="bebida">
+    <article class="bebida">
 
-      <span>
+      <h3>
         Refresco Coca-Cola
-      </span>
+      </h3>
 
-      <strong>
+      <div class="precio">
         $40
-      </strong>
+      </div>
 
       <button
-        class="categoria-btn"
+        class="btn-agregar"
         onclick="agregar('Refresco Coca-Cola',40)"
       >
-        +
+        🛒 AGREGAR
       </button>
 
-    </div>
+    </article>
 
 
-    <div class="bebida">
+    <article class="bebida">
 
-      <span>
+      <h3>
         Naranjada
-      </span>
+      </h3>
 
-      <strong>
+      <div class="precio">
         $60
-      </strong>
+      </div>
 
       <button
-        class="categoria-btn"
+        class="btn-agregar"
         onclick="agregar('Naranjada',60)"
       >
-        +
+        🛒 AGREGAR
       </button>
 
-    </div>
+    </article>
 
 
-    <div class="bebida">
+    <article class="bebida">
 
-      <span>
+      <h3>
         Limonada
-      </span>
+      </h3>
 
-      <strong>
+      <div class="precio">
         $60
-      </strong>
+      </div>
 
       <button
-        class="categoria-btn"
+        class="btn-agregar"
         onclick="agregar('Limonada',60)"
       >
-        +
+        🛒 AGREGAR
       </button>
 
-    </div>
+    </article>
 
 
-    <div class="bebida">
+    <article class="bebida">
 
-      <span>
+      <h3>
         Rusa
-      </span>
+      </h3>
 
-      <strong>
+      <div class="precio">
         $60
-      </strong>
+      </div>
 
       <button
-        class="categoria-btn"
+        class="btn-agregar"
         onclick="agregar('Rusa',60)"
       >
-        +
+        🛒 AGREGAR
       </button>
 
-    </div>
+    </article>
 
 
-    <div class="bebida">
+    <article class="bebida">
 
-      <span>
+      <h3>
         Agua embotellada
-      </span>
+      </h3>
 
-      <strong>
+      <div class="precio">
         $25
-      </strong>
+      </div>
 
       <button
-        class="categoria-btn"
+        class="btn-agregar"
         onclick="agregar('Agua embotellada',25)"
       >
-        +
+        🛒 AGREGAR
       </button>
 
-    </div>
+    </article>
+
 
   </div>
 
@@ -3104,7 +3474,12 @@ footer p{
 
 <div class="aviso">
 
-  📲 <strong>Haz tu pedido fácilmente</strong><br>
+  📲
+  <strong>
+    Haz tu pedido fácilmente
+  </strong>
+
+  <br>
 
   Agrega tus favoritos, revisa tu pedido
   y envíalo directamente por WhatsApp.
@@ -3121,7 +3496,9 @@ footer p{
 
 <footer>
 
-  <h2>Mar y Chelas</h2>
+  <h2>
+    Mar y Chelas
+  </h2>
 
   <p>
     Mariscos buenos · Chelas mejores
@@ -3136,7 +3513,10 @@ footer p{
   </p>
 
   <p>
-    📞 Pedidos: <strong>331 740 8195</strong>
+    📞 Pedidos:
+    <strong>
+      331 740 8195
+    </strong>
   </p>
 
   <a
@@ -3154,13 +3534,18 @@ footer p{
      MODAL CARRITO
 ===================================================== -->
 
-<div class="modal" id="modalCarrito">
+<div
+  class="modal"
+  id="modalCarrito"
+>
 
   <div class="modal-contenido">
 
     <div class="modal-titulo">
 
-      <h2>🛒 Tu pedido</h2>
+      <h2>
+        🛒 Tu pedido
+      </h2>
 
       <button
         class="cerrar"
@@ -3183,7 +3568,9 @@ footer p{
 
     <div class="total">
 
-      <span>Total</span>
+      <span>
+        Total
+      </span>
 
       <span id="totalCarrito">
         $0
@@ -3200,9 +3587,7 @@ footer p{
     </button>
 
 
-    <!-- =================================================
-         FORMULARIO
-    ================================================= -->
+    <!-- FORMULARIO -->
 
     <div
       class="formulario-pedido"
@@ -3416,6 +3801,7 @@ footer p{
 
 </div>
 
+
 <!-- =====================================================
      MODAL CAMARONES AL GUSTO
 ===================================================== -->
@@ -3456,7 +3842,7 @@ footer p{
     <div class="camarones-grid">
 
 
-      <!-- CAMARONES EMPANIZADOS -->
+      <!-- EMPANIZADOS -->
 
       <article class="camaron-card">
 
@@ -3497,8 +3883,7 @@ footer p{
       </article>
 
 
-
-      <!-- CAMARONES A LA DIABLA -->
+      <!-- DIABLA -->
 
       <article class="camaron-card">
 
@@ -3539,8 +3924,7 @@ footer p{
       </article>
 
 
-
-      <!-- CAMARONES CUCARACHA -->
+      <!-- CUCARACHA -->
 
       <article class="camaron-card">
 
@@ -3581,8 +3965,7 @@ footer p{
       </article>
 
 
-
-      <!-- CAMARONES AL AJILLO -->
+      <!-- AJILLO -->
 
       <article class="camaron-card">
 
@@ -3623,8 +4006,7 @@ footer p{
       </article>
 
 
-
-      <!-- CAMARONES AL AJO -->
+      <!-- AJO -->
 
       <article class="camaron-card">
 
@@ -3669,6 +4051,9 @@ footer p{
 
   </div>
 
+</div>
+
+
 <!-- =====================================================
      MODAL CHAROLAS
 ===================================================== -->
@@ -3680,11 +4065,14 @@ footer p{
 
   <div class="modal-charolas-contenido">
 
+
     <div class="modal-charolas-encabezado">
 
       <div>
 
-        <h2>🍤 Charolas Mar y Chelas</h2>
+        <h2>
+          🍤 Charolas Mar y Chelas
+        </h2>
 
         <p>
           Elige una de nuestras charolas mixtas
@@ -3692,6 +4080,7 @@ footer p{
         </p>
 
       </div>
+
 
       <button
         class="cerrar-charolas"
@@ -3706,7 +4095,7 @@ footer p{
     <div class="charolas-grid">
 
 
-      <!-- CHAROLA DE CAMARONES -->
+      <!-- CHAROLA CAMARONES -->
 
       <div class="charola-card">
 
@@ -3736,7 +4125,12 @@ footer p{
 
           <button
             class="btn-ordenar-charola"
-            onclick="ordenarCharola('Charola Mixta de Camarones',800)"
+            onclick="
+              ordenarCharola(
+                'Charola Mixta de Camarones',
+                800
+              )
+            "
           >
             ORDENAR
           </button>
@@ -3746,7 +4140,7 @@ footer p{
       </div>
 
 
-      <!-- CHAROLA DE CEVICHES -->
+      <!-- CHAROLA CEVICHES -->
 
       <div class="charola-card">
 
@@ -3776,7 +4170,12 @@ footer p{
 
           <button
             class="btn-ordenar-charola"
-            onclick="ordenarCharola('Charola Mixta de Ceviches',800)"
+            onclick="
+              ordenarCharola(
+                'Charola Mixta de Ceviches',
+                800
+              )
+            "
           >
             ORDENAR
           </button>
@@ -3786,7 +4185,7 @@ footer p{
       </div>
 
 
-      <!-- CHAROLA DE AGUACHILES -->
+      <!-- CHAROLA AGUACHILES -->
 
       <div class="charola-card">
 
@@ -3816,7 +4215,12 @@ footer p{
 
           <button
             class="btn-ordenar-charola"
-            onclick="ordenarCharola('Charola Mixta de Aguachiles',800)"
+            onclick="
+              ordenarCharola(
+                'Charola Mixta de Aguachiles',
+                800
+              )
+            "
           >
             ORDENAR
           </button>
@@ -3829,7 +4233,7 @@ footer p{
     </div>
 
 
-    <!-- ARMA TU PROPIA CHAROLA -->
+    <!-- ARMA TU CHAROLA -->
 
     <div class="charola-personalizada">
 
@@ -3844,12 +4248,16 @@ footer p{
       </p>
 
       <p>
+
         <strong>
           Precio base: $800
         </strong>
+
         <br>
+
         El precio final se confirma según
         los platillos seleccionados.
+
       </p>
 
       <button
@@ -3864,11 +4272,14 @@ footer p{
 
   </div>
 
-</div>     
+</div>
 
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
 <script>
-
 
 /* =========================================================
    CARRITO
@@ -3878,15 +4289,21 @@ let carrito = [];
 
 let tipoPedido = "";
 
+
 /* =========================================================
    CAMARONES AL GUSTO
 ========================================================= */
 
 function abrirCamarones(){
 
-  document
-    .getElementById("modalCamarones")
-    .classList.add("activo");
+  const modal =
+    document.getElementById("modalCamarones");
+
+  if(!modal){
+    return;
+  }
+
+  modal.classList.add("activo");
 
   document.body.style.overflow =
     "hidden";
@@ -3896,19 +4313,20 @@ function abrirCamarones(){
 
 function cerrarCamarones(){
 
-  document
-    .getElementById("modalCamarones")
-    .classList.remove("activo");
+  const modal =
+    document.getElementById("modalCamarones");
+
+  if(!modal){
+    return;
+  }
+
+  modal.classList.remove("activo");
 
   document.body.style.overflow =
     "";
 
 }
 
-
-/* =========================================================
-   ORDENAR CAMARÓN
-========================================================= */
 
 function ordenarCamaron(preparacion){
 
@@ -3921,6 +4339,7 @@ function ordenarCamaron(preparacion){
   cerrarCamarones();
 
 }
+
 
 /* =========================================================
    CHAROLAS
@@ -3937,6 +4356,9 @@ function abrirCharolas(){
 
   modal.classList.add("activo");
 
+  document.body.style.overflow =
+    "hidden";
+
 }
 
 
@@ -3951,12 +4373,13 @@ function cerrarCharolas(){
 
   modal.classList.remove("activo");
 
-  document.body.style.overflow = "";
+  document.body.style.overflow =
+    "";
 
 }
 
 
-function ordenarCharola(nombre, precio){
+function ordenarCharola(nombre,precio){
 
   agregar(
     nombre,
@@ -3968,17 +4391,37 @@ function ordenarCharola(nombre, precio){
 
 }
 
+
+/* =========================================================
+   ARMA TU CHAROLA
+========================================================= */
+
+function abrirCharolaPersonalizada(){
+
+  alert(
+    "La opción para armar tu propia charola estará disponible próximamente. Por ahora puedes elegir una de nuestras charolas mixtas."
+  );
+
+}
+
+
 /* =========================================================
    AGREGAR PRODUCTO
 ========================================================= */
 
-function agregar(nombre,precio,detalle=""){
+function agregar(
+  nombre,
+  precio,
+  detalle=""
+){
 
-  const existente = carrito.find(
-    item =>
-      item.nombre === nombre &&
-      item.detalle === detalle
-  );
+  const existente =
+    carrito.find(
+      item =>
+        item.nombre === nombre &&
+        item.detalle === detalle
+    );
+
 
   if(existente){
 
@@ -3997,6 +4440,7 @@ function agregar(nombre,precio,detalle=""){
 
   }
 
+
   actualizarCarrito();
 
   abrirCarrito();
@@ -4005,19 +4449,25 @@ function agregar(nombre,precio,detalle=""){
 
 
 /* =========================================================
-   ACTUALIZAR
+   ACTUALIZAR CARRITO
 ========================================================= */
 
 function actualizarCarrito(){
 
   const lista =
-    document.getElementById("listaCarrito");
+    document.getElementById(
+      "listaCarrito"
+    );
 
   const contador =
-    document.getElementById("contadorCarrito");
+    document.getElementById(
+      "contadorCarrito"
+    );
 
   const totalElemento =
-    document.getElementById("totalCarrito");
+    document.getElementById(
+      "totalCarrito"
+    );
 
 
   const totalItems =
@@ -4035,9 +4485,11 @@ function actualizarCarrito(){
   if(carrito.length === 0){
 
     lista.innerHTML =
-      `<div class="vacio">
+      `
+      <div class="vacio">
         Tu pedido está vacío.
-      </div>`;
+      </div>
+      `;
 
     totalElemento.textContent =
       "$0";
@@ -4051,51 +4503,66 @@ function actualizarCarrito(){
     carrito.map(
       (item,index) => `
 
-      <div class="item-carrito">
+        <div class="item-carrito">
 
-        <div>
+          <div>
 
-          <h3>
-            ${item.nombre}
-          </h3>
+            <h3>
+              ${item.nombre}
+            </h3>
 
-          ${
-            item.detalle
-            ? `<p>Preparación: ${item.detalle}</p>`
-            : ""
-          }
+            ${
+              item.detalle
+              ?
+              `<p>
+                Preparación:
+                ${item.detalle}
+              </p>`
+              :
+              ""
+            }
 
-          <p>
-            $${item.precio.toLocaleString("es-MX")}
-            c/u
-          </p>
+            <p>
+              $${item.precio.toLocaleString("es-MX")}
+              c/u
+            </p>
+
+          </div>
+
+
+          <div class="controles">
+
+            <button
+              onclick="
+                cambiarCantidad(
+                  ${index},
+                  -1
+                )
+              "
+            >
+              −
+            </button>
+
+            <span>
+              ${item.cantidad}
+            </span>
+
+            <button
+              onclick="
+                cambiarCantidad(
+                  ${index},
+                  1
+                )
+              "
+            >
+              +
+            </button>
+
+          </div>
 
         </div>
 
-
-        <div class="controles">
-
-          <button
-            onclick="cambiarCantidad(${index},-1)"
-          >
-            −
-          </button>
-
-          <span>
-            ${item.cantidad}
-          </span>
-
-          <button
-            onclick="cambiarCantidad(${index},1)"
-          >
-            +
-          </button>
-
-        </div>
-
-      </div>
-
-    `
+      `
     ).join("");
 
 
@@ -4117,18 +4584,29 @@ function actualizarCarrito(){
 
 
 /* =========================================================
-   CANTIDAD
+   CAMBIAR CANTIDAD
 ========================================================= */
 
-function cambiarCantidad(index,cambio){
+function cambiarCantidad(
+  index,
+  cambio
+){
 
-  carrito[index].cantidad += cambio;
+  carrito[index].cantidad +=
+    cambio;
 
-  if(carrito[index].cantidad <= 0){
 
-    carrito.splice(index,1);
+  if(
+    carrito[index].cantidad <= 0
+  ){
+
+    carrito.splice(
+      index,
+      1
+    );
 
   }
+
 
   actualizarCarrito();
 
@@ -4136,7 +4614,7 @@ function cambiarCantidad(index,cambio){
 
 
 /* =========================================================
-   ABRIR / CERRAR
+   ABRIR / CERRAR CARRITO
 ========================================================= */
 
 function abrirCarrito(){
@@ -4179,6 +4657,7 @@ function mostrarFormulario(){
 
   }
 
+
   document
     .getElementById("formularioPedido")
     .classList.add("activo");
@@ -4192,21 +4671,31 @@ function mostrarFormulario(){
 
 function seleccionarTipo(tipo){
 
-  tipoPedido = tipo;
+  tipoPedido =
+    tipo;
 
 
   document
-    .querySelectorAll(".tipo-pedido button")
-    .forEach(btn =>
-      btn.classList.remove("activo")
+    .querySelectorAll(
+      ".tipo-pedido button"
+    )
+    .forEach(
+      btn =>
+        btn.classList.remove(
+          "activo"
+        )
     );
 
 
   if(tipo === "domicilio"){
 
     document
-      .getElementById("btnDomicilio")
-      .classList.add("activo");
+      .getElementById(
+        "btnDomicilio"
+      )
+      .classList.add(
+        "activo"
+      );
 
   }
 
@@ -4214,8 +4703,12 @@ function seleccionarTipo(tipo){
   if(tipo === "restaurante"){
 
     document
-      .getElementById("btnRestaurante")
-      .classList.add("activo");
+      .getElementById(
+        "btnRestaurante"
+      )
+      .classList.add(
+        "activo"
+      );
 
   }
 
@@ -4223,30 +4716,52 @@ function seleccionarTipo(tipo){
   if(tipo === "recoger"){
 
     document
-      .getElementById("btnRecoger")
-      .classList.add("activo");
+      .getElementById(
+        "btnRecoger"
+      )
+      .classList.add(
+        "activo"
+      );
 
   }
 
 
   document
-    .getElementById("datosDomicilio")
-    .classList.add("oculto");
+    .getElementById(
+      "datosDomicilio"
+    )
+    .classList.add(
+      "oculto"
+    );
+
 
   document
-    .getElementById("datosRestaurante")
-    .classList.add("oculto");
+    .getElementById(
+      "datosRestaurante"
+    )
+    .classList.add(
+      "oculto"
+    );
+
 
   document
-    .getElementById("datosRecoger")
-    .classList.add("oculto");
+    .getElementById(
+      "datosRecoger"
+    )
+    .classList.add(
+      "oculto"
+    );
 
 
   if(tipo === "domicilio"){
 
     document
-      .getElementById("datosDomicilio")
-      .classList.remove("oculto");
+      .getElementById(
+        "datosDomicilio"
+      )
+      .classList.remove(
+        "oculto"
+      );
 
   }
 
@@ -4254,8 +4769,12 @@ function seleccionarTipo(tipo){
   if(tipo === "restaurante"){
 
     document
-      .getElementById("datosRestaurante")
-      .classList.remove("oculto");
+      .getElementById(
+        "datosRestaurante"
+      )
+      .classList.remove(
+        "oculto"
+      );
 
   }
 
@@ -4263,8 +4782,12 @@ function seleccionarTipo(tipo){
   if(tipo === "recoger"){
 
     document
-      .getElementById("datosRecoger")
-      .classList.remove("oculto");
+      .getElementById(
+        "datosRecoger"
+      )
+      .classList.remove(
+        "oculto"
+      );
 
   }
 
@@ -4290,26 +4813,37 @@ function enviarWhatsApp(){
 
   const nombre =
     document
-      .getElementById("clienteNombre")
-      .value.trim();
+      .getElementById(
+        "clienteNombre"
+      )
+      .value
+      .trim();
 
 
   const telefono =
     document
-      .getElementById("clienteTelefono")
-      .value.trim();
+      .getElementById(
+        "clienteTelefono"
+      )
+      .value
+      .trim();
 
 
   const pago =
     document
-      .getElementById("formaPago")
+      .getElementById(
+        "formaPago"
+      )
       .value;
 
 
   const observaciones =
     document
-      .getElementById("observaciones")
-      .value.trim();
+      .getElementById(
+        "observaciones"
+      )
+      .value
+      .trim();
 
 
   if(!nombre){
@@ -4359,6 +4893,7 @@ function enviarWhatsApp(){
   let mensaje =
     "🌊 *MAR Y CHELAS P.V.* 🌊\n";
 
+
   mensaje +=
     "🍤 *NUEVO PEDIDO*\n\n";
 
@@ -4375,18 +4910,26 @@ function enviarWhatsApp(){
     "\n";
 
 
+  /* DOMICILIO */
+
   if(tipoPedido === "domicilio"){
 
     const direccion =
       document
-        .getElementById("clienteDireccion")
-        .value.trim();
+        .getElementById(
+          "clienteDireccion"
+        )
+        .value
+        .trim();
 
 
     const referencia =
       document
-        .getElementById("clienteReferencia")
-        .value.trim();
+        .getElementById(
+          "clienteReferencia"
+        )
+        .value
+        .trim();
 
 
     if(!direccion){
@@ -4422,12 +4965,17 @@ function enviarWhatsApp(){
   }
 
 
+  /* RESTAURANTE */
+
   if(tipoPedido === "restaurante"){
 
     const mesa =
       document
-        .getElementById("numeroMesa")
-        .value.trim();
+        .getElementById(
+          "numeroMesa"
+        )
+        .value
+        .trim();
 
 
     mensaje +=
@@ -4446,11 +4994,15 @@ function enviarWhatsApp(){
   }
 
 
+  /* RECOGER */
+
   if(tipoPedido === "recoger"){
 
     const hora =
       document
-        .getElementById("horaRecoger")
+        .getElementById(
+          "horaRecoger"
+        )
         .value;
 
 
@@ -4549,7 +5101,9 @@ function enviarWhatsApp(){
     "https://wa.me/" +
     numero +
     "?text=" +
-    encodeURIComponent(mensaje);
+    encodeURIComponent(
+      mensaje
+    );
 
 
   window.open(
@@ -4569,11 +5123,15 @@ function irA(id){
   const elemento =
     document.getElementById(id);
 
+
   if(elemento){
 
     elemento.scrollIntoView({
+
       behavior:"smooth",
+
       block:"start"
+
     });
 
   }
@@ -4582,94 +5140,181 @@ function irA(id){
 
 
 /* =========================================================
-   SERVICE WORKER — ACTUALIZACIÓN AUTOMÁTICA
+   CERRAR MODALES AL TOCAR FONDO
 ========================================================= */
 
-if ("serviceWorker" in navigator) {
+document.addEventListener(
+  "click",
+  function(event){
 
-  window.addEventListener("load", async () => {
-
-    try {
-
-      const registro =
-        await navigator.serviceWorker.register(
-          "./service-worker.js",
-          {
-            updateViaCache: "none"
-          }
-        );
-
-      console.log(
-        "Mar y Chelas PWA activa:",
-        registro.scope
+    const modalCarrito =
+      document.getElementById(
+        "modalCarrito"
       );
 
-      /* Buscar actualizaciones inmediatamente */
-      await registro.update();
-
-      /* Si hay una nueva versión esperando */
-      if (registro.waiting) {
-
-        registro.waiting.postMessage({
-          type: "SKIP_WAITING"
-        });
-
-      }
-
-      registro.addEventListener(
-        "updatefound",
-        () => {
-
-          const nuevoWorker =
-            registro.installing;
-
-          if (!nuevoWorker) return;
-
-          nuevoWorker.addEventListener(
-            "statechange",
-            () => {
-
-              if (
-                nuevoWorker.state === "installed" &&
-                navigator.serviceWorker.controller
-              ) {
-
-                nuevoWorker.postMessage({
-                  type: "SKIP_WAITING"
-                });
-
-              }
-
-            }
-          );
-
-        }
+    const modalCamarones =
+      document.getElementById(
+        "modalCamarones"
       );
 
-    } catch (error) {
-
-      console.error(
-        "Error PWA:",
-        error
+    const modalCharolas =
+      document.getElementById(
+        "modalCharolas"
       );
+
+
+    if(
+      event.target ===
+      modalCarrito
+    ){
+
+      cerrarCarrito();
 
     }
 
-  });
+
+    if(
+      event.target ===
+      modalCamarones
+    ){
+
+      cerrarCamarones();
+
+    }
 
 
-  /* Recargar una sola vez cuando entra
-     el nuevo Service Worker */
+    if(
+      event.target ===
+      modalCharolas
+    ){
 
-  let recargando = false;
+      cerrarCharolas();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SERVICE WORKER
+========================================================= */
+
+if(
+  "serviceWorker"
+  in navigator
+){
+
+  window.addEventListener(
+    "load",
+    async () => {
+
+      try{
+
+        const registro =
+          await navigator.serviceWorker.register(
+            "./service-worker.js",
+            {
+              updateViaCache:
+                "none"
+            }
+          );
+
+
+        console.log(
+          "Mar y Chelas PWA activa:",
+          registro.scope
+        );
+
+
+        await registro.update();
+
+
+        if(
+          registro.waiting
+        ){
+
+          registro.waiting.postMessage({
+
+            type:
+              "SKIP_WAITING"
+
+          });
+
+        }
+
+
+        registro.addEventListener(
+          "updatefound",
+          () => {
+
+            const nuevoWorker =
+              registro.installing;
+
+
+            if(!nuevoWorker){
+
+              return;
+
+            }
+
+
+            nuevoWorker.addEventListener(
+              "statechange",
+              () => {
+
+                if(
+                  nuevoWorker.state ===
+                    "installed" &&
+                  navigator.serviceWorker.controller
+                ){
+
+                  nuevoWorker.postMessage({
+
+                    type:
+                      "SKIP_WAITING"
+
+                  });
+
+                }
+
+              }
+            );
+
+          }
+        );
+
+      }catch(error){
+
+        console.error(
+          "Error PWA:",
+          error
+        );
+
+      }
+
+    }
+  );
+
+
+  let recargando =
+    false;
+
 
   navigator.serviceWorker.addEventListener(
     "controllerchange",
     () => {
 
-      if (recargando) return;
+      if(recargando){
 
-      recargando = true;
+        return;
+
+      }
+
+
+      recargando =
+        true;
+
 
       window.location.reload();
 
@@ -4678,43 +5323,63 @@ if ("serviceWorker" in navigator) {
 
 }
 
+
+/* =========================================================
+   FIN JAVASCRIPT
+========================================================= */
+
 </script>
 
 
 <!-- =====================================================
-     MÚSICA
+     MUSICA
 ===================================================== -->
 
 <script>
 
 const musicaMarYChelas =
-  document.getElementById("musicaMarYChelas");
+  document.getElementById(
+    "musicaMarYChelas"
+  );
+
 
 const botonMusica =
-  document.getElementById("botonMusica");
+  document.getElementById(
+    "botonMusica"
+  );
 
 
 function alternarMusica(){
 
-  if(musicaMarYChelas.paused){
+  if(
+    musicaMarYChelas.paused
+  ){
 
-    musicaMarYChelas.play()
-      .then(() => {
+    musicaMarYChelas
+      .play()
+      .then(
+        () => {
 
-        botonMusica.textContent = "🔊";
+          botonMusica.textContent =
+            "🔊";
 
-      })
-      .catch(() => {
+        }
+      )
+      .catch(
+        () => {
 
-        botonMusica.textContent = "🔇";
+          botonMusica.textContent =
+            "🔇";
 
-      });
+        }
+      );
 
   }else{
 
     musicaMarYChelas.pause();
 
-    botonMusica.textContent = "🔇";
+    botonMusica.textContent =
+      "🔇";
 
   }
 
