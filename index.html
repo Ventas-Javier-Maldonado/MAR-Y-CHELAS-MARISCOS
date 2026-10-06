@@ -3811,7 +3811,6 @@ footer p{
         Elige tus platillos favoritos y crea
         una charola a tu gusto.
         Mínimo 2 platillos.
-        También puedes solicitarla caliente.
       </p>
 
       <p>
@@ -3903,14 +3902,8 @@ function abrirCharolas(){
     document.getElementById("modalCharolas");
 
   if(!modal){
-
-    alert("NO ENCUENTRO modalCharolas");
-
     return;
-
   }
-
-  alert("SI ENCUENTRO modalCharolas");
 
   modal.classList.add("activo");
 
@@ -3923,9 +3916,7 @@ function cerrarCharolas(){
     document.getElementById("modalCharolas");
 
   if(!modal){
-
     return;
-
   }
 
   modal.classList.remove("activo");
@@ -3945,8 +3936,7 @@ function ordenarCharola(nombre, precio){
 
   cerrarCharolas();
 
-}  
-
+}
 
 /* =========================================================
    AGREGAR PRODUCTO
