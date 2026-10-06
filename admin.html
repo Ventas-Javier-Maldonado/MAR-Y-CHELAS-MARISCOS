@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
+
+<meta
+name="theme-color"
+content="#06452f"
+
+>
+
+<title>
+  Administrador | Mar y Chelas P.V.
+</title>
+
+<style>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root{
+
+  --verde:#06452f;
+  --verde2:#0b6847;
+  --verde3:#123f30;
+
+  --crema:#f1e5ca;
+  --crema2:#fff7e6;
+
+  --amarillo:#d8c52b;
+  --amarillo2:#f1df55;
+
+  --negro:#101714;
+  --blanco:#ffffff;
+
+  --gris:#59645e;
+  --rojo:#b42318;
+
+  --sombra:
+    0 18px 50px rgba(0,0,0,.18);
+
+}
+
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+
+  margin:0;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  background:
+    linear-gradient(
+      rgba(6,69,47,.96),
+      rgba(18,63,48,.98)
+    );
+
+  color:var(--negro);
+
+  min-height:100vh;
+
+}
+
+
+/* =========================================================
+   CONTENEDOR
+========================================================= */
+
+.admin{
+
+  width:100%;
+
+  max-width:1100px;
+
+  margin:auto;
+
+  padding:20px;
+
+}
+
+
+/* =========================================================
+   ENCABEZADO
+========================================================= */
+
+.encabezado{
+
+  background:var(--crema2);
+
+  border-radius:20px;
+
+  padding:22px;
+
+  margin-bottom:20px;
+
+  box-shadow:var(--sombra);
+
+  text-align:center;
+
+}
+
+.encabezado h1{
+
+  margin:0;
+
+  color:var(--verde);
+
+  font-family:Georgia,serif;
+
+  font-size:30px;
+
+}
+
+.encabezado p{
+
+  margin:8px 0 0;
+
+  color:var(--gris);
+
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.panel{
+
+  background:var(--crema2);
+
+  border-radius:20px;
+
+  padding:22px;
+
+  margin-bottom:20px;
+
+  box-shadow:var(--sombra);
+
+}
+
+.panel h2{
+
+  margin-top:0;
+
+  color:var(--verde);
+
+  font-family:Georgia,serif;
+
+}
+
+
+/* =========================================================
+   CAMPOS
+========================================================= */
+
+.campo{
+
+  margin-bottom:16px;
+
+}
+
+.campo label{
+
+  display:block;
+
+  margin-bottom:7px;
+
+  color:var(--verde);
+
+  font-weight:bold;
+
+}
+
+.campo input,
+.campo select,
+.campo textarea{
+
+  width:100%;
+
+  border:1px solid
+    rgba(6,69,47,.25);
+
+  border-radius:12px;
+
+  padding:13px;
+
+  font-size:15px;
+
+  background:white;
+
+  color:var(--negro);
+
+}
+
+.campo textarea{
+
+  min-height:100px;
+
+  resize:vertical;
+
+}
+
+.contador{
+
+  display:block;
+
+  margin-top:5px;
+
+  text-align:right;
+
+  font-size:12px;
+
+  color:var(--gris);
+
+}
+
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+.botones{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:12px;
+
+  margin-top:18px;
+
+}
+
+button{
+
+  border:none;
+
+  border-radius:14px;
+
+  padding:14px 16px;
+
+  font-size:14px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+}
+
+.btn-principal{
+
+  background:var(--verde);
+
+  color:white;
+
+}
+
+.btn-secundario{
+
+  background:var(--amarillo);
+
+  color:#171717;
+
+}
+
+.btn-peligro{
+
+  background:var(--rojo);
+
+  color:white;
+
+}
+
+.btn-gris{
+
+  background:#d8ddd9;
+
+  color:#18211d;
+
+}
+
+
+/* =========================================================
+   LISTA DE PLATILLOS
+========================================================= */
+
+.lista{
+
+  display:grid;
+
+  gap:10px;
+
+}
+
+.platillo{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  background:white;
+
+  border:1px solid
+    rgba(6,69,47,.15);
+
+  border-radius:14px;
+
+  padding:13px;
+
+}
+
+.platillo-info{
+
+  min-width:0;
+
+}
+
+.platillo-info strong{
+
+  display:block;
+
+  color:var(--verde);
+
+  font-size:16px;
+
+}
+
+.platillo-info span{
+
+  display:block;
+
+  margin-top:4px;
+
+  color:var(--gris);
+
+  font-size:13px;
+
+}
+
+.platillo button{
+
+  flex-shrink:0;
+
+  background:var(--verde);
+
+  color:white;
+
+  padding:10px 13px;
+
+}
+
+
+/* =========================================================
+   FOTO
+========================================================= */
+
+.foto-actual{
+
+  width:100%;
+
+  max-width:300px;
+
+  height:190px;
+
+  margin:10px auto 18px;
+
+  border-radius:16px;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--verde),
+      var(--verde3)
+    );
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+}
+
+.foto-actual img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+}
+
+.sin-foto{
+
+  color:white;
+
+  font-weight:bold;
+
+}
+
+
+/* =========================================================
+   VISTA PREVIA
+========================================================= */
+
+.preview{
+
+  margin-top:20px;
+
+}
+
+.preview h3{
+
+  color:var(--verde);
+
+  margin-bottom:12px;
+
+}
+
+
+/* Tarjeta similar al menú real */
+
+.producto-preview{
+
+  max-width:500px;
+
+  margin:auto;
+
+  background:
+    linear-gradient(
+      rgba(255,250,237,.96),
+      rgba(239,225,194,.96)
+    );
+
+  border:1px solid
+    rgba(6,69,47,.22);
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.18);
+
+}
+
+.producto-preview-foto{
+
+  height:230px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(6,69,47,.95),
+      rgba(18,63,48,.90)
+    );
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  overflow:hidden;
+
+}
+
+.producto-preview-foto img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+}
+
+.producto-preview-contenido{
+
+  padding:18px;
+
+}
+
+.producto-preview h4{
+
+  font-family:Georgia,serif;
+
+  font-size:23px;
+
+  line-height:1.1;
+
+  color:var(--verde);
+
+  margin:
+    0 0 8px;
+
+}
+
+.producto-preview-descripcion{
+
+  color:#3d4b44;
+
+  font-size:14px;
+
+  line-height:1.5;
+
+  margin-bottom:10px;
+
+}
+
+.producto-preview-precio{
+
+  color:#111;
+
+  font-size:25px;
+
+  font-weight:900;
+
+  margin-bottom:13px;
+
+}
+
+.preview-boton{
+
+  width:100%;
+
+  background:var(--verde);
+
+  color:white;
+
+}
+
+
+/* =========================================================
+   MENSAJE
+========================================================= */
+
+.mensaje{
+
+  display:none;
+
+  background:#e4f5ec;
+
+  color:var(--verde);
+
+  border:1px solid
+    rgba(6,69,47,.2);
+
+  border-radius:12px;
+
+  padding:13px;
+
+  margin-bottom:15px;
+
+  font-weight:bold;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:700px){
+
+  .admin{
+
+    padding:12px;
+
+  }
+
+  .encabezado h1{
+
+    font-size:25px;
+
+  }
+
+  .panel{
+
+    padding:17px;
+
+  }
+
+  .botones{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .platillo{
+
+    align-items:flex-start;
+
+  }
+
+  .platillo button{
+
+    padding:9px 10px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="admin">
+
+  <!-- =====================================================
+       ENCABEZADO
+  ====================================================== -->
+
+  <header class="encabezado">
+
+```
+<h1>
+  🦐 Mar y Chelas P.V.
+</h1>
+
+<p>
+  Administrador de menú
+</p>
+```
+
+  </header>
+
+  <div
+    class="mensaje"
+    id="mensaje"
+  ></div>
+
+  <!-- =====================================================
+       SELECCIONAR SECCIÓN
+  ====================================================== -->
+
+  <section class="panel">
+
+```
+<h2>
+  1. Seleccionar sección
+</h2>
+
+<div class="campo">
+
+  <label for="seccion">
+
+    Sección del menú
+
+  </label>
+
+  <select
+    id="seccion"
+    onchange="mostrarSeccion()"
+  >
+
+    <option value="">
+      Seleccionar sección
+    </option>
+
+    <option value="entradas">
+      Entradas
+    </option>
+
+    <option value="ceviches">
+      Ceviches
+    </option>
+
+    <option value="calientes">
+      Platillos calientes
+    </option>
+
+    <option value="aguachiles">
+      Aguachiles
+    </option>
+
+    <option value="tostadas">
+      Tostadas
+    </option>
+
+    <option value="charolas">
+      Charolas
+    </option>
+
+    <option value="extras">
+      Extras
+    </option>
+
+    <option value="bebidas">
+      Bebidas
+    </option>
+
+  </select>
+
+</div>
+```
+
+  </section>
+
+  <!-- =====================================================
+       LISTA
+  ====================================================== -->
+
+  <section
+    class="panel"
+    id="panelLista"
+    style="display:none;"
+  >
+
+```
+<h2>
+  2. Platillos de la sección
+</h2>
+
+<div
+  class="lista"
+  id="listaPlatillos"
+></div>
+
+<div class="botones">
+
+  <button
+    class="btn-secundario"
+    onclick="nuevoPlatillo()"
+  >
+    ＋ AGREGAR PLATILLO
+  </button>
+
+  <button
+    class="btn-gris"
+    onclick="limpiarSeleccion()"
+  >
+    CAMBIAR SECCIÓN
+  </button>
+
+</div>
+```
+
+  </section>
+
+  <!-- =====================================================
+       EDITAR / AGREGAR
+  ====================================================== -->
+
+  <section
+    class="panel"
+    id="panelEdicion"
+    style="display:none;"
+  >
+
+```
+<h2 id="tituloEdicion">
+  3. Editar platillo
+</h2>
+
+
+<div class="campo">
+
+  <label for="nombre">
+    Nombre del platillo
+  </label>
+
+  <input
+    id="nombre"
+    type="text"
+    maxlength="80"
+    placeholder="Nombre del platillo"
+  >
+
+</div>
+
+
+<div class="campo">
+
+  <label for="precio">
+    Precio
+  </label>
+
+  <input
+    id="precio"
+    type="number"
+    min="0"
+    step="1"
+    placeholder="Ej. 250"
+  >
+
+</div>
+
+
+<div class="campo">
+
+  <label for="descripcion">
+    Descripción / promoción
+  </label>
+
+  <textarea
+    id="descripcion"
+    maxlength="50"
+    placeholder="Máximo 50 caracteres"
+    oninput="actualizarContador()"
+  ></textarea>
+
+  <span
+    class="contador"
+    id="contador"
+  >
+    0 / 50
+  </span>
+
+</div>
+
+
+<div class="campo">
+
+  <label for="foto">
+    Nueva fotografía
+  </label>
+
+  <input
+    id="foto"
+    type="file"
+    accept="image/*"
+    onchange="cargarFoto(event)"
+  >
+
+</div>
+
+
+<div>
+
+  <label style="
+    display:block;
+    color:var(--verde);
+    font-weight:bold;
+    margin-bottom:7px;
+  ">
+    Fotografía actual
+  </label>
+
+  <div
+    class="foto-actual"
+    id="fotoActual"
+  >
+
+    <span class="sin-foto">
+      Sin fotografía
+    </span>
+
+  </div>
+
+</div>
+
+
+<div class="botones">
+
+  <button
+    class="btn-secundario"
+    onclick="guardarCambios()"
+  >
+    GUARDAR CAMBIOS
+  </button>
+
+  <button
+    class="btn-principal"
+    onclick="mostrarPreview()"
+  >
+    VISTA PREVIA
+  </button>
+
+</div>
+
+
+<div
+  class="botones"
+  style="margin-top:10px;"
+>
+
+  <button
+    class="btn-peligro"
+    onclick="eliminarPlatillo()"
+  >
+    ELIMINAR PLATILLO
+  </button>
+
+  <button
+    class="btn-gris"
+    onclick="cancelarEdicion()"
+  >
+    CANCELAR
+  </button>
+
+</div>
+
+
+<!-- ===================================================
+     PREVIEW
+==================================================== -->
+
+<div
+  class="preview"
+  id="preview"
+  style="display:none;"
+>
+
+  <h3>
+    REVISAR SECCIÓN
+  </h3>
+
+  <div
+    id="previewProducto"
+  ></div>
+
+  <div class="botones">
+
+    <button
+      class="btn-principal"
+      onclick="aceptarCambios()"
+    >
+      ACEPTAR Y GUARDAR
+    </button>
+
+  </div>
+
+</div>
+```
+
+  </section>
+
+</div>
+
+<script>
+
+/* =========================================================
+   DATOS INICIALES
+   PROVISIONALES — SE CONECTARÁN AL MENÚ REAL
+========================================================= */
+
+let platillos = [
+
+  {
+    id:1,
+    seccion:"entradas",
+    nombre:"Láminas de atún",
+    precio:280,
+    descripcion:
+      "Atún fresco preparado para comenzar.",
+    foto:"images/01-laminas-de-atun.jpg"
+  },
+
+  {
+    id:2,
+    seccion:"ceviches",
+    nombre:"Atún tropical",
+    precio:250,
+    descripcion:"",
+    foto:"images/02-atun-tropical.jpg"
+  },
+
+  {
+    id:3,
+    seccion:"ceviches",
+    nombre:"Bota estilo acapulqueño",
+    precio:250,
+    descripcion:"",
+    foto:"images/03-bota-estilo-acapulqueno.jpg"
+  },
+
+  {
+    id:4,
+    seccion:"ceviches",
+    nombre:"Camarón",
+    precio:250,
+    descripcion:"",
+    foto:"images/04-ceviche-camaron.jpg"
+  },
+
+  {
+    id:5,
+    seccion:"ceviches",
+    nombre:"Vallarta",
+    precio:180,
+    descripcion:"",
+    foto:"images/05-ceviche-vallarta.jpg"
+  },
+
+  {
+    id:6,
+    seccion:"ceviches",
+    nombre:"Ensalada de mariscos",
+    precio:280,
+    descripcion:"",
+    foto:"images/06-ensalada-de-mariscos.jpg"
+  },
+
+  {
+    id:7,
+    seccion:"calientes",
+    nombre:"Cóctel de camarón",
+    precio:250,
+    descripcion:"",
+    foto:"images/07-coctel-de-camaron.jpg"
+  },
+
+  {
+    id:8,
+    seccion:"calientes",
+    nombre:"Cóctel mixto camarón y pulpo",
+    precio:280,
+    descripcion:"",
+    foto:"images/08-coctel-mixto-camaron-pulpo.jpg"
+  },
+
+  {
+    id:9,
+    seccion:"aguachiles",
+    nombre:"Aguachile Verde",
+    precio:250,
+    descripcion:"",
+    foto:"images/10-aguachile-verde.jpg"
+  },
+
+  {
+    id:10,
+    seccion:"aguachiles",
+    nombre:"Aguachile Rojo",
+    precio:250,
+    descripcion:"",
+    foto:"images/11-aguachile-rojo.jpg"
+  },
+
+  {
+    id:11,
+    seccion:"aguachiles",
+    nombre:"Aguachile Negro",
+    precio:250,
+    descripcion:"",
+    foto:"images/12-aguachile-negro.jpg"
+  },
+
+  {
+    id:12,
+    seccion:"tostadas",
+    nombre:"Tostada de ceviche camarón",
+    precio:75,
+    descripcion:"",
+    foto:"images/13-tostada-ceviche-camaron.jpg"
+  },
+
+  {
+    id:13,
+    seccion:"tostadas",
+    nombre:"Atún",
+    precio:85,
+    descripcion:"",
+    foto:"images/14-tostada-atun.jpg"
+  },
+
+  {
+    id:14,
+    seccion:"tostadas",
+    nombre:"Aguachiles",
+    precio:85,
+    descripcion:"",
+    foto:"images/15-tostada-aguachiles.jpg"
+  },
+
+  {
+    id:15,
+    seccion:"tostadas",
+    nombre:"Ceviche Vallarta",
+    precio:55,
+    descripcion:"",
+    foto:"images/16-tostada-ceviche-vallarta.jpg"
+  },
+
+  {
+    id:16,
+    seccion:"tostadas",
+    nombre:"Ceviche cuadro tipo acapulqueño",
+    precio:75,
+    descripcion:"",
+    foto:"images/17-tostada-ceviche-cuadro-acapulqueno.jpg"
+  },
+
+  {
+    id:17,
+    seccion:"extras",
+    nombre:"Arroz",
+    precio:50,
+    descripcion:"",
+    foto:""
+  },
+
+  {
+    id:18,
+    seccion:"extras",
+    nombre:"Salsa aguachile",
+    precio:20,
+    descripcion:"",
+    foto:""
+  },
+
+  {
+    id:19,
+    seccion:"extras",
+    nombre:"Salsa ajillo, diabla",
+    precio:50,
+    descripcion:"",
+    foto:""
+  },
+
+  {
+    id:20,
+    seccion:"extras",
+    nombre:"Aderezo",
+    precio:30,
+    descripcion:"",
+    foto:""
+  },
+
+  {
+    id:21,
+    seccion:"extras",
+    nombre:"Guacamole",
+    precio:125,
+    descripcion:"",
+    foto:""
+  },
+
+  {
+    id:22,
+    seccion:"bebidas",
+    nombre:"Agua del día — Chica",
+    precio:35,
+    descripcion:"",
+    foto:""
+  },
+
+  {
+    id:23,
+    seccion:"bebidas",
+    nombre:"Agua del día — Grande",
+    precio:65,
+    descripcion:"",
+    foto:""
+  },
+
+  {
+    id:24,
+    seccion:"bebidas",
+    nombre:"Refresco Coca-Cola",
+    precio:40,
+    descripcion:"",
+    foto:""
+  },
+
+  {
+    id:25,
+    seccion:"bebidas",
+    nombre:"Naranjada",
+    precio:60,
+    descripcion:"",
+    foto:""
+  },
+
+  {
+    id:26,
+    seccion:"bebidas",
+    nombre:"Limonada",
+    precio:60,
+    descripcion:"",
+    foto:""
+  },
+
+  {
+    id:27,
+    seccion:"bebidas",
+    nombre:"Rusa",
+    precio:60,
+    descripcion:"",
+    foto:""
+  },
+
+  {
+    id:28,
+    seccion:"bebidas",
+    nombre:"Agua embotellada",
+    precio:25,
+    descripcion:"",
+    foto:""
+  }
+
+];
+
+
+let productoActual = null;
+
+let productoNuevo = false;
+
+let fotoTemporal = "";
+
+
+/* =========================================================
+   MOSTRAR SECCIÓN
+========================================================= */
+
+function mostrarSeccion(){
+
+  const seccion =
+    document.getElementById("seccion").value;
+
+  const panelLista =
+    document.getElementById("panelLista");
+
+  const lista =
+    document.getElementById("listaPlatillos");
+
+
+  if(!seccion){
+
+    panelLista.style.display = "none";
+
+    document.getElementById("panelEdicion")
+      .style.display = "none";
+
+    return;
+
+  }
+
+
+  const productos =
+    platillos.filter(
+      producto =>
+        producto.seccion === seccion
+    );
+
+
+  lista.innerHTML = "";
+
+
+  if(productos.length === 0){
+
+    lista.innerHTML = `
+      <div class="platillo">
+        <div class="platillo-info">
+          <strong>
+            No hay platillos registrados
+          </strong>
+          <span>
+            Puedes agregar uno nuevo.
+          </span>
+        </div>
+      </div>
+    `;
+
+  }else{
+
+    productos.forEach(producto => {
+
+      lista.innerHTML += `
+
+        <div class="platillo">
+
+          <div class="platillo-info">
+
+            <strong>
+              ${producto.nombre}
+            </strong>
+
+            <span>
+              $${Number(producto.precio)
+                .toLocaleString("es-MX")}
+            </span>
+
+          </div>
+
+          <button
+            onclick="editarPlatillo(${producto.id})"
+          >
+            EDITAR
+          </button>
+
+        </div>
+
+      `;
+
+    });
+
+  }
+
+
+  panelLista.style.display = "block";
+
+  document.getElementById("panelEdicion")
+    .style.display = "none";
+
+}
+
+
+/* =========================================================
+   EDITAR
+========================================================= */
+
+function editarPlatillo(id){
+
+  const producto =
+    platillos.find(
+      item => item.id === id
+    );
+
+
+  if(!producto) return;
+
+
+  productoActual = producto;
+
+  productoNuevo = false;
+
+  fotoTemporal =
+    producto.foto || "";
+
+
+  document.getElementById("tituloEdicion")
+    .textContent =
+      "3. Editar platillo";
+
+
+  document.getElementById("nombre")
+    .value =
+      producto.nombre;
+
+
+  document.getElementById("precio")
+    .value =
+      producto.precio;
+
+
+  document.getElementById("descripcion")
+    .value =
+      producto.descripcion || "";
+
+
+  actualizarContador();
+
+  mostrarFotoActual();
+
+
+  document.getElementById("panelEdicion")
+    .style.display = "block";
+
+
+  document.getElementById("preview")
+    .style.display = "none";
+
+
+  window.scrollTo({
+    top:
+      document.getElementById("panelEdicion")
+        .offsetTop - 10,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   NUEVO PLATILLO
+========================================================= */
+
+function nuevoPlatillo(){
+
+  const seccion =
+    document.getElementById("seccion").value;
+
+
+  if(!seccion){
+
+    alert(
+      "Primero selecciona una sección."
+    );
+
+    return;
+
+  }
+
+
+  productoActual = null;
+
+  productoNuevo = true;
+
+  fotoTemporal = "";
+
+
+  document.getElementById("tituloEdicion")
+    .textContent =
+      "3. Agregar nuevo platillo";
+
+
+  document.getElementById("nombre")
+    .value = "";
+
+
+  document.getElementById("precio")
+    .value = "";
+
+
+  document.getElementById("descripcion")
+    .value = "";
+
+
+  document.getElementById("foto")
+    .value = "";
+
+
+  actualizarContador();
+
+  mostrarFotoActual();
+
+
+  document.getElementById("panelEdicion")
+    .style.display = "block";
+
+
+  document.getElementById("preview")
+    .style.display = "none";
+
+
+  window.scrollTo({
+    top:
+      document.getElementById("panelEdicion")
+        .offsetTop - 10,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   FOTO
+========================================================= */
+
+function cargarFoto(event){
+
+  const archivo =
+    event.target.files[0];
+
+
+  if(!archivo) return;
+
+
+  const lector =
+    new FileReader();
+
+
+  lector.onload = function(e){
+
+    fotoTemporal =
+      e.target.result;
+
+
+    mostrarFotoActual();
+
+    mostrarPreview();
+
+  };
+
+
+  lector.readAsDataURL(archivo);
+
+}
+
+
+/* =========================================================
+   MOSTRAR FOTO
+========================================================= */
+
+function mostrarFotoActual(){
+
+  const contenedor =
+    document.getElementById("fotoActual");
+
+
+  if(!fotoTemporal){
+
+    contenedor.innerHTML = `
+      <span class="sin-foto">
+        Sin fotografía
+      </span>
+    `;
+
+    return;
+
+  }
+
+
+  contenedor.innerHTML = `
+
+    <img
+      src="${fotoTemporal}"
+      alt="Fotografía del platillo"
+    >
+
+  `;
+
+}
+
+
+/* =========================================================
+   CONTADOR
+========================================================= */
+
+function actualizarContador(){
+
+  const campo =
+    document.getElementById("descripcion");
+
+  const contador =
+    document.getElementById("contador");
+
+
+  contador.textContent =
+    campo.value.length +
+    " / 50";
+
+}
+
+
+/* =========================================================
+   GUARDAR CAMBIOS
+========================================================= */
+
+function guardarCambios(){
+
+  const nombre =
+    document.getElementById("nombre")
+      .value.trim();
+
+
+  const precio =
+    Number(
+      document.getElementById("precio")
+        .value
+    );
+
+
+  const descripcion =
+    document.getElementById("descripcion")
+      .value.trim();
+
+
+  const seccion =
+    document.getElementById("seccion")
+      .value;
+
+
+  if(!seccion){
+
+    alert(
+      "Selecciona una sección."
+    );
+
+    return;
+
+  }
+
+
+  if(!nombre){
+
+    alert(
+      "Escribe el nombre del platillo."
+    );
+
+    return;
+
+  }
+
+
+  if(!precio || precio < 0){
+
+    alert(
+      "Escribe un precio válido."
+    );
+
+    return;
+
+  }
+
+
+  if(productoNuevo){
+
+    const nuevo = {
+
+      id:
+        Date.now(),
+
+      seccion,
+
+      nombre,
+
+      precio,
+
+      descripcion,
+
+      foto:
+        fotoTemporal
+
+    };
+
+
+    platillos.push(nuevo);
+
+    productoActual = nuevo;
+
+    productoNuevo = false;
+
+
+    mostrarMensaje(
+      "Platillo agregado correctamente."
+    );
+
+  }else{
+
+    if(!productoActual){
+
+      alert(
+        "Selecciona un platillo."
+      );
+
+      return;
+
+    }
+
+
+    productoActual.nombre =
+      nombre;
+
+    productoActual.precio =
+      precio;
+
+    productoActual.descripcion =
+      descripcion;
+
+    productoActual.foto =
+      fotoTemporal;
+
+
+    mostrarMensaje(
+      "Cambios guardados correctamente."
+    );
+
+  }
+
+
+  mostrarSeccion();
+
+  editarPlatillo(
+    productoActual.id
+  );
+
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function mostrarPreview(){
+
+  const nombre =
+    document.getElementById("nombre")
+      .value.trim();
+
+
+  const precio =
+    Number(
+      document.getElementById("precio")
+        .value
+    );
+
+
+  const descripcion =
+    document.getElementById("descripcion")
+      .value.trim();
+
+
+  if(!nombre){
+
+    alert(
+      "Escribe el nombre del platillo."
+    );
+
+    return;
+
+  }
+
+
+  if(!precio || precio < 0){
+
+    alert(
+      "Escribe un precio válido."
+    );
+
+    return;
+
+  }
+
+
+  const foto =
+    fotoTemporal;
+
+
+  const preview =
+    document.getElementById("previewProducto");
+
+
+  preview.innerHTML = `
+
+    <div class="producto-preview">
+
+      <div class="producto-preview-foto">
+
+        ${
+          foto
+          ?
+          `<img
+             src="${foto}"
+             alt="${nombre}"
+           >`
+          :
+          `<span style="
+             color:white;
+             font-weight:bold;
+           ">
+             SIN FOTOGRAFÍA
+           </span>`
+        }
+
+      </div>
+
+      <div class="producto-preview-contenido">
+
+        <h4>
+          ${nombre}
+        </h4>
+
+        ${
+          descripcion
+          ?
+          `<p class="producto-preview-descripcion">
+             ${descripcion}
+           </p>`
+          :
+          ""
+        }
+
+        <div class="producto-preview-precio">
+          $${precio.toLocaleString("es-MX")}
+        </div>
+
+        <button
+          class="preview-boton"
+        >
+          🛒 Agregar al pedido
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document.getElementById("preview")
+    .style.display = "block";
+
+
+  document.getElementById("preview")
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+}
+
+
+/* =========================================================
+   ACEPTAR
+========================================================= */
+
+function aceptarCambios(){
+
+  guardarCambios();
+
+  document.getElementById("preview")
+    .style.display = "none";
+
+}
+
+
+/* =========================================================
+   ELIMINAR
+========================================================= */
+
+function eliminarPlatillo(){
+
+  if(!productoActual){
+
+    alert(
+      "Primero selecciona un platillo."
+    );
+
+    return;
+
+  }
+
+
+  const confirmar =
+    confirm(
+      "¿Seguro que deseas eliminar este platillo?"
+    );
+
+
+  if(!confirmar) return;
+
+
+  platillos =
+    platillos.filter(
+      producto =>
+        producto.id !==
+        productoActual.id
+    );
+
+
+  productoActual = null;
+
+
+  document.getElementById("panelEdicion")
+    .style.display = "none";
+
+
+  mostrarSeccion();
+
+
+  mostrarMensaje(
+    "Platillo eliminado correctamente."
+  );
+
+}
+
+
+/* =========================================================
+   CANCELAR
+========================================================= */
+
+function cancelarEdicion(){
+
+  productoActual = null;
+
+  productoNuevo = false;
+
+  fotoTemporal = "";
+
+
+  document.getElementById("panelEdicion")
+    .style.display = "none";
+
+}
+
+
+/* =========================================================
+   CAMBIAR SECCIÓN
+========================================================= */
+
+function limpiarSeleccion(){
+
+  document.getElementById("seccion")
+    .value = "";
+
+  document.getElementById("panelLista")
+    .style.display = "none";
+
+  document.getElementById("panelEdicion")
+    .style.display = "none";
+
+}
+
+
+/* =========================================================
+   MENSAJE
+========================================================= */
+
+function mostrarMensaje(texto){
+
+  const mensaje =
+    document.getElementById("mensaje");
+
+
+  mensaje.textContent =
+    texto;
+
+
+  mensaje.style.display =
+    "block";
+
+
+  setTimeout(() => {
+
+    mensaje.style.display =
+      "none";
+
+  },3000);
+
+}
+
+</script>
+
+</body>
+
+</html>
