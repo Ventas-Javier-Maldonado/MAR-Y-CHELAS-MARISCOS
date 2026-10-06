@@ -3297,33 +3297,25 @@ footer p{
         🔥 Charola Caliente — desde $800
       </h3>
 
-      <p>
-        Incluye dos preparaciones a escoger dentro de la charola.
-        Charola Chica para 5 personas.
-      </p>
+     <p>
+  Arma tu charola a tu gusto. Puedes combinar 4, 5 o más
+  platillos, incluyendo preparaciones frías y calientes.
+  Charola Chica para 5 personas.
+</p>
 
-      <div class="charola-caliente-selectores">
+     <div class="charola-caliente-personalizada">
 
-        <select id="calienteUno">
-          <option value="">Primera preparación</option>
-          <option value="Ajo">Camarones al Ajo</option>
-          <option value="Ajillo">Camarones al Ajillo</option>
-          <option value="Diabla">Camarones a la Diabla</option>
-          <option value="Empanizados">Camarones Empanizados</option>
-          <option value="Cucaracha">Camarones Cucaracha</option>
-        </select>
+  <label for="calientePersonalizada">
+    ¿CÓMO QUIERES TU CHAROLA?
+  </label>
 
-        <select id="calienteDos">
-          <option value="">Segunda preparación</option>
-          <option value="Ajo">Camarones al Ajo</option>
-          <option value="Ajillo">Camarones al Ajillo</option>
-          <option value="Diabla">Camarones a la Diabla</option>
-          <option value="Empanizados">Camarones Empanizados</option>
-          <option value="Cucaracha">Camarones Cucaracha</option>
-        </select>
+  <textarea
+    id="calientePersonalizada"
+    rows="5"
+    placeholder="Escribe aquí cómo quieres combinar tu charola. Puedes elegir 4, 5 o más platillos y combinar preparaciones frías y calientes."
+  ></textarea>
 
-      </div>
-
+</div>
       <button
         class="btn-ordenar-caliente"
         onclick="ordenarCharolaCaliente()"
@@ -3655,11 +3647,16 @@ function ordenarCharola(nombre,precio){
 }
 
 function ordenarCharolaCaliente(){
-  const uno = document.getElementById("calienteUno").value;
-  const dos = document.getElementById("calienteDos").value;
 
-  if(!uno || !dos){
-    alert("Selecciona las dos preparaciones de la charola caliente.");
+  const charola = document
+    .getElementById("calientePersonalizada")
+    .value
+    .trim();
+
+  if(!charola){
+
+    alert("Escribe cómo quieres tu charola antes de ordenar.");
+
     return;
   }
 
@@ -3671,11 +3668,10 @@ function ordenarCharolaCaliente(){
     Cucaracha:"Camarones Cucaracha"
   };
 
-  const detalle = nombres[uno] + " + " + nombres[dos];
+const detalle = charola;
 
-  agregar("Charola Caliente",800,detalle);
-  cerrarCharolas();
-}
+agregar("Charola Caliente",800,detalle);
+cerrarCharolas();
 
 
 /* =========================================================
