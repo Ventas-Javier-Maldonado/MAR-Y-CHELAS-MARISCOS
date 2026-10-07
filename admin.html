@@ -744,6 +744,10 @@ button:hover{
             Platillos calientes
           </option>
 
+          <option value="camarones">
+            🍤 Camarones al gusto
+          </option>    
+
           <option value="aguachiles">
             Aguachiles
           </option>
@@ -1229,6 +1233,8 @@ const nombresSecciones = {
 
   calientes:"Platillos calientes",
 
+  camarones:"Camarones al gusto",
+
   aguachiles:"Aguachiles",
 
   tostadas:"Tostadas",
@@ -1294,18 +1300,19 @@ async function cargarMenu(){
     }
 
 
-    menu = {
+   menu = {
 
-      entradas:[],
-      ceviches:[],
-      calientes:[],
-      aguachiles:[],
-      tostadas:[],
-      charolas:[],
-      extras:[],
-      bebidas:[]
+  entradas:[],
+  ceviches:[],
+  calientes:[],
+  camarones:[],
+  aguachiles:[],
+  tostadas:[],
+  charolas:[],
+  extras:[],
+  bebidas:[]
 
-    };
+};
 
 
     (data || []).forEach(
