@@ -1,5 +1,4 @@
-```html
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="es">
 <head>
 
@@ -174,6 +173,7 @@ body{
   display:flex;
   align-items:center;
   gap:14px;
+  width:100%;
 }
 
 .logo{
@@ -185,6 +185,7 @@ body{
   align-items:center;
   justify-content:center;
   font-size:27px;
+  flex-shrink:0;
 }
 
 .encabezado h1{
@@ -213,10 +214,6 @@ body{
   font-size:12px;
   font-weight:bold;
   cursor:pointer;
-}
-
-.marca{
-  width:100%;
 }
 
 /* =========================================================
@@ -585,11 +582,13 @@ button:hover{
 
   .marca{
     align-items:flex-start;
+    flex-wrap:wrap;
   }
 
   .encabezado-derecha{
     margin-left:0;
     margin-top:12px;
+    width:100%;
   }
 
 }
@@ -874,25 +873,33 @@ button:hover{
           <button
             class="btn-principal"
             onclick="guardarCambios()">
+
             GUARDAR CAMBIOS
+
           </button>
 
           <button
             class="btn-secundario"
             onclick="mostrarPreview()">
+
             VISTA PREVIA
+
           </button>
 
           <button
             class="btn-peligro"
             onclick="eliminarPlatillo()">
+
             ELIMINAR PLATILLO
+
           </button>
 
           <button
             class="btn-gris"
             onclick="cancelarEdicion()">
+
             CANCELAR
+
           </button>
 
         </div>
@@ -951,7 +958,9 @@ button:hover{
       <button
         class="cerrar"
         onclick="cerrarModal('modalPreview')">
+
         ✕
+
       </button>
 
     </div>
@@ -994,14 +1003,14 @@ button:hover{
       <button
         class="cerrar"
         onclick="cerrarModal('modalSeccion')">
+
         ✕
+
       </button>
 
     </div>
 
-    <div
-      id="contenidoSeccionPreview">
-    </div>
+    <div id="contenidoSeccionPreview"></div>
 
     <div class="botones">
 
@@ -1036,7 +1045,7 @@ const SUPABASE_URL =
   "https://drpdwccyjtetakcgbulf.supabase.co";
 
 const SUPABASE_ANON_KEY =
-  "sb_publishable_mf390v5SbXC_xI9h95Q_hg_ElR7ngvZ";
+  "TU_MISMA_CLAVE_PUBLISHABLE_DE_SUPABASE";
 
 const supabaseClient =
   window.supabase.createClient(
@@ -1052,29 +1061,22 @@ const supabaseClient =
 async function iniciarSesion(){
 
   const email =
-    document.getElementById(
-      "loginEmail"
-    ).value.trim();
+    document.getElementById("loginEmail")
+      .value
+      .trim();
 
   const password =
-    document.getElementById(
-      "loginPassword"
-    ).value;
+    document.getElementById("loginPassword")
+      .value;
 
   const errorBox =
-    document.getElementById(
-      "loginError"
-    );
+    document.getElementById("loginError");
 
   const boton =
-    document.getElementById(
-      "btnLogin"
-    );
+    document.getElementById("btnLogin");
 
 
-  errorBox.classList.remove(
-    "activo"
-  );
+  errorBox.classList.remove("activo");
 
   errorBox.textContent = "";
 
@@ -1084,9 +1086,7 @@ async function iniciarSesion(){
     errorBox.textContent =
       "Escribe tu correo y contraseña.";
 
-    errorBox.classList.add(
-      "activo"
-    );
+    errorBox.classList.add("activo");
 
     return;
 
@@ -1099,56 +1099,62 @@ async function iniciarSesion(){
     "VERIFICANDO...";
 
 
-  const {
-    data,
-    error
-  } =
-    await supabaseClient.auth.signInWithPassword({
+  try{
 
-      email:
-        email,
-
-      password:
-        password
-
-    });
-
-
-  if(error){
-
-    console.error(
-      "Error de inicio de sesión:",
+    const {
+      data,
       error
-    );
+    } =
+      await supabaseClient.auth
+        .signInWithPassword({
+
+          email:email,
+
+          password:password
+
+        });
+
+
+    if(error){
+
+      console.error(
+        "Error de inicio de sesión:",
+        error
+      );
+
+      errorBox.textContent =
+        "Correo o contraseña incorrectos.";
+
+      errorBox.classList.add("activo");
+
+      return;
+
+    }
+
+
+    if(data.session){
+
+      mostrarAdministrador();
+
+    }
+
+  }catch(error){
+
+    console.error(error);
 
     errorBox.textContent =
-      "Correo o contraseña incorrectos.";
+      "Ocurrió un error al iniciar sesión.";
 
-    errorBox.classList.add(
-      "activo"
-    );
+    errorBox.classList.add("activo");
+
+  }finally{
 
     boton.disabled = false;
 
     boton.textContent =
       "ENTRAR AL ADMINISTRADOR";
 
-    return;
-
   }
-
-
-  if(data.session){
-
-    mostrarAdministrador();
-
-  }
-
-
-  boton.disabled = false;
-
-  boton.textContent =
-    "ENTRAR AL ADMINISTRADOR";
 
 }
 
@@ -1217,29 +1223,21 @@ function mostrarAdministrador(){
 
 const nombresSecciones = {
 
-  entradas:
-    "Entradas",
+  entradas:"Entradas",
 
-  ceviches:
-    "Ceviches",
+  ceviches:"Ceviches",
 
-  calientes:
-    "Platillos calientes",
+  calientes:"Platillos calientes",
 
-  aguachiles:
-    "Aguachiles",
+  aguachiles:"Aguachiles",
 
-  tostadas:
-    "Tostadas",
+  tostadas:"Tostadas",
 
-  charolas:
-    "Charolas",
+  charolas:"Charolas",
 
-  extras:
-    "Extras",
+  extras:"Extras",
 
-  bebidas:
-    "Bebidas"
+  bebidas:"Bebidas"
 
 };
 
@@ -1253,11 +1251,14 @@ let menu = {};
 let seccionActual =
   "entradas";
 
-let productoActual = null;
+let productoActual =
+  null;
 
-let productoNuevo = false;
+let productoNuevo =
+  false;
 
-let fotoTemporal = "";
+let fotoTemporal =
+  "";
 
 
 /* =========================================================
@@ -1275,8 +1276,8 @@ async function cargarMenu(){
       await supabaseClient
         .from("menu_items")
         .select("*")
-        .eq("activo", true)
-        .order("id", {
+        .eq("activo",true)
+        .order("id",{
           ascending:true
         });
 
@@ -1313,16 +1314,17 @@ async function cargarMenu(){
         const seccion =
           producto.seccion;
 
+
         if(!menu[seccion]){
 
           menu[seccion] = [];
 
         }
 
+
         menu[seccion].push({
 
-          id:
-            producto.id,
+          id:producto.id,
 
           nombre:
             producto.nombre || "",
@@ -1363,8 +1365,10 @@ async function cargarMenu(){
 
         <br><br>
 
-        Revisa que la conexión esté
-        configurada correctamente.
+        ${escapeHTML(
+          error.message ||
+          "Error desconocido"
+        )}
 
       </div>
 
@@ -1386,12 +1390,15 @@ function mostrarSeccion(){
       "selectorSeccion"
     ).value;
 
+
   const lista =
     document.getElementById(
       "listaProductos"
     );
 
+
   limpiarSeleccion();
+
 
   const productos =
     menu[seccionActual] || [];
@@ -1416,26 +1423,34 @@ function mostrarSeccion(){
 
 
   lista.innerHTML =
-    productos.map(producto => `
+    productos.map(
+      producto => `
 
-      <div
-        class="item-lista"
-        id="item-${producto.id}"
-        onclick="editarPlatillo(${producto.id})">
+        <div
+          class="item-lista"
+          id="item-${producto.id}"
+          onclick="editarPlatillo(${producto.id})">
 
-        <strong>
-          ${escapeHTML(producto.nombre)}
-        </strong>
+          <strong>
 
-        <span>
-          $${Number(
-            producto.precio
-          ).toLocaleString("es-MX")}
-        </span>
+            ${escapeHTML(
+              producto.nombre
+            )}
 
-      </div>
+          </strong>
 
-    `).join("");
+          <span>
+
+            $${Number(
+              producto.precio
+            ).toLocaleString("es-MX")}
+
+          </span>
+
+        </div>
+
+      `
+    ).join("");
 
 }
 
@@ -1502,13 +1517,10 @@ function editarPlatillo(id){
 
   document.querySelectorAll(
     ".item-lista"
-  ).forEach(item => {
-
-    item.classList.remove(
-      "activo"
-    );
-
-  });
+  ).forEach(
+    item =>
+      item.classList.remove("activo")
+  );
 
 
   const seleccionado =
@@ -1588,13 +1600,10 @@ function nuevoPlatillo(){
 
   document.querySelectorAll(
     ".item-lista"
-  ).forEach(item => {
-
-    item.classList.remove(
-      "activo"
-    );
-
-  });
+  ).forEach(
+    item =>
+      item.classList.remove("activo")
+  );
 
 
   window.scrollTo({
@@ -1618,6 +1627,7 @@ function cargarFoto(event){
 
   const archivo =
     event.target.files[0];
+
 
   if(!archivo) return;
 
@@ -1711,7 +1721,8 @@ async function guardarCambios(){
   const {
     data:sessionData
   } =
-    await supabaseClient.auth.getSession();
+    await supabaseClient.auth
+      .getSession();
 
 
   if(!sessionData.session){
@@ -1721,7 +1732,7 @@ async function guardarCambios(){
       "error"
     );
 
-    cerrarSesion();
+    await cerrarSesion();
 
     return;
 
@@ -1822,23 +1833,32 @@ async function guardarCambios(){
     } =
       await supabaseClient
         .from("menu_items")
-        .insert(
-          nuevoProducto
-        )
-        .select()
+        .insert(nuevoProducto)
+        .select("*")
         .single();
 
 
     if(error){
 
-      console.error(error);
+      console.error(
+        "ERROR AL INSERTAR:",
+        error
+      );
 
       mostrarMensaje(
-        "No se pudo guardar el platillo.",
+        "No se pudo guardar el platillo: " +
+        error.message,
         "error"
       );
 
       return;
+
+    }
+
+
+    if(!menu[seccionActual]){
+
+      menu[seccionActual] = [];
 
     }
 
@@ -1858,7 +1878,7 @@ async function guardarCambios(){
         data.descripcion,
 
       foto:
-        data.imagen,
+        data.imagen || "",
 
       activo:
         data.activo
@@ -1866,23 +1886,19 @@ async function guardarCambios(){
     });
 
 
-    productoActual =
-      menu[seccionActual]
-        .find(
-          item =>
-            Number(item.id) ===
-            Number(data.id)
-        );
-
-
     productoNuevo =
       false;
 
 
     mostrarMensaje(
-      "Platillo guardado correctamente en Supabase.",
+      "Platillo guardado correctamente.",
       "ok"
     );
+
+
+    mostrarSeccion();
+
+    return;
 
   }
 
@@ -1891,107 +1907,161 @@ async function guardarCambios(){
      PRODUCTO EXISTENTE
   ===================================================== */
 
-  else{
-
-    if(!productoActual){
-
-      mostrarMensaje(
-        "Primero selecciona un platillo.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const cambios = {
-
-      nombre:
-        nombre,
-
-      precio:
-        precio,
-
-      descripcion:
-        descripcion
-
-    };
-
-
-    if(
-      fotoTemporal &&
-      fotoTemporal !== productoActual.foto
-    ){
-
-      cambios.imagen =
-        fotoTemporal;
-
-    }
-
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("menu_items")
-        .update(
-          cambios
-        )
-        .eq(
-          "id",
-          productoActual.id
-        )
-        .select()
-        .single();
-
-
-    if(error){
-
-      console.error(error);
-
-      mostrarMensaje(
-        "No se pudieron guardar los cambios.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    productoActual.nombre =
-      data.nombre;
-
-    productoActual.precio =
-      data.precio;
-
-    productoActual.descripcion =
-      data.descripcion;
-
-    productoActual.foto =
-      data.imagen || "";
-
+  if(!productoActual){
 
     mostrarMensaje(
-      "Cambios guardados correctamente en Supabase.",
-      "ok"
+      "Primero selecciona un platillo.",
+      "error"
     );
+
+    return;
 
   }
 
+
+  const idProducto =
+    Number(
+      productoActual.id
+    );
+
+
+  const cambios = {
+
+    nombre:
+      nombre,
+
+    precio:
+      precio,
+
+    descripcion:
+      descripcion
+
+  };
+
+
+  if(
+    fotoTemporal &&
+    fotoTemporal !== productoActual.foto
+  ){
+
+    cambios.imagen =
+      fotoTemporal;
+
+  }
+
+
+  console.log(
+    "ID QUE SE VA A ACTUALIZAR:",
+    idProducto
+  );
+
+
+  console.log(
+    "CAMBIOS:",
+    cambios
+  );
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("menu_items")
+      .update(cambios)
+      .eq("id",idProducto)
+      .select("*")
+      .maybeSingle();
+
+
+  console.log(
+    "RESPUESTA SUPABASE:",
+    data
+  );
+
+
+  console.log(
+    "ERROR SUPABASE:",
+    error
+  );
+
+
+  if(error){
+
+    console.error(
+      "ERROR AL ACTUALIZAR:",
+      error
+    );
+
+    mostrarMensaje(
+      "Supabase no permitió guardar: " +
+      error.message,
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!data){
+
+    mostrarMensaje(
+      "Supabase no encontró el platillo. Revisa las políticas RLS.",
+      "error"
+    );
+
+    console.error(
+      "NO SE ACTUALIZÓ NINGÚN REGISTRO. ID:",
+      idProducto
+    );
+
+    return;
+
+  }
+
+
+  /* =====================================================
+     ACTUALIZAR DATOS LOCALES
+  ===================================================== */
+
+  productoActual.nombre =
+    data.nombre;
+
+
+  productoActual.precio =
+    data.precio;
+
+
+  productoActual.descripcion =
+    data.descripcion;
+
+
+  productoActual.foto =
+    data.imagen || "";
+
+
+  const idGuardado =
+    productoActual.id;
+
+
+  mostrarMensaje(
+    "Cambios guardados correctamente en Supabase.",
+    "ok"
+  );
+
+
+  /*
+     Guardamos el ID antes de reconstruir
+     la lista para no perder la selección.
+  */
 
   mostrarSeccion();
 
 
-  if(productoActual){
-
-    editarPlatillo(
-      productoActual.id
-    );
-
-  }
+  editarPlatillo(
+    idGuardado
+  );
 
 }
 
@@ -2262,7 +2332,8 @@ async function eliminarPlatillo(){
   const {
     data:sessionData
   } =
-    await supabaseClient.auth.getSession();
+    await supabaseClient.auth
+      .getSession();
 
 
   if(!sessionData.session){
@@ -2272,7 +2343,7 @@ async function eliminarPlatillo(){
       "error"
     );
 
-    cerrarSesion();
+    await cerrarSesion();
 
     return;
 
@@ -2320,7 +2391,8 @@ async function eliminarPlatillo(){
     console.error(error);
 
     mostrarMensaje(
-      "No se pudo eliminar el platillo.",
+      "No se pudo eliminar el platillo: " +
+      error.message,
       "error"
     );
 
@@ -2408,13 +2480,10 @@ function cancelarEdicion(){
 
   document.querySelectorAll(
     ".item-lista"
-  ).forEach(item => {
-
-    item.classList.remove(
-      "activo"
-    );
-
-  });
+  ).forEach(
+    item =>
+      item.classList.remove("activo")
+  );
 
 }
 
@@ -2439,6 +2508,7 @@ function limpiarSeleccion(){
     document.getElementById(
       "editor"
     );
+
 
   if(editor){
 
@@ -2499,7 +2569,7 @@ function mostrarMensaje(
       );
 
     },
-    3500
+    5000
   );
 
 }
@@ -2511,11 +2581,17 @@ function mostrarMensaje(
 
 function cerrarModal(id){
 
-  document.getElementById(
-    id
-  ).classList.remove(
-    "activo"
-  );
+  const modal =
+    document.getElementById(id);
+
+
+  if(modal){
+
+    modal.classList.remove(
+      "activo"
+    );
+
+  }
 
 }
 
@@ -2597,7 +2673,8 @@ async function comprobarSesion(){
   const {
     data
   } =
-    await supabaseClient.auth.getSession();
+    await supabaseClient.auth
+      .getSession();
 
 
   if(data.session){
@@ -2610,6 +2687,7 @@ async function comprobarSesion(){
       "pantallaLogin"
     ).style.display =
       "flex";
+
 
     document.getElementById(
       "pantallaAdmin"
@@ -2626,7 +2704,7 @@ async function comprobarSesion(){
 ========================================================= */
 
 supabaseClient.auth.onAuthStateChange(
-  (event, session) => {
+  (event,session) => {
 
     if(
       event === "SIGNED_IN" &&
@@ -2646,6 +2724,7 @@ supabaseClient.auth.onAuthStateChange(
         "pantallaAdmin"
       ).style.display =
         "none";
+
 
       document.getElementById(
         "pantallaLogin"
@@ -2667,5 +2746,4 @@ comprobarSesion();
 </script>
 
 </body>
-</html>
-```
+</html> 
