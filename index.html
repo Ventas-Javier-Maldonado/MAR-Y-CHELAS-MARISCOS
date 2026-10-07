@@ -1944,6 +1944,87 @@ function crearCamaronMenu(item){
 
   return article;
 
+}
+
+function crearCharolaMenu(item){
+
+  const article = document.createElement("article");
+
+  article.className = "charola-card";
+
+  const nombre = String(item.nombre || "");
+  const descripcion = String(item.descripcion || "");
+  const imagen = String(item.imagen || "");
+  const precio = Number(item.precio) || 0;
+
+  article.innerHTML = `
+
+    <div class="producto-foto">
+
+      ${
+        imagen
+        ? `
+          <img
+            src="${escaparHTML(imagen)}"
+            alt="${escaparHTML(nombre)}"
+            onerror="this.src='images/charolas.jpg';"
+          >
+        `
+        : `
+          <img
+            src="images/charolas.jpg"
+            alt="${escaparHTML(nombre)}"
+          >
+        `
+      }
+
+    </div>
+
+    <div class="camaron-card-contenido">
+
+      <h3>
+        ${escaparHTML(nombre)}
+      </h3>
+
+      ${
+        descripcion
+        ? `
+          <p class="producto-descripcion">
+            ${escaparHTML(descripcion)}
+          </p>
+        `
+        : ""
+      }
+
+      <div class="camaron-card-precio">
+        $${precio.toLocaleString("es-MX")}
+      </div>
+
+      <button
+        class="btn-ordenar-camaron"
+        type="button"
+      >
+        🛒 ORDENAR
+      </button>
+
+    </div>
+  `;
+
+  article
+    .querySelector(".btn-ordenar-camaron")
+    .addEventListener("click", () => {
+
+      agregar(
+        "Charolas para compartir",
+        precio,
+        nombre
+      );
+
+      cerrarCharolas();
+
+    });
+
+  return article;
 }  
 
 async function cargarMenuSupabase(){
@@ -1970,6 +2051,7 @@ async function cargarMenuSupabase(){
   tostadas: document.querySelector("#tostadas .productos"),
   extras: document.querySelector("#extras .bebidas-grid"),
   bebidas: document.querySelector("#bebidas .bebidas-grid"),
+  charolas: document.querySelector("#modalCharolas .charolas-grid"),   
   camarones: document.querySelector("#modalCamarones .camarones-grid")
 };
 
@@ -2077,25 +2159,31 @@ if(contCamarones){
 
 }
     
-    /* =====================================================
-       CHAROLAS NO SE TOCA.
-       Es un módulo especial independiente de Supabase.
-    ===================================================== */
+   /* =====================================================
+   CHAROLAS
+===================================================== */
 
-    console.log(
-      "Menú cargado desde Supabase:",
-      data.length,
-      "productos"
+const contCharolas =
+  contenedores.charolas;
+
+if(contCharolas){
+
+  const charolas =
+    data.filter(item =>
+      normalizarSeccion(item.seccion) === "charolas"
     );
 
-  }catch(error){
+  contCharolas.innerHTML = "";
 
-    console.error(
-      "No se pudo cargar el menú desde Supabase:",
-      error
+  charolas.forEach(item => {
+
+    contCharolas.appendChild(
+      crearCharolaMenu(item)
     );
 
-    /* Si Supabase falla, el menú original permanece visible. */
+  });
+
+}
 
   }
 }
@@ -3253,7 +3341,7 @@ window.addEventListener(
     </div>
 
 
-    <div class="charolas-modal-grid">
+    <div class="charolas-grid">
 
 
       <!-- CHAROLA CEVICHES -->
@@ -3418,43 +3506,49 @@ window.addEventListener(
 
     <div class="charola-caliente">
 
-      <h3>
-        🔥 Charola Caliente — desde $800
-      </h3>
+     <h3>
+  🔥 Combina tu Charola Caliente, desde 800 pesos
+</h3>
 
-      <p>
-        Incluye dos preparaciones a escoger dentro de la charola.
-        Porciones especiales para compartir. Mínimo 5 personas.
-      </p>
+<p>
+  Elige tus preparaciones favoritas. Precio según tu combinación.
+  Porciones especiales para compartir. Mínimo 5 personas.
+</p>
 
       <div class="charola-caliente-selectores">
 
-        <select id="calienteUno">
-          <option value="">Primera preparación</option>
-          <option value="Ajo">Camarones al Ajo</option>
-          <option value="Ajillo">Camarones al Ajillo</option>
-          <option value="Diabla">Camarones a la Diabla</option>
-          <option value="Empanizados">Camarones Empanizados</option>
-          <option value="Cucaracha">Camarones Cucaracha</option>
-        </select>
+  <select id="calienteUno">
+    <option value="">Primera preparación</option>
+    <option value="Ajo">Camarones al Ajo</option>
+    <option value="Ajillo">Camarones al Ajillo</option>
+    <option value="Diabla">Camarones a la Diabla</option>
+    <option value="Empanizados">Camarones Empanizados</option>
+    <option value="Cucaracha">Camarones Cucaracha</option>
+  </select>
 
-        <select id="calienteDos">
-          <option value="">Segunda preparación</option>
-          <option value="Ajo">Camarones al Ajo</option>
-          <option value="Ajillo">Camarones al Ajillo</option>
-          <option value="Diabla">Camarones a la Diabla</option>
-          <option value="Empanizados">Camarones Empanizados</option>
-          <option value="Cucaracha">Camarones Cucaracha</option>
-        </select>
+  <select id="calienteDos">
+    <option value="">Segunda preparación</option>
+    <option value="Ajo">Camarones al Ajo</option>
+    <option value="Ajillo">Camarones al Ajillo</option>
+    <option value="Diabla">Camarones a la Diabla</option>
+    <option value="Empanizados">Camarones Empanizados</option>
+    <option value="Cucaracha">Camarones Cucaracha</option>
+  </select>
 
-      </div>
+</div>
 
-      <button
-        class="btn-ordenar-caliente"
-        onclick="ordenarCharolaCaliente()"
-      >
-        ORDENAR CHAROLA CALIENTE · DESDE $800
-      </button>
+<textarea
+  id="notaCharolaCaliente"
+  placeholder="Escribe aquí cómo quieres tu charola..."
+  rows="3"
+></textarea>
+
+     <button
+  class="btn-ordenar-caliente"
+  onclick="ordenarCharolaCaliente()"
+>
+  🛒 ORDENAR CHAROLA CALIENTE
+</button>
 
     </div>
 
@@ -3771,28 +3865,68 @@ function ordenarCharola(nombre,precio){
 }
 
 function ordenarCharolaCaliente(){
-  const uno = document.getElementById("calienteUno").value;
-  const dos = document.getElementById("calienteDos").value;
+
+  const uno =
+    document.getElementById("calienteUno").value;
+
+  const dos =
+    document.getElementById("calienteDos").value;
+
+  const nota =
+    document.getElementById("notaCharolaCaliente").value.trim();
 
   if(!uno || !dos){
-    alert("Selecciona las dos preparaciones de la charola caliente.");
+
+    alert(
+      "Selecciona las dos preparaciones de la charola caliente."
+    );
+
     return;
   }
 
   const nombres = {
+
     Ajo:"Camarones al Ajo",
+
     Ajillo:"Camarones al Ajillo",
+
     Diabla:"Camarones a la Diabla",
+
     Empanizados:"Camarones Empanizados",
+
     Cucaracha:"Camarones Cucaracha"
+
   };
 
-  const detalle = nombres[uno] + " + " + nombres[dos];
+  const detalleBase =
+    nombres[uno] + " + " + nombres[dos];
 
-  agregar("Charola Caliente",800,detalle);
+  const detalle =
+    nota
+    ? detalleBase + " | Nota: " + nota
+    : detalleBase;
+
+  agregar(
+    "Charola Caliente",
+    800,
+    detalle
+  );
+
+  document.getElementById(
+    "calienteUno"
+  ).value = "";
+
+  document.getElementById(
+    "calienteDos"
+  ).value = "";
+
+  document.getElementById(
+    "notaCharolaCaliente"
+  ).value = "";
+
   cerrarCharolas();
-}
 
+}
 
 /* =========================================================
    AGREGAR PRODUCTO
