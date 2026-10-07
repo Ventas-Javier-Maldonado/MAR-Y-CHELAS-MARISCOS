@@ -2020,51 +2020,79 @@ async function guardarCambios(){
 
   }
 
+/* =====================================================
+   ACTUALIZAR DATOS LOCALES
+===================================================== */
 
-  /* =====================================================
-     ACTUALIZAR DATOS LOCALES
-  ===================================================== */
-
-  productoActual.nombre =
-    data.nombre;
-
-
-  productoActual.precio =
-    data.precio;
+const productos =
+  menu[seccionActual] || [];
 
 
-  productoActual.descripcion =
-    data.descripcion;
-
-
-  productoActual.foto =
-    data.imagen || "";
-
-
-  const idGuardado =
-    productoActual.id;
-
-
-  mostrarMensaje(
-    "Cambios guardados correctamente en Supabase.",
-    "ok"
+const posicion =
+  productos.findIndex(
+    item =>
+      Number(item.id) ===
+      Number(data.id)
   );
 
 
-  /*
-     Guardamos el ID antes de reconstruir
-     la lista para no perder la selección.
-  */
+if(posicion !== -1){
 
-  mostrarSeccion();
+  productos[posicion] = {
 
+    id:
+      data.id,
 
-  editarPlatillo(
-    idGuardado
-  );
+    nombre:
+      data.nombre || "",
+
+    precio:
+      data.precio ?? 0,
+
+    descripcion:
+      data.descripcion || "",
+
+    foto:
+      data.imagen || "",
+
+    activo:
+      data.activo
+
+  };
 
 }
 
+
+/*
+   Actualizamos también productoActual
+   con lo que realmente confirmó Supabase.
+*/
+
+productoActual =
+  productos[posicion];
+
+
+const idGuardado =
+  data.id;
+
+
+mostrarMensaje(
+  "Cambios guardados correctamente en Supabase.",
+  "ok"
+);
+
+
+/*
+   Redibujamos la sección con los
+   datos recién guardados.
+*/
+
+mostrarSeccion();
+
+
+editarPlatillo(
+  idGuardado
+);
 
 /* =========================================================
    VISTA PREVIA
