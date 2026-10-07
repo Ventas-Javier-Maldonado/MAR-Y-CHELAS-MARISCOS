@@ -1758,8 +1758,8 @@ footer p{
 
 /* =========================================================
    SUPABASE — MENÚ DINÁMICO
-   SOLO CONECTA EL MENÚ NORMAL.
-   CAMARONES AL GUSTO Y CHAROLAS SE CONSERVAN INTACTOS.
+   MENÚ NORMAL + CAMARONES AL GUSTO.
+   CHAROLAS SE CONSERVAN INTACTAS.
 ========================================================= */
 
 const SUPABASE_URL = "https://drpdwccyjtetakcgbulf.supabase.co";
@@ -1853,6 +1853,92 @@ function crearItemSimple(item){
   return div;
 }
 
+function crearCamaronMenu(item){
+
+  const article = document.createElement("article");
+
+  article.className = "camaron-card";
+
+  const nombre = String(item.nombre || "");
+  const descripcion = String(item.descripcion || "");
+  const imagen = String(item.imagen || "");
+  const precio = Number(item.precio) || 0;
+
+  article.innerHTML = `
+
+    <div class="producto-foto">
+
+      ${
+        imagen
+        ? `
+          <img
+            src="${escaparHTML(imagen)}"
+            alt="${escaparHTML(nombre)}"
+            onerror="this.src='images/09-camarones-al-gusto.jpg';"
+          >
+        `
+        : `
+          <img
+            src="images/09-camarones-al-gusto.jpg"
+            alt="${escaparHTML(nombre)}"
+          >
+        `
+      }
+
+    </div>
+
+    <div class="camaron-card-contenido">
+
+      <h3>
+        ${escaparHTML(nombre)}
+      </h3>
+
+      ${
+        descripcion
+        ? `
+          <p class="producto-descripcion">
+            ${escaparHTML(descripcion)}
+          </p>
+        `
+        : ""
+      }
+
+      <div class="camaron-card-precio">
+        $${precio.toLocaleString("es-MX")}
+      </div>
+
+      <button
+        class="btn-ordenar-camaron"
+        type="button"
+      >
+        🛒 ORDENAR
+      </button>
+
+    </div>
+  `;
+
+  const boton = article.querySelector(".btn-ordenar-camaron");
+
+  if(boton){
+
+    boton.addEventListener("click", () => {
+
+      agregar(
+        "Camarones al gusto",
+        precio,
+        nombre
+      );
+
+      cerrarCamarones();
+
+    });
+
+  }
+
+  return article;
+
+}  
+
 async function cargarMenuSupabase(){
 
   try{
@@ -1870,14 +1956,15 @@ async function cargarMenuSupabase(){
     const normalizarSeccion = (valor) =>
       String(valor || "").toLowerCase().trim();
 
-    const contenedores = {
-      entradas: document.querySelector("#entradas .productos"),
-      ceviches: document.querySelector("#ceviches .productos"),
-      aguachiles: document.querySelector("#aguachiles .productos"),
-      tostadas: document.querySelector("#tostadas .productos"),
-      extras: document.querySelector("#extras .bebidas-grid"),
-      bebidas: document.querySelector("#bebidas .bebidas-grid")
-    };
+   const contenedores = {
+  entradas: document.querySelector("#entradas .productos"),
+  ceviches: document.querySelector("#ceviches .productos"),
+  aguachiles: document.querySelector("#aguachiles .productos"),
+  tostadas: document.querySelector("#tostadas .productos"),
+  extras: document.querySelector("#extras .bebidas-grid"),
+  bebidas: document.querySelector("#bebidas .bebidas-grid"),
+  camarones: document.querySelector("#modalCamarones .camarones-grid")
+};
 
     /* =====================================================
        SECCIONES NORMALES
@@ -1955,6 +2042,33 @@ async function cargarMenuSupabase(){
       }
 
     }
+
+    /* =====================================================
+   CAMARONES AL GUSTO
+   Se administran desde Supabase.
+===================================================== */
+
+const contCamarones =
+  contenedores.camarones;
+
+if(contCamarones){
+
+  const camarones =
+    data.filter(item =>
+      normalizarSeccion(item.seccion) === "camarones"
+    );
+
+  contCamarones.innerHTML = "";
+
+  camarones.forEach(item => {
+
+    contCamarones.appendChild(
+      crearCamaronMenu(item)
+    );
+
+  });
+
+}
 
     /* =====================================================
        CHAROLAS NO SE TOCA.
@@ -3101,206 +3215,6 @@ window.addEventListener(
 
 
     <div class="camarones-grid">
-
-
-      <!-- AJO -->
-
-      <article class="camaron-card">
-
-        <div class="producto-foto">
-          <img
-            src="images/camarones-ajo.jpg"
-            alt="Camarones al Ajo"
-            onerror="this.src='images/09-camarones-al-gusto.jpg';"
-          >
-        </div>
-
-        <div class="camaron-card-contenido">
-
-          <h3>
-            Camarones al Ajo
-          </h3>
-
-          <p class="producto-descripcion">
-            Camarones preparados al ajo, con todo el sabor
-            de una preparación clásica.
-          </p>
-
-          <div class="camaron-card-precio">
-            $285
-          </div>
-
-          <button
-            class="btn-ordenar-camaron"
-            onclick="ordenarCamaron('Ajo')"
-          >
-            🛒 ORDENAR
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- AJILLO -->
-
-      <article class="camaron-card">
-
-        <div class="producto-foto">
-          <img
-            src="images/camarones-ajillo.jpg"
-            alt="Camarones al Ajillo"
-            onerror="this.src='images/09-camarones-al-gusto.jpg';"
-          >
-        </div>
-
-        <div class="camaron-card-contenido">
-
-          <h3>
-            Camarones al Ajillo
-          </h3>
-
-          <p class="producto-descripcion">
-            Camarones preparados al ajillo, llenos de sabor
-            y perfectos para disfrutar.
-          </p>
-
-          <div class="camaron-card-precio">
-            $285
-          </div>
-
-          <button
-            class="btn-ordenar-camaron"
-            onclick="ordenarCamaron('Ajillo')"
-          >
-            🛒 ORDENAR
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- DIABLA -->
-
-      <article class="camaron-card">
-
-        <div class="producto-foto">
-          <img
-            src="images/camarones-diabla.jpg"
-            alt="Camarones a la Diabla"
-            onerror="this.src='images/09-camarones-al-gusto.jpg';"
-          >
-        </div>
-
-        <div class="camaron-card-contenido">
-
-          <h3>
-            Camarones a la Diabla
-          </h3>
-
-          <p class="producto-descripcion">
-            Camarones con una preparación de sabor intenso
-            y un toque picante.
-          </p>
-
-          <div class="camaron-card-precio">
-            $285
-          </div>
-
-          <button
-            class="btn-ordenar-camaron"
-            onclick="ordenarCamaron('Diabla')"
-          >
-            🛒 ORDENAR
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- EMPANIZADOS -->
-
-      <article class="camaron-card">
-
-        <div class="producto-foto">
-          <img
-            src="images/camarones-empanizados.jpg"
-            alt="Camarones Empanizados"
-            onerror="this.src='images/09-camarones-al-gusto.jpg';"
-          >
-        </div>
-
-        <div class="camaron-card-contenido">
-
-          <h3>
-            Camarones Empanizados
-          </h3>
-
-          <p class="producto-descripcion">
-            Camarones empanizados, dorados y crujientes,
-            ideales para disfrutar.
-          </p>
-
-          <div class="camaron-card-precio">
-            $285
-          </div>
-
-          <button
-            class="btn-ordenar-camaron"
-            onclick="ordenarCamaron('Empanizados')"
-          >
-            🛒 ORDENAR
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- CUCARACHA -->
-
-      <article class="camaron-card">
-
-        <div class="producto-foto">
-          <img
-            src="images/camarones-cucaracha.jpg"
-            alt="Camarones Cucaracha"
-            onerror="this.src='images/09-camarones-al-gusto.jpg';"
-          >
-        </div>
-
-        <div class="camaron-card-contenido">
-
-          <h3>
-            Camarones Cucaracha
-          </h3>
-
-          <p class="producto-descripcion">
-            Camarones preparados al estilo cucaracha,
-            con sabor intenso y tradicional.
-          </p>
-
-          <div class="camaron-card-precio">
-            $285
-          </div>
-
-          <button
-            class="btn-ordenar-camaron"
-            onclick="ordenarCamaron('Cucaracha')"
-          >
-            🛒 ORDENAR
-          </button>
-
-        </div>
-
-      </article>
-
-
-    </div>
-
-  </div>
 
 </div>
 
