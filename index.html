@@ -27,11 +27,6 @@
 
 <style>
 
-/* =========================================================
-   MAR Y CHELAS
-   ESTILO ORIGINAL
-========================================================= */
-
 :root{
   --verde:#06452f;
   --verde2:#0b6847;
@@ -1335,7 +1330,6 @@ footer p{
 /* =========================================================
    SUPABASE — MENÚ DINÁMICO
 ========================================================= */
-
 
 /* =========================================================
    CARRITO
@@ -2875,8 +2869,6 @@ window.addEventListener(
   <div class="bebidas-grid">
 
 
-    <!-- AGUA CHICA -->
-
     <div class="bebida">
 
       <span>
@@ -2896,8 +2888,6 @@ window.addEventListener(
 
     </div>
 
-
-    <!-- AGUA GRANDE -->
 
     <div class="bebida">
 
@@ -3602,10 +3592,6 @@ window.addEventListener(
     </button>
 
 
-    <!-- =================================================
-         FORMULARIO
-    ================================================= -->
-
     <div
       class="formulario-pedido"
       id="formularioPedido"
@@ -3677,8 +3663,6 @@ window.addEventListener(
       </div>
 
 
-      <!-- DOMICILIO -->
-
       <div
         id="datosDomicilio"
         class="oculto"
@@ -3715,8 +3699,6 @@ window.addEventListener(
       </div>
 
 
-      <!-- RESTAURANTE -->
-
       <div
         id="datosRestaurante"
         class="oculto"
@@ -3738,8 +3720,6 @@ window.addEventListener(
 
       </div>
 
-
-      <!-- RECOGER -->
 
       <div
         id="datosRecoger"
@@ -3848,6 +3828,7 @@ function ordenarCamaron(preparacion){
   agregar("Camarones al gusto",285,preparacion);
   cerrarCamarones();
 }
+
 
 /* =========================================================
    CHAROLAS
@@ -4528,10 +4509,8 @@ if ("serviceWorker" in navigator) {
         registro.scope
       );
 
-      /* Buscar actualizaciones inmediatamente */
       await registro.update();
 
-      /* Si hay una nueva versión esperando */
       if (registro.waiting) {
 
         registro.waiting.postMessage({
@@ -4582,9 +4561,6 @@ if ("serviceWorker" in navigator) {
   });
 
 
-  /* Recargar una sola vez cuando entra
-     el nuevo Service Worker */
-
   let recargando = false;
 
   navigator.serviceWorker.addEventListener(
@@ -4598,6 +4574,7 @@ if ("serviceWorker" in navigator) {
       window.location.reload();
 
     }
+
   );
 
 }
