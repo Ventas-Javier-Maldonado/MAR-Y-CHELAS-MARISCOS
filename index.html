@@ -2185,6 +2185,30 @@ if(contCharolas){
 
 }
 
+  }
+
+  catch(error){
+
+    console.error(
+      "Error cargando menú desde Supabase:",
+      error
+    );
+
+  }
+
+}
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    cargarMenuSupabase();
+
+  }
+);
+
+</script>
+
 <!-- =====================================================
      MÚSICA
 ===================================================== -->
@@ -3298,6 +3322,10 @@ if(contCharolas){
     <div class="camarones-grid">
 
 </div>
+
+</div>
+
+</div>    
 
 
 <!-- =====================================================
