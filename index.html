@@ -1861,35 +1861,40 @@ function crearItemSimple(item){
 
 function crearCamaronMenu(item){
 
-  const article = document.createElement("article");
+  const article =
+    document.createElement("article");
 
-  article.className = "camaron-card";
+  article.className =
+    "camaron-card";
 
-  const nombre = String(item.nombre || "");
-  const descripcion = String(item.descripcion || "");
-  const imagen = String(item.imagen || "");
-  const precio = Number(item.precio) || 0;
+  const nombre =
+    String(item.nombre || "");
+
+  const descripcion =
+    String(item.descripcion || "");
+
+  const imagen =
+    String(item.imagen || "");
+
+  const precio =
+    Number(item.precio) || 0;
 
   article.innerHTML = `
 
     <div class="producto-foto">
 
-      ${
-        imagen
-        ? `
-          <img
-            src="${escaparHTML(imagen)}"
-            alt="${escaparHTML(nombre)}"
-            onerror="this.src='images/09-camarones-al-gusto.jpg';"
-          >
-        `
-        : `
-          <img
-            src="images/09-camarones-al-gusto.jpg"
-            alt="${escaparHTML(nombre)}"
-          >
-        `
-      }
+      <img
+        src="${
+          escaparHTML(
+            imagen || "images/09-camarones-al-gusto.jpg"
+          )
+        }"
+        alt="${escaparHTML(nombre)}"
+        onerror="
+          this.onerror=null;
+          this.src='images/09-camarones-al-gusto.jpg';
+        "
+      >
 
     </div>
 
@@ -1921,24 +1926,30 @@ function crearCamaronMenu(item){
       </button>
 
     </div>
+
   `;
 
   const boton =
-    article.querySelector(".btn-ordenar-camaron");
+    article.querySelector(
+      ".btn-ordenar-camaron"
+    );
 
   if(boton){
 
-    boton.addEventListener("click", () => {
+    boton.addEventListener(
+      "click",
+      () => {
 
-      agregar(
-        "Camarones al gusto",
-        precio,
-        nombre
-      );
+        agregar(
+          "Camarones al gusto",
+          precio,
+          nombre
+        );
 
-      cerrarCamarones();
+        cerrarCamarones();
 
-    });
+      }
+    );
 
   }
 
@@ -1946,41 +1957,51 @@ function crearCamaronMenu(item){
 
 }
 
+
+/* =========================================================
+   CHAROLAS — TARJETA DINÁMICA
+========================================================= */
+
 function crearCharolaMenu(item){
 
-  const article = document.createElement("article");
+  const article =
+    document.createElement("article");
 
-  article.className = "charola-card";
+  article.className =
+    "charola-modal-card";
 
-  const nombre = String(item.nombre || "");
-  const descripcion = String(item.descripcion || "");
-  const imagen = String(item.imagen || "");
-  const precio = Number(item.precio) || 0;
+  const nombre =
+    String(item.nombre || "");
+
+  const descripcion =
+    String(item.descripcion || "");
+
+  const imagen =
+    String(item.imagen || "");
+
+  const precio =
+    Number(item.precio) || 0;
 
   article.innerHTML = `
 
-    <div class="producto-foto">
+    <div class="charola-modal-foto">
 
-      ${
-        imagen
-        ? `
-          <img
-            src="${escaparHTML(imagen)}"
-            alt="${escaparHTML(nombre)}"
-            onerror="this.src='images/charolas.jpg';"
-          >
-        `
-        : `
-          <img
-            src="images/charolas.jpg"
-            alt="${escaparHTML(nombre)}"
-          >
-        `
-      }
+      <img
+        src="${
+          escaparHTML(
+            imagen || "images/charolas.jpg"
+          )
+        }"
+        alt="${escaparHTML(nombre)}"
+        onerror="
+          this.onerror=null;
+          this.src='images/charolas.jpg';
+        "
+      >
 
     </div>
 
-    <div class="camaron-card-contenido">
+    <div class="charola-modal-card-contenido">
 
       <h3>
         ${escaparHTML(nombre)}
@@ -1989,72 +2010,136 @@ function crearCharolaMenu(item){
       ${
         descripcion
         ? `
-          <p class="producto-descripcion">
+          <p>
             ${escaparHTML(descripcion)}
           </p>
         `
         : ""
       }
 
-      <div class="camaron-card-precio">
+      <div class="charola-modal-precio">
         $${precio.toLocaleString("es-MX")}
       </div>
 
       <button
-        class="btn-ordenar-camaron"
+        class="btn-ordenar-charola"
         type="button"
       >
         🛒 ORDENAR
       </button>
 
     </div>
+
   `;
 
-  article
-    .querySelector(".btn-ordenar-camaron")
-    .addEventListener("click", () => {
+  const boton =
+    article.querySelector(
+      ".btn-ordenar-charola"
+    );
 
-      agregar(
-        "Charolas para compartir",
-        precio,
-        nombre
-      );
+  if(boton){
 
-      cerrarCharolas();
+    boton.addEventListener(
+      "click",
+      () => {
 
-    });
+        agregar(
+          nombre,
+          precio
+        );
+
+        cerrarCharolas();
+
+      }
+    );
+
+  }
 
   return article;
-}  
+
+}
+
+
+/* =========================================================
+   CARGAR MENÚ DESDE SUPABASE
+========================================================= */
 
 async function cargarMenuSupabase(){
 
   try{
 
-    const { data, error } = await supabaseClient
-      .from("menu_items")
-      .select("*")
-      .eq("activo", true)
-      .order("id", { ascending:true });
+    const { data, error } =
+      await supabaseClient
+        .from("menu_items")
+        .select("*")
+        .eq("activo", true)
+        .order("id", {
+          ascending:true
+        });
 
     if(error) throw error;
 
     if(!Array.isArray(data)) return;
 
-    const normalizarSeccion = (valor) =>
-      String(valor || "").toLowerCase().trim();
 
-   const contenedores = {
-  entradas: document.querySelector("#entradas .productos"),
-  ceviches: document.querySelector("#ceviches .productos"),
-  aguachiles: document.querySelector("#aguachiles .productos"),
-  tostadas: document.querySelector("#tostadas .productos"),
-  extras: document.querySelector("#extras .bebidas-grid"),
-  bebidas: document.querySelector("#bebidas .bebidas-grid"),
-  charolas: document.querySelector("#modalCharolas .charolas-grid"),   
-  camarones: document.querySelector("#modalCamarones .camarones-grid")
-};
+    /* =====================================================
+       NORMALIZAR SECCIONES
+    ===================================================== */
 
+    const normalizarSeccion =
+      (valor) =>
+        String(valor || "")
+          .toLowerCase()
+          .trim();
+
+
+    /* =====================================================
+       CONTENEDORES
+    ===================================================== */
+
+    const contenedores = {
+
+      entradas:
+        document.querySelector(
+          "#entradas .productos"
+        ),
+
+      ceviches:
+        document.querySelector(
+          "#ceviches .productos"
+        ),
+
+      aguachiles:
+        document.querySelector(
+          "#aguachiles .productos"
+        ),
+
+      tostadas:
+        document.querySelector(
+          "#tostadas .productos"
+        ),
+
+      extras:
+        document.querySelector(
+          "#extras .bebidas-grid"
+        ),
+
+      bebidas:
+        document.querySelector(
+          "#bebidas .bebidas-grid"
+        ),
+
+      charolas:
+        document.querySelector(
+          "#modalCharolas .charolas-grid"
+        ),
+
+      camarones:
+        document.querySelector(
+          "#modalCamarones .camarones-grid"
+        )
+
+    };
     /* =====================================================
        SECCIONES NORMALES
        Si Supabase respondió correctamente, se reemplaza
@@ -2158,32 +2243,32 @@ if(contCamarones){
   });
 
 }
-    
-   /* =====================================================
-   CHAROLAS
-===================================================== */
 
-const contCharolas =
-  contenedores.charolas;
+    /* =====================================================
+       CHAROLAS
+    ===================================================== */
 
-if(contCharolas){
+    const contCharolas =
+      contenedores.charolas;
 
-  const charolas =
-    data.filter(item =>
-      normalizarSeccion(item.seccion) === "charolas"
-    );
+    if(contCharolas){
 
-  contCharolas.innerHTML = "";
+      const charolas =
+        data.filter(item =>
+          normalizarSeccion(item.seccion) === "charolas"
+        );
 
-  charolas.forEach(item => {
+      contCharolas.innerHTML = "";
 
-    contCharolas.appendChild(
-      crearCharolaMenu(item)
-    );
+      charolas.forEach(item => {
 
-  });
+        contCharolas.appendChild(
+          crearCharolaMenu(item)
+        );
 
-}
+      });
+
+    }
 
   }
 
@@ -2208,7 +2293,6 @@ document.addEventListener(
 );
 
 </script>
-
 <!-- =====================================================
      MÚSICA
 ===================================================== -->
