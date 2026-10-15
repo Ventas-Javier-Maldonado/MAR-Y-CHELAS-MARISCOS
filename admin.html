@@ -2796,70 +2796,132 @@ supabaseClient.auth.onAuthStateChange(
 
 
 /* =========================================================
-   TICKETS OCR - BANDEJA DE CONSULTA
-   La aprobación y actualización de inventario se integrarán
-   mediante una operación segura en Supabase.
+   TICKETS OCR - APROBACIÓN E INVENTARIO
+   La operación completa se realiza en una función SQL atómica.
 ========================================================= */
+let ticketsOCRProcesando = false;
+let catalogoInventarioOCR = [];
+const monedaOCR = n => Number(n || 0).toLocaleString('es-MX', {style:'currency',currency:'MXN'});
+
 async function cargarTicketsOCR(){
-  const estado = document.getElementById("estadoTicketsOCR");
-  const lista = document.getElementById("listaTicketsOCR");
-  const boton = document.getElementById("btnActualizarTickets");
-  if(!estado || !lista) return;
+  const estado = document.getElementById('estadoTicketsOCR');
+  const lista = document.getElementById('listaTicketsOCR');
+  const boton = document.getElementById('btnActualizarTickets');
+  if (!estado || !lista || ticketsOCRProcesando) return;
   boton.disabled = true;
-  estado.textContent = "Consultando tickets pendientes...";
+  estado.textContent = 'Consultando tickets pendientes...';
   lista.replaceChildren();
   try {
-    const { data: usuario, error: errorUsuario } = await supabaseClient.auth.getUser();
-    if(errorUsuario || !usuario?.user) throw new Error("Inicia sesión para consultar tickets.");
-    const { data, error } = await supabaseClient
-      .from("cr_tickets_pendientes")
-      .select("id,fecha,productos,total,estado")
-      .eq("estado", "pendiente")
-      .order("fecha", { ascending:false })
-      .limit(50);
-    if(error) throw error;
-    if(!data || data.length===0){
-      estado.textContent = "No hay tickets pendientes por revisar.";
-      return;
-    }
-    estado.textContent = data.length + " ticket(s) pendiente(s).";
-    const dinero = valor => Number(valor || 0).toLocaleString("es-MX", {style:"currency",currency:"MXN"});
-    data.forEach(ticket => {
-      const tarjeta = document.createElement("article");
-      tarjeta.style.cssText = "border:1px solid rgba(6,69,47,.18);background:white;border-radius:14px;padding:16px;";
-      const titulo = document.createElement("strong");
-      titulo.style.color = "var(--verde)";
-      titulo.textContent = "Ticket #" + ticket.id + " · " + new Date(ticket.fecha).toLocaleString("es-MX");
+    const {data: usuario, error: errorUsuario} = await supabaseClient.auth.getUser();
+    if (errorUsuario || !usuario?.user) throw new Error('Inicia sesión para consultar tickets.');
+    const [{data: tickets, error: errorTickets}, {data: inventario, error: errorInventario}] = await Promise.all([
+      supabaseClient.from('cr_tickets_pendientes').select('id,fecha,productos,total,estado').eq('estado','pendiente').order('fecha',{ascending:false}).limit(50),
+      supabaseClient.from('cr_inventario').select('id,nombre,codigo,unidad,existencia,estado').order('nombre',{ascending:true}).limit(1000)
+    ]);
+    if (errorTickets) throw errorTickets;
+    if (errorInventario) throw new Error('No se pudo consultar inventario: ' + errorInventario.message);
+    catalogoInventarioOCR = (inventario || []).filter(p => p.estado !== 'inactivo');
+    if (!tickets?.length){ estado.textContent = 'No hay tickets pendientes por revisar.'; return; }
+    estado.textContent = tickets.length + ' ticket(s) pendiente(s). Selecciona los productos de inventario antes de aprobar.';
+    tickets.forEach(ticket => {
+      const tarjeta = document.createElement('article');
+      tarjeta.style.cssText = 'border:1px solid rgba(6,69,47,.18);background:white;border-radius:14px;padding:16px;';
+      const titulo = document.createElement('strong');
+      titulo.style.color = 'var(--verde)';
+      titulo.textContent = 'Ticket #' + ticket.id + ' · ' + new Date(ticket.fecha).toLocaleString('es-MX');
       tarjeta.appendChild(titulo);
       const productos = Array.isArray(ticket.productos) ? ticket.productos : [];
-      const detalle = document.createElement("ul");
-      detalle.style.cssText = "margin:12px 0;padding-left:20px;line-height:1.6;";
-      productos.forEach(item => {
-        const li = document.createElement("li");
-        const nombre = item.nombre || item.producto || item.descripcion || "Producto sin nombre";
-        const cantidad = item.cantidad ?? item.qty ?? "";
-        const unidad = item.unidad || "";
-        const importe = item.importe ?? item.total ?? item.subtotal;
-        li.textContent = [cantidad,unidad,nombre].filter(v => v!=="").join(" ") + (importe == null ? "" : " — " + dinero(importe));
-        detalle.appendChild(li);
+      const filas = [];
+      productos.forEach((item, indice) => {
+        const fila = document.createElement('div');
+        fila.style.cssText = 'padding:12px 0;border-bottom:1px solid #e3e7e3;display:grid;gap:8px;';
+        const nombre = String(item.product ?? item.nombre ?? item.producto ?? item.descripcion ?? 'Producto sin nombre');
+        const importe = item.amount ?? item.importe ?? item.total ?? item.subtotal;
+        const encabezado = document.createElement('strong');
+        encabezado.textContent = nombre + (importe == null ? '' : ' — ' + monedaOCR(importe));
+        fila.appendChild(encabezado);
+        const etiqueta = document.createElement('label');
+        etiqueta.textContent = 'Producto de inventario';
+        const selector = document.createElement('select');
+        const vacio = document.createElement('option');
+        vacio.value = '';
+        vacio.textContent = 'Seleccionar producto...';
+        selector.appendChild(vacio);
+        catalogoInventarioOCR.forEach(p => {
+          const opt = document.createElement('option');
+          opt.value = String(p.id);
+          opt.textContent = p.nombre + (p.codigo ? ' · ' + p.codigo : '') + ' (actual: ' + p.existencia + ' ' + (p.unidad || '') + ')';
+          selector.appendChild(opt);
+        });
+        etiqueta.appendChild(selector);
+        fila.appendChild(etiqueta);
+        const etiquetaCantidad = document.createElement('label');
+        etiquetaCantidad.textContent = 'Cantidad que ingresará al inventario';
+        const cantidad = document.createElement('input');
+        cantidad.type = 'number'; cantidad.min = '0.001'; cantidad.step = 'any';
+        const cantidadOCR = Number(item.quantity ?? item.cantidad ?? item.qty ?? 1);
+        cantidad.value = Number.isFinite(cantidadOCR) && cantidadOCR > 0 ? String(cantidadOCR) : '1';
+        etiquetaCantidad.appendChild(cantidad);
+        fila.appendChild(etiquetaCantidad);
+        tarjeta.appendChild(fila);
+        filas.push({indice,selector,cantidad});
       });
-      if(!productos.length){
-        const li = document.createElement("li");
-        li.textContent = "Sin productos registrados";
-        detalle.appendChild(li);
-      }
-      tarjeta.appendChild(detalle);
-      const total = document.createElement("p");
-      total.style.fontWeight = "bold";
-      total.textContent = "Total: " + dinero(ticket.total) + " · Pendiente de autorización";
+      const total = document.createElement('p');
+      total.style.cssText = 'font-weight:bold;margin:12px 0;';
+      total.textContent = 'Total: ' + monedaOCR(ticket.total) + ' · Pendiente de autorización';
       tarjeta.appendChild(total);
+      const acciones = document.createElement('div');
+      acciones.className = 'botones';
+      const aprobar = document.createElement('button');
+      aprobar.className = 'btn-principal'; aprobar.type = 'button'; aprobar.textContent = 'APROBAR Y SUMAR INVENTARIO';
+      const rechazar = document.createElement('button');
+      rechazar.className = 'btn-peligro'; rechazar.type = 'button'; rechazar.textContent = 'RECHAZAR TICKET';
+      aprobar.addEventListener('click', async () => {
+        if (!filas.length) { alert('El ticket no contiene productos.'); return; }
+        const asignaciones = filas.map(f => ({indice:f.indice, producto_id:Number(f.selector.value), cantidad:Number(f.cantidad.value)}));
+        if (filas.some(f => !f.selector.value || !f.cantidad.value || !Number.isFinite(Number(f.cantidad.value)) || Number(f.cantidad.value) <= 0)) {
+          alert('Selecciona un producto de inventario y una cantidad mayor a cero para cada renglón.'); return;
+        }
+        if (!confirm('¿Aprobar ticket #' + ticket.id + ' y SUMAR las cantidades al inventario? Esta operación registrará movimientos.')) return;
+        await resolverTicketOCR(ticket.id,'aprobar',asignaciones);
+      });
+      rechazar.addEventListener('click', async () => {
+        if (!confirm('¿Rechazar ticket #' + ticket.id + '? No modificará inventario.')) return;
+        await resolverTicketOCR(ticket.id,'rechazar',[]);
+      });
+      acciones.append(aprobar,rechazar);
+      tarjeta.appendChild(acciones);
       lista.appendChild(tarjeta);
     });
-  } catch(error){
-    console.error("Error al cargar tickets OCR:",error);
-    estado.textContent = "No se pudieron consultar los tickets: " + (error.message || "Error desconocido");
+  } catch(error) {
+    console.error('Error al cargar tickets OCR:',error);
+    estado.textContent = 'No se pudieron consultar los tickets: ' + (error.message || 'Error desconocido');
+  } finally { boton.disabled = false; }
+}
+
+async function resolverTicketOCR(ticketId, accion, asignaciones){
+  if (ticketsOCRProcesando) return;
+  ticketsOCRProcesando = true;
+  const estado = document.getElementById('estadoTicketsOCR');
+  const boton = document.getElementById('btnActualizarTickets');
+  const acciones = [...document.querySelectorAll('#listaTicketsOCR button')];
+  acciones.forEach(b => b.disabled = true);
+  boton.disabled = true;
+  estado.textContent = 'Procesando ticket #' + ticketId + '...';
+  try {
+    const {data,error} = await supabaseClient.rpc('cr_resolver_ticket_ocr', {
+      p_ticket_id: ticketId,
+      p_accion: accion,
+      p_asignaciones: asignaciones
+    });
+    if (error) throw error;
+    alert('Ticket #' + ticketId + (accion === 'aprobar' ? ' aprobado. Inventario y movimientos actualizados.' : ' rechazado correctamente.'));
+  } catch(error) {
+    console.error('Error al resolver ticket OCR:',error);
+    alert('No se pudo procesar el ticket: ' + (error.message || 'Error desconocido') + '. No se confirmó la autorización.');
   } finally {
-    boton.disabled = false;
+    ticketsOCRProcesando = false;
+    await cargarTicketsOCR();
   }
 }
 
