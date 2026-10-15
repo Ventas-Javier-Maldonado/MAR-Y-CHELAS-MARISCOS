@@ -936,6 +936,16 @@ button:hover{
 
       </div>
 
+
+      <!-- BANDEJA DE TICKETS OCR: no altera el editor de menú -->
+      <section id="panelTicketsOCR" style="margin-top:30px;border-top:1px solid rgba(6,69,47,.18);padding-top:24px;">
+        <h2 style="font-family:Georgia,serif;color:var(--verde);margin-bottom:10px;">Tickets recibidos</h2>
+        <p style="color:var(--gris);margin-bottom:16px;line-height:1.5;">Notas pendientes de revisión. Las fotografías permanecen en el celular; aquí solo aparecen los datos.</p>
+        <button type="button" class="btn-principal" id="btnActualizarTickets" onclick="cargarTicketsOCR()">ACTUALIZAR TICKETS</button>
+        <div id="estadoTicketsOCR" role="status" style="margin:16px 0;color:var(--verde);">Cargando tickets...</div>
+        <div id="listaTicketsOCR" style="display:grid;gap:12px;"></div>
+      </section>
+
     </main>
 
   </div>
@@ -1217,6 +1227,7 @@ function mostrarAdministrador(){
 
 
   cargarMenu();
+  cargarTicketsOCR();
 
 }
 
@@ -2782,6 +2793,75 @@ supabaseClient.auth.onAuthStateChange(
 
   }
 );
+
+
+/* =========================================================
+   TICKETS OCR - BANDEJA DE CONSULTA
+   La aprobación y actualización de inventario se integrarán
+   mediante una operación segura en Supabase.
+========================================================= */
+async function cargarTicketsOCR(){
+  const estado = document.getElementById("estadoTicketsOCR");
+  const lista = document.getElementById("listaTicketsOCR");
+  const boton = document.getElementById("btnActualizarTickets");
+  if(!estado || !lista) return;
+  boton.disabled = true;
+  estado.textContent = "Consultando tickets pendientes...";
+  lista.replaceChildren();
+  try {
+    const { data: usuario, error: errorUsuario } = await supabaseClient.auth.getUser();
+    if(errorUsuario || !usuario?.user) throw new Error("Inicia sesión para consultar tickets.");
+    const { data, error } = await supabaseClient
+      .from("cr_tickets_pendientes")
+      .select("id,fecha,productos,total,estado")
+      .eq("estado", "pendiente")
+      .order("fecha", { ascending:false })
+      .limit(50);
+    if(error) throw error;
+    if(!data || data.length===0){
+      estado.textContent = "No hay tickets pendientes por revisar.";
+      return;
+    }
+    estado.textContent = data.length + " ticket(s) pendiente(s).";
+    const dinero = valor => Number(valor || 0).toLocaleString("es-MX", {style:"currency",currency:"MXN"});
+    data.forEach(ticket => {
+      const tarjeta = document.createElement("article");
+      tarjeta.style.cssText = "border:1px solid rgba(6,69,47,.18);background:white;border-radius:14px;padding:16px;";
+      const titulo = document.createElement("strong");
+      titulo.style.color = "var(--verde)";
+      titulo.textContent = "Ticket #" + ticket.id + " · " + new Date(ticket.fecha).toLocaleString("es-MX");
+      tarjeta.appendChild(titulo);
+      const productos = Array.isArray(ticket.productos) ? ticket.productos : [];
+      const detalle = document.createElement("ul");
+      detalle.style.cssText = "margin:12px 0;padding-left:20px;line-height:1.6;";
+      productos.forEach(item => {
+        const li = document.createElement("li");
+        const nombre = item.nombre || item.producto || item.descripcion || "Producto sin nombre";
+        const cantidad = item.cantidad ?? item.qty ?? "";
+        const unidad = item.unidad || "";
+        const importe = item.importe ?? item.total ?? item.subtotal;
+        li.textContent = [cantidad,unidad,nombre].filter(v => v!=="").join(" ") + (importe == null ? "" : " — " + dinero(importe));
+        detalle.appendChild(li);
+      });
+      if(!productos.length){
+        const li = document.createElement("li");
+        li.textContent = "Sin productos registrados";
+        detalle.appendChild(li);
+      }
+      tarjeta.appendChild(detalle);
+      const total = document.createElement("p");
+      total.style.fontWeight = "bold";
+      total.textContent = "Total: " + dinero(ticket.total) + " · Pendiente de autorización";
+      tarjeta.appendChild(total);
+      lista.appendChild(tarjeta);
+    });
+  } catch(error){
+    console.error("Error al cargar tickets OCR:",error);
+    estado.textContent = "No se pudieron consultar los tickets: " + (error.message || "Error desconocido");
+  } finally {
+    boton.disabled = false;
+  }
+}
 
 /* =========================================================
    INICIAR
