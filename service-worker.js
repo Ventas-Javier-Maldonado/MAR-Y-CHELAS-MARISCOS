@@ -1,103 +1,105 @@
-const CACHE_NAME = "mar-y-chelas-v3";
+/* =========================================================
+   MAR Y CHELAS — CACHÉ INDEPENDIENTE
+========================================================= */
+
+const CACHE_PREFIX = "mar-y-chelas-";
+const CACHE_NAME = CACHE_PREFIX + "v4";
 
 const ARCHIVOS = [
-  "./",
-  "./index.html",
-  "./manifest.webmanifest",
-  "./images/menu-mar-y-chelas.jpg",
-  "./music/musica-mar-y-chelas.mp3"
+    "./",
+    "./index.html",
+    "./manifest.webmanifest"
 ];
 
+const URLS_PERMITIDAS = new Set(
+    ARCHIVOS.map(
+        ruta => new URL(ruta, self.location.href).href
+    )
+);
+
+/* INSTALACIÓN */
+
 self.addEventListener("install", event => {
-
-  event.waitUntil(
-
-    caches.open(CACHE_NAME)
-      .then(cache => {
-
-        return cache.addAll(ARCHIVOS);
-
-      })
-
-  );
-
-  self.skipWaiting();
-
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then(cache => cache.addAll(ARCHIVOS))
+            .then(() => self.skipWaiting())
+    );
 });
 
+/* LIMPIAR SOLO VERSIONES DE ESTA APLICACIÓN */
 
 self.addEventListener("activate", event => {
-
-  event.waitUntil(
-
-    caches.keys()
-      .then(nombres => {
-
-        return Promise.all(
-
-          nombres
-            .filter(nombre => nombre !== CACHE_NAME)
-            .map(nombre => caches.delete(nombre))
-
-        );
-
-      })
-
-  );
-
-  self.clients.claim();
-
+    event.waitUntil(
+        caches.keys()
+            .then(nombres => Promise.all(
+                nombres
+                    .filter(nombre =>
+                        nombre.startsWith(CACHE_PREFIX) &&
+                        nombre !== CACHE_NAME
+                    )
+                    .map(nombre => caches.delete(nombre))
+            ))
+            .then(() => self.clients.claim())
+    );
 });
 
+/* ACTUALIZACIÓN */
 
 self.addEventListener("message", event => {
-
-  if (
-    event.data &&
-    event.data.type === "SKIP_WAITING"
-  ) {
-
-    self.skipWaiting();
-
-  }
-
+    if (event.data?.type === "SKIP_WAITING") {
+        self.skipWaiting();
+    }
 });
 
+/* INTERNET PRIMERO; SIN CACHÉ DE SUPABASE NI FOTOS */
 
 self.addEventListener("fetch", event => {
+    const request = event.request;
 
-  if (event.request.method !== "GET") {
-    return;
-  }
+    if (request.method !== "GET") return;
 
-  event.respondWith(
+    const url = new URL(request.url);
 
-    fetch(event.request)
-      .then(respuesta => {
+    if (url.origin !== self.location.origin) return;
 
-        const copia = respuesta.clone();
+    const urlSinParametros = new URL(url.href);
+    urlSinParametros.search = "";
+    urlSinParametros.hash = "";
 
-        caches.open(CACHE_NAME)
-          .then(cache => {
+    if (!URLS_PERMITIDAS.has(urlSinParametros.href)) {
+        return;
+    }
 
-            cache.put(
-              event.request,
-              copia
+    event.respondWith((async () => {
+        const cache = await caches.open(CACHE_NAME);
+
+        try {
+            const respuesta = await fetch(request, {
+                cache: "no-store"
+            });
+
+            if (respuesta.ok) {
+                try {
+                    await cache.put(
+                        urlSinParametros.href,
+                        respuesta.clone()
+                    );
+                } catch (error) {
+                    console.warn("No se pudo actualizar caché:", error);
+                }
+            }
+
+            return respuesta;
+
+        } catch (error) {
+            const guardada = await cache.match(
+                urlSinParametros.href
             );
 
-          });
+            if (guardada) return guardada;
 
-        return respuesta;
-
-      })
-      .catch(() => {
-
-        return caches.match(
-          event.request
-        );
-
-      })
-
-  );
-
+            return Response.error();
+        }
+    })());
 });
