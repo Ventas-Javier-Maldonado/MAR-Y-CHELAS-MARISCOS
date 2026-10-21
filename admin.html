@@ -1212,23 +1212,99 @@ async function cerrarSesion(){
 }
 
 
-function mostrarAdministrador(){
+async function mostrarAdministrador() {
 
-  document.getElementById(
-    "pantallaLogin"
-  ).style.display =
-    "none";
+  const pantallaLogin =
+    document.getElementById("pantallaLogin");
 
+  const pantallaAdmin =
+    document.getElementById("pantallaAdmin");
 
-  document.getElementById(
-    "pantallaAdmin"
-  ).style.display =
-    "block";
+  const errorBox =
+    document.getElementById("loginError");
 
+  pantallaAdmin.style.display = "none";
 
-  cargarMenu();
-  cargarTicketsOCR();
+  try {
 
+    const {
+      data: datosAuth,
+      error: errorAuth
+    } = await supabaseClient.auth.getUser();
+
+    if (errorAuth) {
+      throw errorAuth;
+    }
+
+    if (!datosAuth?.user) {
+      throw new Error(
+        "Inicia sesión para continuar."
+      );
+    }
+
+    const {
+      data: perfil,
+      error: errorPerfil
+    } = await supabaseClient
+      .from("cr_usuarios")
+      .select("id, nombre, rol, activo")
+      .eq("id", datosAuth.user.id)
+      .single();
+
+    if (errorPerfil) {
+      throw new Error(
+        "No se pudo comprobar tu perfil. Intenta nuevamente."
+      );
+    }
+
+    if (!perfil || perfil.activo !== true) {
+      throw new Error(
+        "Tu perfil no está habilitado para acceder."
+      );
+    }
+
+    const rol =
+      String(perfil.rol || "")
+        .trim()
+        .toLowerCase();
+
+    const rolesPermitidos = [
+      "propietario",
+      "administrador"
+    ];
+
+    if (!rolesPermitidos.includes(rol)) {
+      throw new Error(
+        "Tu rol no tiene acceso a este administrador."
+      );
+    }
+
+    errorBox.textContent = "";
+    errorBox.classList.remove("activo");
+
+    pantallaLogin.style.display = "none";
+    pantallaAdmin.style.display = "block";
+
+    cargarMenu();
+    cargarTicketsOCR();
+
+  } catch (error) {
+
+    console.error(
+      "Error al validar acceso:",
+      error
+    );
+
+    pantallaAdmin.style.display = "none";
+    pantallaLogin.style.display = "flex";
+
+    errorBox.textContent =
+      error.message ||
+      "No se pudo comprobar el acceso.";
+
+    errorBox.classList.add("activo");
+
+  }
 }
 
 
@@ -2762,38 +2838,33 @@ async function comprobarSesion(){
 ========================================================= */
 
 supabaseClient.auth.onAuthStateChange(
-  (event,session) => {
+  (event, session) => {
 
-    if(
+    if (
       event === "SIGNED_IN" &&
       session
-    ){
+    ) {
 
-      mostrarAdministrador();
+      setTimeout(() => {
+        mostrarAdministrador();
+      }, 0);
 
     }
 
-
-    if(
-      event === "SIGNED_OUT"
-    ){
+    if (event === "SIGNED_OUT") {
 
       document.getElementById(
         "pantallaAdmin"
-      ).style.display =
-        "none";
-
+      ).style.display = "none";
 
       document.getElementById(
         "pantallaLogin"
-      ).style.display =
-        "flex";
+      ).style.display = "flex";
 
     }
 
   }
 );
-
 
 /* =========================================================
    TICKETS OCR - APROBACIÓN E INVENTARIO
