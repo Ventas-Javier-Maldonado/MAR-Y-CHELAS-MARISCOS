@@ -3780,10 +3780,19 @@ document.addEventListener(
 
       <button
         class="btn-whatsapp"
-        onclick="enviarWhatsApp()"
+        onclick="enviarPedidoMenu(true)"
       >
         💬 ENVIAR PEDIDO POR WHATSAPP
       </button>
+
+      <button
+  id="btnOrdenarPedido"
+  class="btn-whatsapp oculto"
+  type="button"
+  onclick="enviarPedidoMenu(false)"
+>
+  🍽️ ORDENAR
+</button>
 
     </div>
 
@@ -4234,6 +4243,28 @@ function seleccionarTipo(tipo){
 
 }
 
+  const botonOrdenar =
+    document.getElementById("btnOrdenarPedido");
+
+  const botonWhatsApp =
+    document.querySelector(
+      '.btn-whatsapp[onclick="enviarPedidoMenu(true)"]'
+    );
+
+  if (botonOrdenar) {
+    botonOrdenar.classList.toggle(
+      "oculto",
+      tipo === "domicilio"
+    );
+  }
+
+  if (botonWhatsApp) {
+    botonWhatsApp.classList.toggle(
+      "oculto",
+      tipo === "restaurante"
+    );
+  }  
+
 
 /* =========================================================
    WHATSAPP
@@ -4352,9 +4383,11 @@ async function enviarPedidoMenu(abrirWhatsAppDespues = false) {
     }
   }
 
- const botones = [
+const botones = [
   document.getElementById("btnOrdenarPedido"),
-  document.getElementById("btnWhatsAppPedido")
+  document.querySelector(
+    '.btn-whatsapp[onclick="enviarPedidoMenu(true)"]'
+  )
 ].filter(Boolean);
 
 if (botones.some(boton => boton.disabled)) return;
