@@ -1821,7 +1821,7 @@ function crearProductoMenu(item){
 
   if(boton){
     boton.addEventListener("click", () => {
-      agregar(nombre, precio);
+     agregar(nombre, precio, "", item.id);
     });
   }
 
@@ -1846,7 +1846,7 @@ function crearItemSimple(item){
 
   if(boton){
     boton.addEventListener("click", () => {
-      agregar(nombre, precio);
+     agregar(nombre, precio, "", item.id); 
     });
   }
 
@@ -1941,11 +1941,11 @@ function crearCamaronMenu(item){
       () => {
 
         agregar(
-          "Camarones al gusto",
-          precio,
-          nombre
-        );
-
+  "Camarones al gusto",
+  precio,
+  nombre,
+  item.id
+);
         cerrarCamarones();
 
       }
@@ -1955,7 +1955,7 @@ function crearCamaronMenu(item){
 
   return article;
 
-}
+}  
 
 
 /* =========================================================
@@ -2032,21 +2032,27 @@ function crearCharolaMenu(item){
 
   `;
 
-  const boton =
+   const boton =
     article.querySelector(
       ".btn-ordenar-charola"
     );
 
-  if(boton){
+  if (boton) {
+    boton.addEventListener("click", () => {
+      agregar(nombre, precio, "", item.id);
+      cerrarCharolas();
+    });
+  }
 
-    boton.addEventListener(
-      "click",
-      () => {
+  return article;
+}
 
-        agregar(
-          nombre,
-          precio
-        );
+ if (boton) {
+  boton.addEventListener("click", () => {
+    agregar(nombre, precio, "", item.id);
+    cerrarCharolas();
+  });
+}
 
         cerrarCharolas();
 
@@ -2058,6 +2064,13 @@ function crearCharolaMenu(item){
   return article;
 
 }
+
+agregar(
+  nombre,
+  precio,
+  "",
+  item.id
+);  
 
 
 /* =========================================================
@@ -4006,12 +4019,13 @@ function ordenarCharolaCaliente(){
     ? detalleBase + " | Nota: " + nota
     : detalleBase;
 
-  agregar(
+agregar(
     "Charola Caliente",
     800,
-    detalle
-  );
-
+    detalle,
+    "-1001"
+);
+  
   document.getElementById(
     "calienteUno"
   ).value = "";
@@ -4062,15 +4076,19 @@ function crObtenerMenuItemId(nombre, detalle = "") {
 
 function agregar(nombre, precio, detalle = "", productoId = null) {
   const idProducto =
-    productoId !== null && productoId !== undefined
-      ? String(productoId)
-      : crObtenerMenuItemId(nombre, detalle);
+    productoId === null || productoId === undefined
+      ? null
+      : String(productoId);
 
   const existente = carrito.find(item =>
     item.nombre === nombre &&
     item.detalle === detalle &&
-    String(item.productoId || "") === String(idProducto || "")
+    String(item.productoId ?? "") === String(idProducto ?? "")
   );
+  
+  actualizarCarrito();
+  abrirCarrito();
+}
 
   if (existente) {
     existente.cantidad++;
