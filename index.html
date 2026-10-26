@@ -4239,7 +4239,7 @@ function seleccionarTipo(tipo){
    WHATSAPP
 ========================================================= */
 
-async function enviarWhatsApp() {
+async function enviarPedidoMenu(abrirWhatsAppDespues = false) {
   if (carrito.length === 0) {
     alert("Tu pedido está vacío.");
     return;
@@ -4352,12 +4352,17 @@ async function enviarWhatsApp() {
     }
   }
 
-  const boton = document.querySelector(".btn-whatsapp");
+ const botones = [
+  document.getElementById("btnOrdenarPedido"),
+  document.getElementById("btnWhatsAppPedido")
+].filter(Boolean);
 
-  if (boton?.disabled) return;
-  if (boton) boton.disabled = true;
+if (botones.some(boton => boton.disabled)) return;
+botones.forEach(boton => boton.disabled = true);
 
-  const ventanaWhatsApp = window.open("about:blank", "_blank");
+const ventanaWhatsApp = abrirWhatsAppDespues
+  ? window.open("about:blank", "_blank")
+  : null;
 
   try {
     const { data, error } = await supabaseClient.rpc(
@@ -4437,7 +4442,7 @@ async function enviarWhatsApp() {
     );
 
   } finally {
-    if (boton) boton.disabled = false;
+    botones.forEach(boton => boton.disabled = false);
   }
 }
 
