@@ -2081,6 +2081,8 @@ async function cargarMenuSupabase(){
 
     if(!Array.isArray(data)) return;
 
+    window.menuItemsSupabase = data;
+
 
     /* =====================================================
        NORMALIZAR SECCIONES
@@ -4030,37 +4032,61 @@ function ordenarCharolaCaliente(){
    AGREGAR PRODUCTO
 ========================================================= */
 
-function agregar(nombre,precio,detalle=""){
+function crObtenerMenuItemId(nombre, detalle = "") {
+  const normalizar = valor =>
+    String(valor || "")
+      .trim()
+      .toLocaleLowerCase("es-MX");
 
-  const existente = carrito.find(
-    item =>
-      item.nombre === nombre &&
-      item.detalle === detalle
+  let nombreBuscado = nombre;
+
+  if (
+    normalizar(nombre) === normalizar("Camarones al gusto") &&
+    detalle
+  ) {
+    nombreBuscado = String(detalle).split("|")[0].trim();
+  }
+
+  const productos = window.menuItemsSupabase;
+
+  if (!Array.isArray(productos)) {
+    return null;
+  }
+
+  const producto = productos.find(
+    item => normalizar(item.nombre) === normalizar(nombreBuscado)
   );
 
-  if(existente){
+  return producto ? String(producto.id) : null;
+}
 
+function agregar(nombre, precio, detalle = "", productoId = null) {
+  const idProducto =
+    productoId !== null && productoId !== undefined
+      ? String(productoId)
+      : crObtenerMenuItemId(nombre, detalle);
+
+  const existente = carrito.find(item =>
+    item.nombre === nombre &&
+    item.detalle === detalle &&
+    String(item.productoId || "") === String(idProducto || "")
+  );
+
+  if (existente) {
     existente.cantidad++;
-
-  }else{
-
+  } else {
     carrito.push({
-
+      productoId: idProducto,
       nombre,
       precio,
-      cantidad:1,
+      cantidad: 1,
       detalle
-
     });
-
   }
 
   actualizarCarrito();
-
   abrirCarrito();
-
 }
-
 
 /* =========================================================
    ACTUALIZAR
