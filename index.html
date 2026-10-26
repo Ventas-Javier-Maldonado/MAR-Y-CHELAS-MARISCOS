@@ -4239,290 +4239,207 @@ function seleccionarTipo(tipo){
    WHATSAPP
 ========================================================= */
 
-function enviarWhatsApp(){
-
-  if(carrito.length === 0){
-
-    alert(
-      "Tu pedido está vacío."
-    );
-
+async function enviarWhatsApp() {
+  if (carrito.length === 0) {
+    alert("Tu pedido está vacío.");
     return;
-
   }
-
 
   const nombre =
-    document
-      .getElementById("clienteNombre")
-      .value.trim();
-
+    document.getElementById("clienteNombre")?.value.trim() || "";
 
   const telefono =
-    document
-      .getElementById("clienteTelefono")
-      .value.trim();
-
+    document.getElementById("clienteTelefono")?.value.trim() || "";
 
   const pago =
-    document
-      .getElementById("formaPago")
-      .value;
-
+    document.getElementById("formaPago")?.value || "";
 
   const observaciones =
-    document
-      .getElementById("observaciones")
-      .value.trim();
+    document.getElementById("observaciones")?.value.trim() || "";
 
-
-  if(!nombre){
-
-    alert(
-      "Por favor escribe tu nombre."
-    );
-
+  if (!nombre || !telefono || !pago) {
+    alert("Completa tu nombre, teléfono y forma de pago.");
     return;
-
   }
 
-
-  if(!telefono){
-
-    alert(
-      "Por favor escribe tu teléfono."
-    );
-
+  if (!tipoPedido) {
+    alert("Selecciona cómo quieres recibir tu pedido.");
     return;
-
   }
 
+  const direccion =
+    document.getElementById("clienteDireccion")?.value.trim() || "";
 
-  if(!tipoPedido){
+  const referencia =
+    document.getElementById("clienteReferencia")?.value.trim() || "";
 
-    alert(
-      "Selecciona cómo quieres recibir tu pedido."
-    );
+  const numeroMesa =
+    document.getElementById("numeroMesa")?.value.trim() || "";
 
+  const horaRecoger =
+    document.getElementById("horaRecoger")?.value || "";
+
+  if (tipoPedido === "domicilio" && !direccion) {
+    alert("Escribe la dirección de entrega.");
     return;
-
   }
 
-
-  if(!pago){
-
-    alert(
-      "Selecciona una forma de pago."
-    );
-
+  if (tipoPedido === "restaurante" && !numeroMesa) {
+    alert("Escribe el número de mesa.");
     return;
-
   }
 
+  const items = carrito.map(item => ({
+    productoId: String(item.productoId || ""),
+    cantidad: Number(item.cantidad),
+    detalle: String(item.detalle || "")
+  }));
 
-  let mensaje =
-    "🌊 *MAR Y CHELAS P.V.* 🌊\n";
+  if (items.some(item =>
+    !item.productoId ||
+    !Number.isInteger(item.cantidad) ||
+    item.cantidad <= 0
+  )) {
+    alert("Hay un producto sin identificador o con cantidad inválida.");
+    return;
+  }
 
-  mensaje +=
-    "🍤 *NUEVO PEDIDO*\n\n";
+  const pedido = {
+    tipoPedido,
+    clienteNombre: nombre,
+    clienteTelefono: telefono,
+    clienteDireccion: direccion,
+    clienteReferencia: referencia,
+    numeroMesa,
+    horaRecoger,
+    observaciones:
+      [
+        observaciones,
+        "Preferencia de pago indicada por el cliente (pendiente de cobro): " + pago
+      ].filter(Boolean).join("\n"),
+    items
+  };
 
+  const firma = JSON.stringify(pedido);
+  const claveIntento = "cr_pedido_menu_pendiente_v1";
+  let intento = null;
 
-  mensaje +=
-    "👤 *Cliente:* " +
-    nombre +
-    "\n";
+  try {
+    intento = JSON.parse(localStorage.getItem(claveIntento) || "null");
+  } catch (error) {
+    intento = null;
+  }
 
+  if (intento && intento.firma !== firma) {
+    alert(
+      "Hay un pedido anterior sin confirmación. " +
+      "Revisa las cuentas abiertas en caja antes de enviar otro."
+    );
+    return;
+  }
 
-  mensaje +=
-    "📱 *Teléfono:* " +
-    telefono +
-    "\n";
+  if (!intento) {
+    intento = {
+      firma,
+      claveLocal: crypto.randomUUID()
+    };
 
-
-  if(tipoPedido === "domicilio"){
-
-    const direccion =
-      document
-        .getElementById("clienteDireccion")
-        .value.trim();
-
-
-    const referencia =
-      document
-        .getElementById("clienteReferencia")
-        .value.trim();
-
-
-    if(!direccion){
-
-      alert(
-        "Escribe la dirección de entrega."
-      );
-
+    try {
+      localStorage.setItem(claveIntento, JSON.stringify(intento));
+    } catch (error) {
+      alert("No se pudo preparar el envío seguro del pedido.");
       return;
-
     }
-
-
-    mensaje +=
-      "🏠 *Domicilio*\n";
-
-
-    mensaje +=
-      "📍 " +
-      direccion +
-      "\n";
-
-
-    if(referencia){
-
-      mensaje +=
-        "🧭 Referencia: " +
-        referencia +
-        "\n";
-
-    }
-
   }
 
+  const boton = document.querySelector(".btn-whatsapp");
 
-  if(tipoPedido === "restaurante"){
+  if (boton?.disabled) return;
+  if (boton) boton.disabled = true;
 
-    const mesa =
-      document
-        .getElementById("numeroMesa")
-        .value.trim();
+  const ventanaWhatsApp = window.open("about:blank", "_blank");
 
-
-    mensaje +=
-      "🍽️ *Consumir en restaurante*\n";
-
-
-    if(mesa){
-
-      mensaje +=
-        "🪑 Mesa: " +
-        mesa +
-        "\n";
-
-    }
-
-  }
-
-
-  if(tipoPedido === "recoger"){
-
-    const hora =
-      document
-        .getElementById("horaRecoger")
-        .value;
-
-
-    mensaje +=
-      "📦 *Para llevar / recoger*\n";
-
-
-    if(hora){
-
-      mensaje +=
-        "⏰ Hora aproximada: " +
-        hora +
-        "\n";
-
-    }
-
-  }
-
-
-  mensaje +=
-    "\n🧾 *PEDIDO:*\n";
-
-
-  carrito.forEach(
-    item => {
-
-      mensaje +=
-        "• " +
-        item.cantidad +
-        " x " +
-        item.nombre;
-
-
-      if(item.detalle){
-
-        mensaje +=
-          " — " +
-          item.detalle;
-
+  try {
+    const { data, error } = await supabaseClient.rpc(
+      "cr_recibir_pedido_menu",
+      {
+        p_pedido: {
+          ...pedido,
+          claveLocal: intento.claveLocal
+        }
       }
-
-
-      mensaje +=
-        " — $" +
-        (
-          item.precio *
-          item.cantidad
-        ).toLocaleString("es-MX") +
-        "\n";
-
-    }
-  );
-
-
-  const total =
-    carrito.reduce(
-      (sum,item) =>
-        sum +
-        item.precio *
-        item.cantidad,
-      0
     );
 
+    if (error) throw error;
 
-  mensaje +=
-    "\n💰 *TOTAL: $" +
-    total.toLocaleString("es-MX") +
-    "*\n";
+    if (!data?.success) {
+      throw new Error("Supabase no confirmó la cuenta abierta.");
+    }
 
+    localStorage.removeItem(claveIntento);
 
-  mensaje +=
-    "💳 *Pago:* " +
-    pago +
-    "\n";
+    const cuenta =
+      tipoPedido === "restaurante"
+        ? "Mesa " + numeroMesa
+        : tipoPedido === "domicilio"
+          ? "Domicilio — " + nombre
+          : "Para llevar — " + nombre;
 
+    let mensaje = "MAR Y CHELAS P.V.\n";
+    mensaje += "Cuenta abierta en caja: " + cuenta + "\n";
+    mensaje += "Cliente: " + nombre + "\n";
+    mensaje += "Teléfono: " + telefono + "\n\n";
+    mensaje += "Pedido:\n";
 
-  if(observaciones){
+    carrito.forEach(item => {
+      mensaje +=
+        item.cantidad + " x " + item.nombre +
+        (item.detalle ? " — " + item.detalle : "") +
+        "\n";
+    });
 
-    mensaje +=
-      "📝 *Observaciones:* " +
-      observaciones +
-      "\n";
+    mensaje += "\nTotal confirmado: $" +
+      Number(data.total).toLocaleString("es-MX") + "\n";
+    mensaje += "Pendiente de cobro en Control Restaurante.";
 
+    if (ventanaWhatsApp) {
+      ventanaWhatsApp.location.href =
+        "https://wa.me/523317408195?text=" +
+        encodeURIComponent(mensaje);
+    }
+
+    carrito = [];
+    actualizarCarrito();
+    cerrarCarrito();
+
+    document.getElementById("formularioPedido")
+      ?.classList.remove("activo");
+
+    document.querySelectorAll(".tipo-pedido button")
+      .forEach(elemento => elemento.classList.remove("activo"));
+
+    tipoPedido = "";
+
+    alert(
+      "La cuenta quedó abierta en caja. " +
+      "Total: " + Number(data.total).toLocaleString("es-MX")
+    );
+
+  } catch (error) {
+    if (ventanaWhatsApp) ventanaWhatsApp.close();
+
+    console.error("No se pudo enviar el pedido a caja:", error);
+
+    alert(
+      "No se pudo registrar la cuenta en caja.\n\n" +
+      (error.message || "Error de conexión.") +
+      "\n\nEl pedido sigue en pantalla para que puedas reintentar."
+    );
+
+  } finally {
+    if (boton) boton.disabled = false;
   }
-
-
-  mensaje +=
-    "\n¡Gracias por elegir Mar y Chelas! 🌊🍤";
-
-
-  const numero =
-    "523317408195";
-
-
-  const url =
-    "https://wa.me/" +
-    numero +
-    "?text=" +
-    encodeURIComponent(mensaje);
-
-
-  window.open(
-    url,
-    "_blank"
-  );
-
 }
-
 
 /* =========================================================
    NAVEGACIÓN
