@@ -3779,6 +3779,7 @@ document.addEventListener(
 
 
       <button
+        id="btnWhatsAppPedido"
         class="btn-whatsapp"
         onclick="enviarPedidoMenu(true)"
       >
@@ -4246,10 +4247,8 @@ function seleccionarTipo(tipo){
   const botonOrdenar =
     document.getElementById("btnOrdenarPedido");
 
-  const botonWhatsApp =
-    document.querySelector(
-      '.btn-whatsapp[onclick="enviarPedidoMenu(true)"]'
-    );
+const botonWhatsApp =
+  document.getElementById("btnWhatsAppPedido");
 
   if (botonOrdenar) {
     botonOrdenar.classList.toggle(
